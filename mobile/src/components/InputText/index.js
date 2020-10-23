@@ -3,11 +3,12 @@ import { TextInput } from 'react-native';
 
 import styles from './styles';
 
-function InputText() {
+function InputText(props) {
   return (
     <TextInput
       style={styles.input}
       placeholder="clique para digitar"
+      {...props}
     />
   );
 }

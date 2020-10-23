@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
     Text,
     ScrollView,
@@ -7,15 +8,30 @@ import {
     Alert,
 } from "react-native";
 
+import api from '../../services/api';
+
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
 import ImagePickerExample from '../../components/Camera';
 import styles from './styles';
 
 function Anuncio() {
+    const { navigate } = useNavigation();
+
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
     const [categoria, setCategoria] = useState("");
+
+    function validaCamposNull() {
+        let validado = true;
+
+        if (titulo == '' || descricao == '' || categoria == '') {
+            Alert.alert('Informação', 'Preencha todos os campos')
+            validado = false;
+        }
+
+        return validado;
+    }
 
     function handleSubmit() {
         const data = {
@@ -23,18 +39,23 @@ function Anuncio() {
             descricao,
             categoria,
         };
+        console.log(data)
 
-        api
-            .post("/anuncios", data)
-            .then((res) => {
-                //console.log(res.data.msg)
-                Alert.alert("Informação", res.data.msg);
-                limpaCampos();
-            })
-            .catch((error) => {
-                Alert.alert("Erro", "Houve um erro!");
-                console.log(error);
-            });
+        let validaCampos = validaCamposNull();
+
+        if (validaCampos) {
+            api.post("/anuncios", data)
+                .then((res) => {
+                    console.log(data)
+                    Alert.alert(res.data.msg);
+                    limpaCampos();
+                    navigate('MeusAnuncios')
+                })
+                .catch((error) => {
+                    alert("Houve um erro!");
+                    console.log(error);
+                });
+        }
     }
 
     function limpaCampos() {
@@ -71,7 +92,11 @@ function Anuncio() {
                     value={categoria}
                     onChangeText={setCategoria}
                 />
-                <Button titleButton="Continuar" onPress={handleSubmit}></Button>
+                <Button
+                    titleButton="Continuar"
+                    onPress={handleSubmit}
+                >
+                </Button>
             </ScrollView>
         </KeyboardAvoidingView>
     );

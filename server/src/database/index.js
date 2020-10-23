@@ -3,13 +3,13 @@ import Sequelize from 'sequelize';
 import Usuario from '../app/models/Usuario';
 import Anuncio from '../app/models/Anuncio';
 import Arquivo from '../app/models/Arquivo';
-import Pessoa from '../app/models/Pessoa';
+import PessoaFisica from '../app/models/PessoaFisica';
 import PessoaJuridica from '../app/models/PessoaJuridica';
 import PessoaComplemento from '../app/models/PessoaComplemento';
 
 import databaseConfig from '../config/database';
 
-const models = [Usuario, Anuncio, Arquivo, Pessoa, PessoaJuridica, PessoaComplemento];
+const models = [Usuario, Anuncio, Arquivo, PessoaFisica, PessoaJuridica, PessoaComplemento];
 
 class Database {
     constructor() {

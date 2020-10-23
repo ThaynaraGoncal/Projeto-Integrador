@@ -3,9 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
-import Anuncio from '../Pages/Anuncio';
 import Cadastro from '../Pages/Cadastro';
 import Home from '../Pages/Home';
+
+import CadastroStack from '../Routes/CadastroStack';
+import AnuncioStack from '../Routes/AnuncioStack';
 
 import PayButton from '../components/PayButton';
 
@@ -42,14 +44,14 @@ export default function Navigation() {
                 />
                 <Screen
                     name="Anuncio"
-                    component={Anuncio}
+                    component={AnuncioStack}
                     options={{
                         tabBarLabel: ""
                     }}
                 />
                 <Screen
                     name="Cadastro"
-                    component={Cadastro}
+                    component={CadastroStack}
                     options={{
                         tabBarLabel: 'Cadastro',
                         tabBarIcon: ({ color, size, focused }) => {

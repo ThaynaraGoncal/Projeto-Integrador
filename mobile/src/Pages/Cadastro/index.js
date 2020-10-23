@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { View, Text, ScrollView, KeyboardAvoidingView, TextInput, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import PayButton from '../../components/PayButton';
 import Input from '../../components/input';
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
@@ -11,26 +11,47 @@ import api from '../../services/api';
 import styles from './styles';
 
 function Cadastro() {
-    const [name, setName] = useState('');
+    const { navigate } = useNavigation();
+
+
+    const [nome, setNome] = useState('');
     const [cpf, setcpf] = useState('');
-    const [dt_nascimento, setDtNascimento] = useState('');
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [dt_nascimento, setDtNascimento] = useState('');
+
+    function validaCamposNull() {
+        let validado = true;
+
+        if (nome == '' || cpf == '' || dt_nascimento == '') {
+            Alert.alert('Informação', 'Preencha todos os campos')
+            validado = false;
+        }
+
+        return validado;
+    }
 
     function handleSubmit() {
 
         const data = {
-            name, cpf, dt_nascimento, telefone, email, password
+            nome, cpf, dt_nascimento, telefone, email
         }
 
-        api.post('/users', data).then(res => {
-            //console.log(res.data.msg)
-            Alert.alert('Informação', res.data.msg)
-        }).catch(error => {
-            Alert.alert('Erro', 'Houve um erro!')
-            console.log(error)
-        })
+        let validaCampos = validaCamposNull();
+
+        if (validaCampos) {
+            api.post(`/pessoa_fisica`, data).then(res => {
+                //console.log(res.data)
+                if (res.data.info) {
+                    alert(res.data.info)
+                } else {
+                    //alert(res.data.sucess)
+                    navigate("CadastroDetalhes", res.data);
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
     }
 
     return (
@@ -39,14 +60,16 @@ function Cadastro() {
             <ScrollView showsVerticalScrollIndicator="false">
                 <View style={styles.containerInputs}>
                     <Text style={styles.labelInput}> Nome</Text>
-                    <InputText />
+                    <InputText
+                        onChangeText={setNome} value={nome}
+                    />
                     <Text style={styles.labelInput}> CPF</Text>
                     <Input type={'custom'}
                         options={{ mask: '999.999.999-99' }}
                         keyboardType='numeric'
                         onChangeText={setcpf} value={cpf}
                     />
-                    <Text style={styles.labelInput}> Data de Nascimento</Text>
+                    <Text style={styles.labelInput}>Data de Nascimento</Text>
                     <Input type={'custom'}
                         options={{ mask: '99/99/9999' }}
                         keyboardType='numeric'
@@ -69,16 +92,10 @@ function Cadastro() {
                         onChangeText={setEmail}
                         value={email}
                     />
-                    <Text style={styles.labelInput}> Escolha uma senha</Text>
-                    <InputText
-                        onChangeText={setPassword}
-                        value={password}
-                    />
                     <Button
-                        titleButton="Concluir"
+                        titleButton="Continuar"
                         onPress={handleSubmit}
                     >
-                        <Text style={styles.contactButtonText}>Continuar</Text>
                     </Button>
                 </View>
             </ScrollView>

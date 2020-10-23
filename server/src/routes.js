@@ -17,16 +17,19 @@ routes.post('/pessoa_juridica', PessoaJuridicaController.store);
 routes.post('/pessoa_complemento', PessoaComplementoController.store);
 routes.post('/arquivo', ArquivoController.store);
 routes.post('/anuncios', AnuncioController.store);
+
 routes.post('/usuario', UsuarioController.store);
 
-routes.get('/pessoas', PessoaFisicaController.index);
+//routes.get('/pessoas', PessoaFisicaController.index);
 routes.get('/usuarios', UsuarioController.index);
+routes.get('/usuario', UsuarioController.user);
+routes.get('/anuncios', AnuncioController.index);
 
 routes.get('/users', (req, res) => {
     let msg = { msg: "hello word" }
     return res.status(200).json(msg);
 });
 
-routes.post('/files', upload.single('file'), ArquivoController.store);
+routes.post('/arquivos', upload.single('file'), ArquivoController.store);
 
 export default routes;
