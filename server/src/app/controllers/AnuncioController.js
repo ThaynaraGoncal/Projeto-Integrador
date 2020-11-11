@@ -13,13 +13,15 @@ class AnuncioController {
             let anuncio = await Anuncio.create(req.body);
             let { id } = anuncio.dataValues;
 
-            const { originalname: name, filename: path } = req.file;
+            if (req.file) {
+                const { originalname: name, filename: path } = req.file;
 
-            const file = await Arquivo.create({
-                name,
-                path,
-                id_anuncio: id,
-            });
+                const file = await Arquivo.create({
+                    name,
+                    path,
+                    id_anuncio: id,
+                });
+            }
 
             return res.status(200).json({ anuncio });
 

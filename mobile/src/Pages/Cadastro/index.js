@@ -73,7 +73,8 @@ function Cadastro() {
                     <Input type={'custom'}
                         options={{ mask: '99/99/9999' }}
                         keyboardType='numeric'
-                        onChangeText={setDtNascimento} value={dt_nascimento}
+                        onChangeText={setDtNascimento}
+                        value={dt_nascimento}
                     />
                     <Text style={styles.labelInput}> Telefone</Text>
                     <Input
