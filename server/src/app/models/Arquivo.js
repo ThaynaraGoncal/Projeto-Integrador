@@ -5,13 +5,18 @@ class Arquivo extends Model {
         super.init({
             name: Sequelize.STRING,
             path: Sequelize.STRING,
+            id_anuncio: Sequelize.INTEGER,
         },
-        {
-            sequelize,
-        }
+            {
+                sequelize,
+            }
         );
 
         return this;
+    }
+
+    static associate(models) {
+        this.hasOne(models.Anuncio, { foreignKey: 'id' });
     }
 }
 

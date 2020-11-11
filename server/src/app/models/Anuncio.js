@@ -7,6 +7,7 @@ class Anuncio extends Model {
             titulo: Sequelize.STRING,
             categoria: Sequelize.STRING,
             descricao: Sequelize.STRING,
+            valor: Sequelize.FLOAT,
         },
             {
                 sequelize,

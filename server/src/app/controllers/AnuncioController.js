@@ -1,18 +1,27 @@
 const { QueryTypes, Sequelize } = require('sequelize');
 
 import Anuncio from '../models/Anuncio';
+import Arquivo from '../models/Arquivo';
 import database from '../../config/database';
 
 class AnuncioController {
     async store(req, res) {
 
         try {
-            //console.log(req.body);
+            console.log(req.body);
+
             let anuncio = await Anuncio.create(req.body);
+            let { id } = anuncio.dataValues;
 
-            //console.log('anuncio', anuncio)
+            const { originalname: name, filename: path } = req.file;
 
-            return res.status(200).json({ msg: 'Anúncio Inserido com sucesso' });
+            const file = await Arquivo.create({
+                name,
+                path,
+                id_anuncio: id,
+            });
+
+            return res.status(200).json({ anuncio });
 
         } catch (error) {
             console.log(error);
@@ -24,7 +33,7 @@ class AnuncioController {
         const sequelize = new Sequelize(database);
 
         const anuncios = await sequelize
-            .query(`select titulo, categoria, descricao from anuncios`,
+            .query(`select anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu inner join arquivos arq on anu.id = arq.id_anuncio`,
                 { type: QueryTypes.SELECT }).then(user => {
                     return user
                 });

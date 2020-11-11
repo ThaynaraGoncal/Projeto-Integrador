@@ -12,18 +12,18 @@ import ArquivoController from './app/controllers/ArquivoController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+//routes.get('/pessoas', PessoaFisicaController.index);
 routes.post('/pessoa_fisica', PessoaFisicaController.store);
 routes.post('/pessoa_juridica', PessoaJuridicaController.store);
 routes.post('/pessoa_complemento', PessoaComplementoController.store);
 routes.post('/arquivo', ArquivoController.store);
-routes.post('/anuncios', AnuncioController.store);
 
-routes.post('/usuario', UsuarioController.store);
-
-//routes.get('/pessoas', PessoaFisicaController.index);
 routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuario', UsuarioController.user);
+routes.post('/usuario', UsuarioController.store);
+
 routes.get('/anuncios', AnuncioController.index);
+routes.post('/anuncios', upload.single('file'), AnuncioController.store);
 
 routes.get('/users', (req, res) => {
     let msg = { msg: "hello word" }
