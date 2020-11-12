@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
+import * as color from '../../Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#131418',
+    backgroundColor: color.PRETO_BACKGROUND,
     padding: 20,
   },
   title: {
-    color: '#fcbf49',
+    color: color.AMARELO,
     fontSize: 38,
     marginTop: 28,
     fontWeight: 'bold'
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
 
   labelInput: {
     fontSize: 16,
-    color: '#fcbf49',
+    color: color.AMARELO,
   },
 });
 

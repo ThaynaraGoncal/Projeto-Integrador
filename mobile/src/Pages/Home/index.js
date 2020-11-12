@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 
 import api from '../../services/api';
 import Button from '../../components/Button';
+import Container from '../../components/Container';
 
 import styles from './styles';
 
@@ -21,14 +22,14 @@ function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Anuncíos disponíveis</Text>
+    <Container buttonBack title="Anuncíos" >
       <Button
         titleButton="Listar Anúncios"
         onPress={listaAnuncios}
       >
       </Button>
-    </View>
+    </Container>
+
   )
 }
 

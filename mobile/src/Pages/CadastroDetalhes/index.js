@@ -36,7 +36,7 @@ function CadastroDetalhes() {
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding" >
             <Text style={styles.title}>Cadastro</Text>
-            <ScrollView showsVerticalScrollIndicator="false">
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.labelInput}> Escolha uma senha</Text>
                 <InputText
                     onChangeText={setPassword}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import * as color from '../Colors';
 
-import Cadastro from '../Pages/Cadastro';
 import Home from '../Pages/Home';
-
 import CadastroStack from '../Routes/CadastroStack';
 import AnuncioStack from '../Routes/AnuncioStack';
 
@@ -28,7 +27,7 @@ export default function Navigation() {
                 })}
                 tabBarOptions={{
                     style: {
-                        backgroundColor: '#131418',
+                        backgroundColor: color.PRETO_BACKGROUND,
                         borderTopColor: 'rgba(255, 255, 255, 0.2)',
                     },
                     activeTintColor: '#fff',
@@ -39,7 +38,7 @@ export default function Navigation() {
                     name="Home"
                     component={Home}
                     options={{
-                        tabBarLabel: "Home"
+                        tabBarLabel: "Anúncios"
                     }}
                 />
                 <Screen

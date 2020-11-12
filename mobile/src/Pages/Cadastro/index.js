@@ -57,7 +57,7 @@ function Cadastro() {
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding" >
             <Text style={styles.title}>Cadastro</Text>
-            <ScrollView showsVerticalScrollIndicator="false">
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.containerInputs}>
                     <Text style={styles.labelInput}> Nome</Text>
                     <InputText

@@ -1,12 +1,16 @@
 import { StyleSheet } from 'react-native';
-import * as color from '../../Colors';
+import * as color from '../../../Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: color.PRETO_BACKGROUND,
-    padding: 20,
   },
+
+  box: {
+    padding: 10,
+  },
+
   title: {
     color: color.AMARELO,
     fontSize: 38,
@@ -14,6 +18,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: 'bold'
   },
+
   containerInputs: {
     marginTop: 20,
   },
@@ -28,6 +33,22 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 12,
     backgroundColor: '#fff',
+  },
+
+  button: {
+    borderColor: color.AMARELO,
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 5,
+  },
+
+  textButton: {
+    color: '#c1bccc',
   }
 });
 

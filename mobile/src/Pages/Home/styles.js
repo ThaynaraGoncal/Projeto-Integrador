@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import * as color from '../../Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    backgroundColor: '#131418',
+    backgroundColor: color.PRETO_BACKGROUND,
   },
 
   ContainerLogo: {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 36,
-    color: '#fcbf49',
+    color: color.AMARELO,
     fontWeight: 'bold',
   },
 

@@ -48,7 +48,7 @@ function MeusAnuncios() {
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding" >
             <Text style={styles.title}>Meus Anúncios</Text>
-            <ScrollView showsVerticalScrollIndicator="false">
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.labelInput}>Título</Text>
 
             </ScrollView>
