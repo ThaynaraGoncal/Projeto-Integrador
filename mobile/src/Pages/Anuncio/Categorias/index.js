@@ -11,15 +11,14 @@ import {
 } from "react-native";
 
 import Container from '../../../components/Container';
-import styles from './styles';
 
 function Anuncio() {
   const { navigate, goBack } = useNavigation();
 
   return (
-    <View>
-
-    </View>
+    <Container title="Escolha uma categoria">
+      <Text>Festa</Text>
+    </Container>
   );
 }
 

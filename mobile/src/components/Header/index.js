@@ -18,8 +18,8 @@ export default function Header({ title, buttonBack, route }) {
         onPress={handleRoute}
       >
         <AntDesign name="arrowleft" size={27} color="#fff" />
-      </RectButton>)
-      }
+      </RectButton>)}
+
 
       <Text style={styles.titleHeader}>{title}</Text>
     </View>

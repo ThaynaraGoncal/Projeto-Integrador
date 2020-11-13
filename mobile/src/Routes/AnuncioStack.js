@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Anuncio from '../Pages/Anuncio/InserirAnuncio';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
 import MeusAnuncios from '../Pages/MeusAnuncios';
+import AnuncioDetalhes from '../Pages/Anuncio/AnuncioDetalhes';
 
 const { Navigator, Screen } = createStackNavigator();
 

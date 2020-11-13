@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import * as color from '../Colors';
 
-import Home from '../Pages/Home';
+import Home from '../Routes/HomeStack';
 import CadastroStack from '../Routes/CadastroStack';
 import AnuncioStack from '../Routes/AnuncioStack';
 

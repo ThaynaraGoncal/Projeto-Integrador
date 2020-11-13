@@ -1,17 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Header from '../../components/Header';
-import * as color from '../../Colors';
+import Header from '../../../components/Header';
+import * as color from '../../../Colors';
 
-
-export default function Container({ children, title, buttonBack, route }) {
+export default function AnuncioDetalhes({ route }) {
+  console.log('Meu item: ', route.params)
 
   return (
     <View style={styles.container}>
-      <Header title={title} buttonBack={buttonBack} route={route} />
-      <View style={styles.content}>
-        {children}
-      </View>
+      <Header title="Detalhes Anúncio" />
     </View>
 
   );

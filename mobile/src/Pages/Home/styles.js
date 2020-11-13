@@ -4,8 +4,8 @@ import * as color from '../../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    //alignItems: 'center',
+    //justifyContent: 'space-evenly',
     backgroundColor: color.PRETO_BACKGROUND,
   },
 
