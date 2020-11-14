@@ -40,7 +40,7 @@ const listaAnuncios = ({ anuncios }) => {
       <FlatList
         data={anuncios}
         renderItem={renderItem}
-        keyExtractor={item => item.path}
+        keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );

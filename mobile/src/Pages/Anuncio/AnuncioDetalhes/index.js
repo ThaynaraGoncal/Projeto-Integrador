@@ -8,7 +8,7 @@ export default function AnuncioDetalhes({ route }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Detalhes Anúncio" />
+      <Header title="Detalhes Anúncio" buttonBack route="Home"/>
     </View>
 
   );
