@@ -34,13 +34,18 @@ class AnuncioController {
     async index(req, res) {
         const sequelize = new Sequelize(database);
 
-        const anuncios = await sequelize
+        const lista_anuncios = await sequelize
             .query(`select anu.id, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio`,
                 { type: QueryTypes.SELECT }).then(user => {
                     return user
                 });
 
-        console.log('Anuncios', anuncios)
+        //console.log('Anuncios', anuncios)
+
+        const anuncios = lista_anuncios.map(anuncio => ({
+            ...anuncio,
+            path: `http://localhost:3333/images/${anuncio.path}`
+        }))
 
         return res.status(200).json({ anuncios });
 

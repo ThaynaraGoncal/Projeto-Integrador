@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,11 +14,11 @@ export default function Header({ title, buttonBack, route }) {
 
   return (
     <View style={buttonBack ? styles.header : styles.headerCenter}>
-      {buttonBack && (<RectButton style={styles.button}
+      {buttonBack && (<BorderlessButton style={styles.button}
         onPress={handleRoute}
       >
         <AntDesign name="arrowleft" size={27} color="#fff" />
-      </RectButton>)}
+      </BorderlessButton>)}
 
 
       <Text style={styles.titleHeader}>{title}</Text>

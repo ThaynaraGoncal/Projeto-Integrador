@@ -5,6 +5,7 @@ import Anuncio from '../Pages/Anuncio/InserirAnuncio';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
 import MeusAnuncios from '../Pages/MeusAnuncios';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
+import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import AnuncioDetalhes from '../Pages/Anuncio/AnuncioDetalhes';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -16,6 +17,7 @@ function AnuncioStack() {
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
       <Screen name="SubCategoria" component={SubCategoria} />
+      <Screen name="Comida" component={Comida} />
     </Navigator>
   );
 }

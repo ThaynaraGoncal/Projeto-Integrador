@@ -23,57 +23,57 @@ function Categoria() {
 
   return (
     <View style={styles.container}>
-      <Header title="Escolha uma categoria" buttonBack route="Anuncio"/>
+      <Header title="Escolha uma categoria" buttonBack route="Anuncio" />
       <ScrollView>
-      <RectButton style={styles.categoriaButton} 
-        onPress={()=> navigate('SubCategoria', 'comida')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Comida</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'decoracao')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Decoração</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'musica')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Música</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'lembrancas')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Lembranças</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'entretenimento')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Entretenimento</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'convites')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Convites</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
-      <RectButton style={styles.categoriaButton}
-        onPress={()=> navigate('SubCategoria', 'local')}
-      > 
-        <Icon name='food' size={34} color={color.AMARELO} />
-        <Text style={styles.textButton}>Local</Text>
-        <AntDesign name="arrowright" size={27} />
-      </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('Comida')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Comida</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'decoracao')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Decoração</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'musica')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Música</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'lembrancas')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Lembranças</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'entretenimento')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Entretenimento</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'convites')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Convites</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'local')}
+        >
+          <Icon name='food' size={34} color={color.AMARELO} />
+          <Text style={styles.textButton}>Local</Text>
+          <AntDesign name="arrowright" size={27} />
+        </RectButton>
       </ScrollView>
     </View>
 

@@ -21,7 +21,7 @@ import styles from './styles';
 import Categoria from '../Categorias';
 
 function SubCategoria({ route }) {
-  console.log(route.params)
+  //console.log(route.params)
   const categoria = route.params;
 
   const comida = ['Doces', 'Salgados', 'Buffet'];
@@ -33,7 +33,7 @@ function SubCategoria({ route }) {
   const local = ['Salão', 'Clube', 'Club']
 
   let stateInical = [];
-  
+
   switch (categoria) {
     case 'comida': stateInical = comida;
       break;
@@ -47,24 +47,29 @@ function SubCategoria({ route }) {
       break;
     case 'convites': stateInical = convites;
       break;
-    case 'local' : stateInical = local;
-    default :
+    case 'local': stateInical = local;
+    default:
   }
 
   const [subComida, setSubComida] = useState(stateInical);
   const { navigate, goBack } = useNavigation();
 
+  function concluiCategoria(item) {
+    console.log(item)
+  }
+
   return (
     <View style={styles.container}>
-      <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio"/>
+      <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
-        {subComida.map((item)=> {
+        {subComida.map((item) => {
+          console.log(item)
           return (
             <RectButton style={styles.categoriaButton}
-              onPress={() => {navigate('Anuncio', item)}}
-            > 
+            // onPress={concluiCategoria(item)}
+            >
               <Text style={styles.textButton}>{item}</Text>
-          </RectButton>
+            </RectButton>
           )
         })}
 

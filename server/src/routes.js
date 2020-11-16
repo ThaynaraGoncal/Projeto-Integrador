@@ -23,7 +23,7 @@ routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
 
 routes.get('/anuncios', AnuncioController.index);
-routes.post('/anuncios', upload.single('file'), AnuncioController.store);
+routes.post('/anuncios', upload.array('file'), AnuncioController.store);
 
 routes.get('/users', (req, res) => {
     let msg = { msg: "hello word" }

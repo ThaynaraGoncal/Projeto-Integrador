@@ -1,5 +1,6 @@
 import express from 'express';
 import routes from './routes';
+import path from 'path';
 
 import './database';
 
@@ -11,8 +12,10 @@ class App {
         this.routes();
     }
 
+
     midlewares() {
         this.server.use(express.json());
+        this.server.use('/images', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')));
     }
 
     routes() {
