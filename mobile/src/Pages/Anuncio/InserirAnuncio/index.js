@@ -110,7 +110,6 @@ function Anuncio() {
                         onChangeText={setValor}
                         keyboardType='numeric'
                     >
-                        <Text style={{ color: '#c1bccc' }}>R$: </Text>
                     </InputText>
                     <Text style={styles.labelInput}>Descrição</Text>
                     <TextInput

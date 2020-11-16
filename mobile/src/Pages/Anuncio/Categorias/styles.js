@@ -7,21 +7,21 @@ const styles = StyleSheet.create({
     backgroundColor: color.PRETO_BACKGROUND,
   },
 
-  header: {
-    height: 70,
+  categoriaButton: {
     width: '100%',
-    backgroundColor: color.AMARELO,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 5,
+    flexDirection: 'row',
+    padding: 10,
+    marginBottom: 10,
   },
 
-  titleHeader: {
-    color: '#fff',
+  textButton: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginRight: 10,
+    marginLeft: 20
   }
 });
 

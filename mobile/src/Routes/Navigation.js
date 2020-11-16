@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 import * as color from '../Colors';
 
 import Home from '../Routes/HomeStack';
@@ -38,7 +38,12 @@ export default function Navigation() {
                     name="Home"
                     component={Home}
                     options={{
-                        tabBarLabel: "Anúncios"
+                        tabBarLabel: "Anúncios",
+                        tabBarIcon: ({ color, size, focused }) => {
+                            return (
+                            <AntDesign name='home' color={focused ? '#fcbf49' : color} size={size}/>
+                            );
+                        }
                     }}
                 />
                 <Screen
@@ -55,7 +60,7 @@ export default function Navigation() {
                         tabBarLabel: 'Cadastro',
                         tabBarIcon: ({ color, size, focused }) => {
                             return (
-                                <Ionicons name='ios-easel' color={focused ? '#fcbf49' : color} size={size} />
+                                <AntDesign name='setting' color={focused ? '#fcbf49' : color} size={size} />
                             )
                         }
                     }}
