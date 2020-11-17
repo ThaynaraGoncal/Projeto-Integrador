@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import {
   Text,
@@ -24,8 +24,9 @@ import ImagePickerExample from '../../../components/Camera';
 
 import styles from './styles';
 
-function Anuncio({ route }) {
-  //console.log(route.params.name)
+function Anuncio({ route, limpa }, params) {
+  console.log('route', params);
+
   const { navigate } = useNavigation();
 
   const [titulo, setTitulo] = useState("");
@@ -33,6 +34,19 @@ function Anuncio({ route }) {
   const [categoria, setCategoria] = useState("");
   const [valor, setValor] = useState("");
   const [images, setImages] = useState([]);
+
+
+
+  useFocusEffect(() => {
+    if (limpa) {
+      setTitulo('');
+      setDescricao('');
+      setCategoria('');
+      setValor('');
+      setImages([]);
+    }
+
+  }, [])
 
   function validaCamposNull() {
     let validado = true;
@@ -146,7 +160,7 @@ function Anuncio({ route }) {
             })}
 
             <TouchableOpacity style={styles.imagesInput} onPress={handleSelectImages}>
-              <Feather name="plus" size={24} color={color.AMARELO} />
+              <Feather name="plus" size={24} color={color.BUTTON_IMAGES} />
             </TouchableOpacity>
           </ScrollView>
 

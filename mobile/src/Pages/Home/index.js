@@ -20,6 +20,7 @@ function Home() {
 
     api.get(`/anuncios`).then(res => {
       const anunciosResp = res.data.anuncios;
+
       setAnuncios(anunciosResp)
     }).catch(error => {
       console.log(error);

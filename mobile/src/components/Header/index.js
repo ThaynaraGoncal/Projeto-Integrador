@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+import * as color from '../../Colors';
 
-export default function Header({ title, buttonBack, route }) {
+export default function Header({ title, buttonBack, route, buttonEsq }) {
   const { navigate } = useNavigation();
 
   const handleRoute = () => {
@@ -17,11 +18,14 @@ export default function Header({ title, buttonBack, route }) {
       {buttonBack && (<BorderlessButton style={styles.button}
         onPress={handleRoute}
       >
-        <AntDesign name="arrowleft" size={27} color="#fff" />
+        <AntDesign name="arrowleft" size={27} color={color.INPUT_LAVEL} />
       </BorderlessButton>)}
-
-
       <Text style={styles.titleHeader}>{title}</Text>
+      {buttonEsq && (<BorderlessButton style={styles.button}
+        onPress={handleRoute}
+      >
+        <Feather name="x" size={24} color="#ff669d" />
+      </BorderlessButton>)}
     </View>
   );
 }
@@ -30,18 +34,24 @@ const styles = StyleSheet.create({
   header: {
     height: 70,
     width: '100%',
-    backgroundColor: '#fcbf49',
+    backgroundColor: color.AZUL_CIANETO,
+    borderBottomWidth: 1,
+    borderColor: '#dde3f0',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
     marginBottom: 15,
+    paddingRight: 10,
+    paddingLeft: 10
   },
 
   headerCenter: {
     height: 70,
     width: '100%',
-    backgroundColor: '#fcbf49',
+    backgroundColor: color.AZUL_CIANETO,
+    borderBottomWidth: 1,
+    borderColor: '#fff',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'center',
@@ -50,9 +60,9 @@ const styles = StyleSheet.create({
   },
 
   titleHeader: {
-    color: '#fff',
-    fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: 'Nunito_600SemiBold',
+    color: color.INPUT_LAVEL,
+    fontSize: 22,
     marginRight: 10,
   }
 })

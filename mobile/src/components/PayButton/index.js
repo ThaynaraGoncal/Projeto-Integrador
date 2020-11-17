@@ -13,7 +13,7 @@ function PayButton({ label, focused }) {
         focused ? styles.buttonOff : {}
       ]}
     >
-      <Feather name='edit' color={focused ? '#fcbf49' : '#fff'} size={20}/> 
+      <Feather name='edit' color={focused ? '#15c3d6' : '#fff'} size={20} />
       <Text
         style={[
           styles.label,

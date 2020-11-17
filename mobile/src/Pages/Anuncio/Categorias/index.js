@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Fontisto, Entypo, FontAwesome } from '@expo/vector-icons';
 import * as color from '../../../Colors';
 
 import Header from '../../../components/Header';
@@ -28,51 +28,58 @@ function Categoria() {
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('Comida')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <Icon name='food' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Comida</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'decoracao')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <FontAwesome name='star-half-empty' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Decoração</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'musica')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <Fontisto name='music-note' size={30} color={'#15c3d6'} />
           <Text style={styles.textButton}>Música</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
+        </RectButton>
+        <RectButton style={styles.categoriaButton}
+          onPress={() => navigate('SubCategoria', 'fotos')}
+        >
+          <FontAwesome name='camera-retro' size={30} color={'#15c3d6'} />
+          <Text style={styles.textButton}>Fotos</Text>
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'lembrancas')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <FontAwesome name='gift' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Lembranças</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'entretenimento')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <Entypo name='game-controller' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Entretenimento</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'convites')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <FontAwesome name='envelope-o' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Convites</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('SubCategoria', 'local')}
         >
-          <Icon name='food' size={34} color={color.AMARELO} />
+          <FontAwesome name='home' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Local</Text>
-          <AntDesign name="arrowright" size={27} />
+          <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
       </ScrollView>
     </View>

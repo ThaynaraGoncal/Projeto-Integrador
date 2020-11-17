@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import * as color from '../../Colors';
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#fcbf49',
+    backgroundColor: color.AZUL_CIANETO,
     height: 50,
     borderRadius: 8,
     flexDirection: 'row',
@@ -13,9 +14,10 @@ const styles = StyleSheet.create({
   },
 
   titleButton: {
+    fontFamily: 'Nunito_800ExtraBold',
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#fff',
+    color: color.INPUT_LAVEL,
     padding: 12,
   }
 

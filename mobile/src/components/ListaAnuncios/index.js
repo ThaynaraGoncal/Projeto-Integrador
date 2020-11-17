@@ -17,7 +17,7 @@ const Item = ({ data }) => {
     <RectButton style={styles.item} onPress={() => handleDetalhes(data)}>
       <View style={styles.containerItens}>
         <View style={styles.containerImage}>
-          <Image source={ImageFundo} style={styles.image} />
+          <Image source={{ uri: data.path[0] }} style={styles.image} />
         </View>
         <View style={styles.containerText}>
           <Text style={styles.label}>{data.titulo}</Text>
@@ -40,7 +40,7 @@ const listaAnuncios = ({ anuncios }) => {
       <FlatList
         data={anuncios}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
     </SafeAreaView>
   );
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     //marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#605C3C',
+    backgroundColor: '#92929c',
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 5,

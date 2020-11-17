@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fcbf49'
+    backgroundColor: '#15c3d6'
   },
 
   buttonOff: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
   labelOff: {
     fontSize: 12,
-    color: '#fcbf49',
+    color: '#15c3d6',
     fontWeight: 'bold'
   }
 

@@ -27,10 +27,10 @@ export default function Navigation() {
                 })}
                 tabBarOptions={{
                     style: {
-                        backgroundColor: color.PRETO_BACKGROUND,
-                        borderTopColor: 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: '#f9fafc',
+                        borderTopColor: '#dde3f0',
                     },
-                    activeTintColor: '#fff',
+                    activeTintColor: '#8fa7b3',
                     inactiveTintColor: '#92929c',
                 }}
             >
@@ -41,7 +41,7 @@ export default function Navigation() {
                         tabBarLabel: "Anúncios",
                         tabBarIcon: ({ color, size, focused }) => {
                             return (
-                            <AntDesign name='home' color={focused ? '#fcbf49' : color} size={size}/>
+                                <AntDesign name='home' color={focused ? '#15c3d6' : color} size={size} />
                             );
                         }
                     }}
@@ -60,7 +60,7 @@ export default function Navigation() {
                         tabBarLabel: 'Cadastro',
                         tabBarIcon: ({ color, size, focused }) => {
                             return (
-                                <AntDesign name='setting' color={focused ? '#fcbf49' : color} size={size} />
+                                <AntDesign name='setting' color={focused ? '#15c3d6' : color} size={size} />
                             )
                         }
                     }}

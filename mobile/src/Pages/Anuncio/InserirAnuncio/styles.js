@@ -4,13 +4,12 @@ import * as color from '../../../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.PRETO_BACKGROUND,
     paddingBottom: 50
   },
 
   box: {
     padding: 10,
-    marginBottom: 10
+    marginBottom: 50
   },
 
   title: {
@@ -27,14 +26,17 @@ const styles = StyleSheet.create({
 
   labelInput: {
     marginTop: 5,
+    marginBottom: 5,
     fontSize: 16,
-    color: color.AMARELO,
+    color: color.CINZA_LABEL,
+    fontFamily: color.FONT_NUNITO_600,
   },
   textArea: {
-    width: '100%',
     height: 100,
     borderRadius: 12,
     backgroundColor: '#fff',
+    padding: 5,
+    color: color.CINZA_TITULO
   },
 
   button: {
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   imagesInput: {
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderStyle: 'dashed',
-    borderColor: color.AMARELO,
+    borderColor: color.BUTTON_IMAGES,
     borderWidth: 1.4,
     borderRadius: 20,
     height: 150,
