@@ -33,14 +33,14 @@ function Categoria() {
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'decoracao')}
+          onPress={() => navigate('Decoracao')}
         >
           <FontAwesome name='star-half-empty' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Decoração</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'musica')}
+          onPress={() => navigate('Musica')}
         >
           <Fontisto name='music-note' size={30} color={'#15c3d6'} />
           <Text style={styles.textButton}>Música</Text>
@@ -54,28 +54,28 @@ function Categoria() {
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'lembrancas')}
+          onPress={() => navigate('Lembrancas')}
         >
           <FontAwesome name='gift' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Lembranças</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'entretenimento')}
+          onPress={() => navigate('Entretenimento')}
         >
           <Entypo name='game-controller' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Entretenimento</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'convites')}
+          onPress={() => navigate('Convites')}
         >
           <FontAwesome name='envelope-o' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Convites</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'local')}
+          onPress={() => navigate('Local')}
         >
           <FontAwesome name='home' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Local</Text>

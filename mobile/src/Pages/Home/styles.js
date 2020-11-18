@@ -4,7 +4,6 @@ import * as color from '../../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
 
   ContainerLogo: {

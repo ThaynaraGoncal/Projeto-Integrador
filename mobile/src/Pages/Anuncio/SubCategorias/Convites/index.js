@@ -43,23 +43,28 @@ function Convites() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.PRETO_BACKGROUND,
   },
 
   categoriaButton: {
-    width: '100%',
     height: 50,
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderColor: '#d3e2e6',
+    borderWidth: 1.4,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginBottom: 10,
+    marginLeft: 5,
+    marginRight: 5
   },
 
   textButton: {
-    fontSize: 24,
+    fontFamily: 'Nunito_600SemiBold',
+    color: '#8fa7b3',
+    fontSize: 22,
     marginLeft: 20
   }
 });

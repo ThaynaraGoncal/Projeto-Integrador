@@ -24,9 +24,8 @@ import ImagePickerExample from '../../../components/Camera';
 
 import styles from './styles';
 
-function Anuncio({ route, limpa }, params) {
-  console.log('route', params);
-
+function Anuncio({ route, limpa }) {
+  console.log('route.params', route)
   const { navigate } = useNavigation();
 
   const [titulo, setTitulo] = useState("");
@@ -34,8 +33,6 @@ function Anuncio({ route, limpa }, params) {
   const [categoria, setCategoria] = useState("");
   const [valor, setValor] = useState("");
   const [images, setImages] = useState([]);
-
-
 
   useFocusEffect(() => {
     if (limpa) {

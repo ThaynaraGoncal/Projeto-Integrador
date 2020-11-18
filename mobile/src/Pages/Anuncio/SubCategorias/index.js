@@ -55,7 +55,7 @@ function SubCategoria({ route }) {
   const { navigate, goBack } = useNavigation();
 
   function concluiCategoria(item) {
-    console.log(item)
+    navigate("Anuncio", item)
   }
 
   return (
@@ -63,10 +63,12 @@ function SubCategoria({ route }) {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         {subComida.map((item) => {
-          console.log(item)
+          let itemCategoria = item;
+          //console.log('item',itemCategoria)
           return (
             <RectButton style={styles.categoriaButton}
-            // onPress={concluiCategoria(item)}
+              key={itemCategoria}
+              onPress={() => concluiCategoria(itemCategoria)}
             >
               <Text style={styles.textButton}>{item}</Text>
             </RectButton>
