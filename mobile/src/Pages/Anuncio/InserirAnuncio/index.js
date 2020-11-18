@@ -34,8 +34,8 @@ function Anuncio({ route, limpa }) {
   const [valor, setValor] = useState("");
   const [images, setImages] = useState([]);
 
-  useFocusEffect(() => {
-  }, [])
+  // useFocusEffect(() => {
+  // }, [])
 
   function limpaCampos() {
     setTitulo('');

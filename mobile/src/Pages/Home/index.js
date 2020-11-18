@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
+import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 
 import api from '../../services/api';
-import HeaderHome from '../../components/HeaderHome';
 import ListaAnuncio from '../../components/ListaAnuncios';
 import * as color from '../../Colors';
 
 function Home() {
   const [anuncios, setAnuncios] = useState([]);
+  const [filtro, setFiltro] = useState('');
 
-  useFocusEffect(() => {
+  useEffect(() => {
     listaAnuncios();
-  }, [anuncios])
+  }, [])
 
   function listaAnuncios() {
 
@@ -25,9 +26,46 @@ function Home() {
     });
   }
 
+  function handleFiltro(filtro) {
+
+    setFiltro(filtro)
+    console.log(filtro)
+
+    if (filtro) {
+      const anuncios_filtrados = anuncios.filter((item) => {
+        return item.titulo.includes(filtro)
+      })
+      setAnuncios(anuncios_filtrados)
+    } else {
+      listaAnuncios();
+    }
+  }
+
+  function limpaFiltro() {
+    setFiltro('');
+    listaAnuncios();
+  }
+
   return (
     <View style={styles.container}>
-      <HeaderHome />
+      <View style={styles.headerCenter}>
+        <View style={styles.viewInput}>
+          <MaterialIcons name='search' size={25} color={color.BUTTON_IMAGES} />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(text) => handleFiltro(text)}
+            placeholder='Busca'
+            value={filtro}
+          />
+          <TouchableOpacity onPress={limpaFiltro}>
+            <Feather name='x' size={25} color={color.BUTTON_IMAGES} />
+          </TouchableOpacity>
+        </View>
+
+        <BorderlessButton style={styles.button} >
+          <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
+        </BorderlessButton>
+      </View>
       {anuncios.length > 0 ?
         (
           <ListaAnuncio anuncios={anuncios} />
@@ -59,6 +97,53 @@ const styles = StyleSheet.create({
   info: {
     fontFamily: 'Nunito_800ExtraBold',
     fontSize: 30,
+    color: color.CINZA_TITULO
+  },
+
+  headerCenter: {
+    height: 80,
+    backgroundColor: color.AZUL_CIANETO,
+    borderBottomWidth: 1,
+    borderColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingHorizontal: 5,
+    paddingBottom: 10,
+  },
+
+  titleHeader: {
+    fontFamily: 'Nunito_600SemiBold',
+    color: color.INPUT_LAVEL,
+    fontSize: 22,
+    marginRight: 10,
+  },
+
+  viewInput: {
+    flex: 1,
+    height: 40,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 5,
+    paddingHorizontal: 5
+  },
+
+  button: {
+    height: 40,
+    width: 40,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    marginRight: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  textInput: {
+    flex: 1,
+    fontFamily: 'Nunito_600SemiBold',
+    height: 30,
+    fontSize: 18,
     color: color.CINZA_TITULO
   }
 

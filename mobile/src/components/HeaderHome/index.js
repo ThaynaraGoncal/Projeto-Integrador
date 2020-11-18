@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+import api from '../../services/api';
+
 import * as color from '../../Colors';
 
 export default function HeaderHome() {
+  const [filtro, setFiltro] = useState('');
+
   const { navigate } = useNavigation();
+
+  function handleFiltro() {
+    console.log(filtro)
+
+    api.get(`/anuncio?categoria=${filtro}`).then(res => {
+      const anunciosResp = res.data;
+      navigate('Home', anunciosResp)
+      //console.log('anunciosResp', anunciosResp)
+
+    }).catch(error => {
+      console.log(error);
+    });
+
+  }
 
   const handleRoute = () => {
     navigate(route);
@@ -15,8 +33,8 @@ export default function HeaderHome() {
 
   return (
     <View style={styles.headerCenter}>
-      <TextInput style={styles.input} />
-      <BorderlessButton style={styles.button}>
+      <TextInput style={styles.input} value={filtro} onChangeText={setFiltro} />
+      <BorderlessButton style={styles.button} onPress={handleFiltro}>
         <MaterialIcons name='search' size={25} />
       </BorderlessButton>
     </View>

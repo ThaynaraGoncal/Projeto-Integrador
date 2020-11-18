@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     padding: 10,
-    marginBottom: 15,
     paddingRight: 10,
     paddingLeft: 10
   },
@@ -56,13 +55,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     padding: 5,
-    marginBottom: 15,
   },
 
   titleHeader: {
-    fontFamily: 'Nunito_600SemiBold',
+    fontFamily: 'Nunito_800ExtraBold',
     color: color.INPUT_LAVEL,
-    fontSize: 22,
+    fontSize: 24,
     marginRight: 10,
   }
 })
