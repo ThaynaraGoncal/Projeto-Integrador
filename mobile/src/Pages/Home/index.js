@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import ListaAnuncio from '../../components/ListaAnuncios';
@@ -10,6 +11,8 @@ import * as color from '../../Colors';
 function Home() {
   const [anuncios, setAnuncios] = useState([]);
   const [filtro, setFiltro] = useState('');
+
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     listaAnuncios();
@@ -62,7 +65,7 @@ function Home() {
           </TouchableOpacity>
         </View>
 
-        <BorderlessButton style={styles.button} >
+        <BorderlessButton style={styles.button} onPress={() => navigate('ModalFiltro')}>
           <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
         </BorderlessButton>
       </View>
