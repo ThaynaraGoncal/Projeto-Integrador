@@ -7,7 +7,7 @@ function InputText(props) {
   return (
     <TextInput
       style={styles.input}
-      placeholder="clique para digitar"
+      placeholder="Clique para digitar"
       {...props}
     />
   );

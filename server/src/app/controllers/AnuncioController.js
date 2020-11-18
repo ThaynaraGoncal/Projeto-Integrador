@@ -4,11 +4,12 @@ import Anuncio from '../models/Anuncio';
 import Arquivo from '../models/Arquivo';
 import database from '../../config/database';
 
+import { hostCasa, hostEmpresa } from '../../constants';
+
 class AnuncioController {
   async store(req, res) {
-
+    console.log(req.body)
     try {
-      console.log(req);
 
       let anuncio = await Anuncio.create(req.body);
       let { id } = anuncio.dataValues;
@@ -53,7 +54,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`http://192.168.0.103:3333/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
         }
       }
     }

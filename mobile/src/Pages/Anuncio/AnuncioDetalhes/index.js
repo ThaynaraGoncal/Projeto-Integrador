@@ -1,44 +1,49 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import Header from '../../../components/Header';
+import { RectButton } from 'react-native-gesture-handler';
+import { AntDesign, Entypo } from '@expo/vector-icons';
+
+
+import styles from './styles';
 import * as color from '../../../Colors';
 
 export default function AnuncioDetalhes({ route }) {
-  console.log('Meu item: ', route.params)
+  console.log('Meu item: ', route.params);
+  const imagens = route.params.path;
+  const { categoria, descricao, titulo, valor } = route.params;
 
   return (
     <View style={styles.container}>
-      <Header title="Detalhes Anúncio" buttonBack route="Home"/>
+      <Header title="Detalhes Anúncio" buttonBack route="Home" />
+      <ScrollView>
+        <ScrollView horizontal={true} style={styles.viewImages}>
+          {imagens.map((item) => {
+            return (
+              <Image key={item} source={{ uri: item }} style={styles.image} />
+            )
+          })}
+        </ScrollView>
+        <Text style={styles.titulo}>{titulo}</Text>
+        <Text style={styles.labelValor}>R$ {valor}</Text>
+        <Text style={styles.labelTitulo}>Categoria</Text>
+        <View style={styles.viewInfo}>
+          <Text style={styles.labelText}>{categoria}</Text>
+        </View>
+        <Text style={styles.labelTitulo}>Descrição</Text>
+        <View style={styles.viewDescricao}>
+          <Text style={styles.labelText}>{descricao}</Text>
+        </View>
+        <View style={styles.viewButtons}>
+          <RectButton style={styles.button}>
+            <AntDesign name="heart" size={40} color={color.VERMELHO_CLARO} />
+          </RectButton>
+          <RectButton style={styles.button}>
+            <Entypo name='chat' size={40} color={color.CINZA_TITULO} />
+          </RectButton>
+        </View>
+      </ScrollView>
     </View>
 
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.PRETO_BACKGROUND,
-  },
-
-  header: {
-    height: 70,
-    width: '100%',
-    backgroundColor: color.AMARELO,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-around',
-    padding: 5,
-    marginBottom: 15,
-  },
-
-  titleHeader: {
-    color: '#fff',
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginRight: 10,
-  },
-
-  content: {
-    padding: 5,
-  }
-})
+};

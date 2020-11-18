@@ -7,5 +7,6 @@ export const INPUT_BORDER_LABEL = '#d3e2e6';
 export const INPUT_LAVEL = '#fFF';
 export const BUTTON_IMAGES = '#96D2F0';
 export const BACKGROUND_HEADER = '#f9fafc';
+export const VERMELHO_CLARO = '#ff669d';
 
 export const FONT_NUNITO_600 = 'Nunito_600SemiBold';

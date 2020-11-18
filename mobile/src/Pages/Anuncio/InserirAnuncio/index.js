@@ -25,7 +25,7 @@ import ImagePickerExample from '../../../components/Camera';
 import styles from './styles';
 
 function Anuncio({ route, limpa }) {
-  console.log('route.params', route)
+  console.log('route.params', route.params)
   const { navigate } = useNavigation();
 
   const [titulo, setTitulo] = useState("");
@@ -35,15 +35,15 @@ function Anuncio({ route, limpa }) {
   const [images, setImages] = useState([]);
 
   useFocusEffect(() => {
-    if (limpa) {
-      setTitulo('');
-      setDescricao('');
-      setCategoria('');
-      setValor('');
-      setImages([]);
-    }
-
   }, [])
+
+  function limpaCampos() {
+    setTitulo('');
+    setDescricao('');
+    setCategoria('');
+    setValor('');
+    setImages([]);
+  }
 
   function validaCamposNull() {
     let validado = true;
@@ -60,16 +60,12 @@ function Anuncio({ route, limpa }) {
   }
 
   async function handleSubmit() {
-    // const dados = {
-    //   titulo,
-    //   descricao,
-    //   categoria,
-    //   valor,
-    // };
 
     let validaCampos = validaCamposNull();
 
     const data = new FormData();
+
+    setCategoria(route.params.name)
 
     data.append('titulo', titulo);
     data.append('descricao', descricao);
@@ -84,12 +80,14 @@ function Anuncio({ route, limpa }) {
       })
     })
 
-    console.log('Data formado:', data.values)
+    console.log('categoria:', categoria)
 
     if (validaCampos) {
       api.post('/anuncios', data);
 
+      limpaCampos();
       navigate('Home')
+
       // api.post("/anuncios", data)
       //   .then((res) => {
       //     console.log(data)
@@ -106,13 +104,6 @@ function Anuncio({ route, limpa }) {
 
   function handleCategorias() {
     navigate('CategoriaAnuncio');
-  }
-
-  function limpaCampos() {
-    setTitulo("");
-    setDescricao("");
-    setCategoria("");
-    setvalor("");
   }
 
   async function handleSelectImages() {
@@ -169,6 +160,8 @@ function Anuncio({ route, limpa }) {
           <Text style={styles.labelInput}>Categoria</Text>
           <RectButton style={styles.button}
             onPress={handleCategorias}
+            value={categoria}
+            onChangeText={setCategoria}
           >
             <Text style={styles.textButton}>{route.params ? route.params.name : 'Selecione uma categoria'}</Text>
             <AntDesign name="arrowright" size={24} color="#c1bccc" />
