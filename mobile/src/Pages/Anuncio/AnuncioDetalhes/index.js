@@ -9,7 +9,6 @@ import styles from './styles';
 import * as color from '../../../Colors';
 
 export default function AnuncioDetalhes({ route }) {
-  console.log('Meu item: ', route.params);
   const imagens = route.params.path;
   const { categoria, descricao, titulo, valor } = route.params;
 
@@ -20,7 +19,7 @@ export default function AnuncioDetalhes({ route }) {
         <ScrollView horizontal={true} style={styles.viewImages}>
           {imagens.map((item) => {
             return (
-              <Image key={item} source={{ uri: item }} style={styles.image} />
+              <Image source={{ uri: item }} style={styles.image} key={item} />
             )
           })}
         </ScrollView>

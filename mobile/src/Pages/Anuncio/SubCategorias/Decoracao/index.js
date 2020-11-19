@@ -11,7 +11,8 @@ import {
 import Header from '../../../../components/Header';
 import * as color from '../../../../Colors';
 
-function Decoracao() {
+function Decoracao({ route }) {
+  const rota = route.params;
   const { navigate } = useNavigation();
 
   return (
@@ -19,22 +20,22 @@ function Decoracao() {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Mesas' })}
+          onPress={() => navigate(rota, 'Mesas')}
         >
           <Text style={styles.textButton}>Mesas</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Temas' })}
+          onPress={() => navigate(rota, { name: 'Temas' })}
         >
           <Text style={styles.textButton}>Temas</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Flores' })}
+          onPress={() => navigate(rota, { name: 'Flores' })}
         >
           <Text style={styles.textButton}>Flores</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Baloes' })}
+          onPress={() => navigate(rota, { name: 'Baloes' })}
         >
           <Text style={styles.textButton}>Balões</Text>
         </RectButton>

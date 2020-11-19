@@ -80,8 +80,6 @@ function Anuncio({ route, limpa }) {
       })
     })
 
-    console.log('categoria:', categoria)
-
     if (validaCampos) {
       api.post('/anuncios', data);
 

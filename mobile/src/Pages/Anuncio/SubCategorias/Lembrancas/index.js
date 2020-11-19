@@ -11,7 +11,8 @@ import {
 import Header from '../../../../components/Header';
 import * as color from '../../../../Colors';
 
-function Lembrancas() {
+function Lembrancas({ route }) {
+  const rota = route.params;
   const { navigate } = useNavigation();
 
   return (
@@ -19,17 +20,17 @@ function Lembrancas() {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Mesas' })}
+          onPress={() => navigate(rota, { name: 'Mesas' })}
         >
           <Text style={styles.textButton}>Mesas</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Aninversario' })}
+          onPress={() => navigate(rota, { name: 'Aninversario' })}
         >
           <Text style={styles.textButton}>Aninversário</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Casamento' })}
+          onPress={() => navigate(rota, { name: 'Casamento' })}
         >
           <Text style={styles.textButton}>Casamento</Text>
         </RectButton>

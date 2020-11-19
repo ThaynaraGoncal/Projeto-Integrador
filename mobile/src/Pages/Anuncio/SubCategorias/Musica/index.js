@@ -11,7 +11,8 @@ import {
 import Header from '../../../../components/Header';
 import * as color from '../../../../Colors';
 
-function Musica() {
+function Musica({ route }) {
+  const rota = route.params;
   const { navigate } = useNavigation();
 
   return (
@@ -19,22 +20,22 @@ function Musica() {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Acustico' })}
+          onPress={() => navigate(rota, { name: 'Acustico' })}
         >
           <Text style={styles.textButton}>Acústico</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'DJ' })}
+          onPress={() => navigate(rota, { name: 'DJ' })}
         >
           <Text style={styles.textButton}>DJ</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Carro de Som' })}
+          onPress={() => navigate(rota, { name: 'Carro de Som' })}
         >
           <Text style={styles.textButton}>Carro de Som</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Caixa de Som' })}
+          onPress={() => navigate(rota, { name: 'Caixa de Som' })}
         >
           <Text style={styles.textButton}>Caixa de Som</Text>
         </RectButton>

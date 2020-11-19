@@ -2,79 +2,80 @@ import { StyleSheet } from 'react-native';
 import * as color from '../../Colors';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  view: {
-    height: 200,
-    backgroundColor: color.INPUT_LAVEL,
-    borderRadius: 5,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  info: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 30,
-    color: color.CINZA_TITULO
-  },
-
-  headerCenter: {
-    height: 80,
+  header: {
+    height: 70,
+    width: '100%',
     backgroundColor: color.AZUL_CIANETO,
     borderBottomWidth: 1,
     borderColor: '#fff',
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingHorizontal: 5,
-    paddingBottom: 10,
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 5
   },
 
   titleHeader: {
-    fontFamily: 'Nunito_600SemiBold',
+    fontFamily: 'Nunito_800ExtraBold',
     color: color.INPUT_LAVEL,
-    fontSize: 22,
+    fontSize: 26,
     marginRight: 10,
-  },
-
-  viewInput: {
-    flex: 1,
-    height: 40,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 5,
-    paddingHorizontal: 5
-  },
-
-  button: {
-    height: 40,
-    width: 40,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    marginRight: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  textInput: {
-    flex: 1,
-    fontFamily: 'Nunito_600SemiBold',
-    height: 30,
-    fontSize: 18,
-    color: color.CINZA_TITULO
   },
 
   centeredView: {
     flex: 1,
-    marginTop: 30,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    backgroundColor: color.AMARELO
   },
+
+  buttonCategoria: {
+    borderColor: color.AMARELO,
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 5,
+  },
+
+  textButton: {
+    fontFamily: 'Nunito_700Bold',
+    color: '#c1bccc',
+    fontSize: 22
+  },
+
+  viewInputPrecos: {
+    backgroundColor: '#fff',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 10,
+    marginTop: 5,
+  },
+
+  inputPrecos: {
+    fontFamily: 'Nunito_700Bold',
+    width: 120,
+    fontSize: 18,
+    color: '#c1bccc',
+  },
+
+  titleOpcoes: {
+    fontFamily: 'Nunito_700Bold',
+    color: color.CINZA_TITULO,
+    fontSize: 18,
+    marginTop: 10
+  },
+
+  container: {
+    paddingHorizontal: 10,
+  },
+
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -97,9 +98,10 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   textStyle: {
+    fontFamily: 'Nunito_700Bold',
     color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    fontSize: 20
+    //textAlign: "center"
   },
   modalText: {
     marginBottom: 15,

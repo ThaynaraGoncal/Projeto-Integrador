@@ -18,64 +18,72 @@ import * as color from '../../../Colors';
 import Header from '../../../components/Header';
 import styles from './styles';
 
-function Categoria() {
-  const { navigate, goBack } = useNavigation();
+function Categoria({ route, }) {
+  console.log('route', route)
+  const { navigate } = useNavigation();
+
+  let rota = 'Anuncio';
+  if (route.params) {
+    rota = route.params
+  }
 
   return (
     <View style={styles.container}>
-      <Header title="Escolha uma categoria" buttonBack route="Anuncio" />
+      <Header title="Escolha uma categoria" buttonBack route={route.params} />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Comida')}
+          onPress={() => navigate('Comida', rota)}
         >
           <Icon name='food' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Comida</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Decoracao')}
+          onPress={() => navigate('Decoracao', rota)}
         >
           <FontAwesome name='star-half-empty' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Decoração</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Musica')}
+          onPress={() => navigate('Musica', rota)}
         >
           <Fontisto name='music-note' size={30} color={'#15c3d6'} />
           <Text style={styles.textButton}>Música</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('SubCategoria', 'fotos')}
+          onPress={() => navigate('Fotos', rota)}
         >
           <FontAwesome name='camera-retro' size={30} color={'#15c3d6'} />
           <Text style={styles.textButton}>Fotos</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
+
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Lembrancas')}
+          onPress={() => navigate('Lembrancas', rota)}
         >
           <FontAwesome name='gift' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Lembranças</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
+
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Entretenimento')}
+          onPress={() => navigate('Entretenimento', rota)}
         >
           <Entypo name='game-controller' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Entretenimento</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Convites')}
+          onPress={() => navigate('Convites', rota)}
         >
           <FontAwesome name='envelope-o' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Convites</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Local')}
+          onPress={() => navigate('Local', rota)}
         >
           <FontAwesome name='home' size={34} color={'#15c3d6'} />
           <Text style={styles.textButton}>Local</Text>

@@ -62,6 +62,35 @@ class AnuncioController {
     return res.status(200).json({ anuncios });
 
   }
+
+  async indexFiltro(req, res) {
+    console.log(req.query);
+    const sequelize = new Sequelize(database);
+
+    const anuncio_list = await sequelize
+      .query(`select anu.id, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio where anu.categoria = '${req.query.categoria}'`,
+        { type: QueryTypes.SELECT }).then(user => {
+          return user
+        });
+
+    const anunciosFiltro = anuncio_list.filter(
+      (v, i, a) => a.findIndex(t => t.id === v.id) === i,
+    );
+
+    const anuncios = anunciosFiltro.map(dado => ({ ...dado, path: [] }));
+
+    for (let anuncioF of anuncios) {
+      for (let anunciosAll of anuncio_list) {
+        if (anuncioF.id === anunciosAll.id) {
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+        }
+      }
+    }
+
+    return res.status(200).json({ anuncios });
+
+  }
+
 }
 
 export default new AnuncioController;

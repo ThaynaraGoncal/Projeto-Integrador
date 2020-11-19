@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
 
   viewImages: {
     flex: 1,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    marginTop: 5
   },
 
   image: {
@@ -20,6 +21,13 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 5,
     marginRight: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     //borderColor: color.BUTTON_IMAGES,
     //borderWidth: 1,
   },

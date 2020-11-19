@@ -12,7 +12,6 @@ function CadastroConcluido() {
   const { navigate } = useNavigation();
 
   const { usuario } = route.params;
-  console.log(route.params);
 
   function handleSubmit() {
     navigate('Cadastro')

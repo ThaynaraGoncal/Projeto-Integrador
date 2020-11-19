@@ -21,7 +21,6 @@ import styles from './styles';
 import Categoria from '../Categorias';
 
 function SubCategoria({ route }) {
-  //console.log(route.params)
   const categoria = route.params;
 
   const comida = ['Doces', 'Salgados', 'Buffet'];

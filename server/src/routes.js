@@ -23,6 +23,7 @@ routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
 
 routes.get('/anuncios', AnuncioController.index);
+routes.get('/anuncio', AnuncioController.indexFiltro);
 routes.post('/anuncios', upload.array('file'), AnuncioController.store);
 
 routes.get('/users', (req, res) => {

@@ -11,7 +11,8 @@ import {
 import Header from '../../../../components/Header';
 import * as color from '../../../../Colors';
 
-function Convites() {
+function Comida({ route }) {
+  const rota = route.params;
   const { navigate } = useNavigation();
 
   return (
@@ -19,17 +20,17 @@ function Convites() {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Doces' })}
+          onPress={() => navigate(rota, { name: 'Doces' })}
         >
           <Text style={styles.textButton}>Doces</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Salgados' })}
+          onPress={() => navigate(rota, { name: 'Salgados' })}
         >
           <Text style={styles.textButton}>Salgados</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate('Anuncio', { name: 'Buffet' })}
+          onPress={() => navigate(rota, { name: 'Buffet' })}
         >
           <Text style={styles.textButton}>Buffet</Text>
         </RectButton>
@@ -69,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Convites;
+export default Comida;
