@@ -5,6 +5,7 @@ import multerConfig from './config/multer';
 import PessoaFisicaController from './app/controllers/PessoaFisicaController';
 import PessoaJuridicaController from './app/controllers/PessoaJuridicaController';
 import PessoaComplementoController from './app/controllers/PessoaComplementeController';
+import UsuariosController from './app/controllers/UsuarioController';
 import UsuarioController from './app/controllers/UsuarioController';
 import AnuncioController from './app/controllers/AnuncioController';
 import ArquivoController from './app/controllers/ArquivoController';
@@ -18,7 +19,7 @@ routes.post('/pessoa_juridica', PessoaJuridicaController.store);
 routes.post('/pessoa_complemento', PessoaComplementoController.store);
 routes.post('/arquivo', ArquivoController.store);
 
-routes.get('/usuarios', UsuarioController.index);
+//routes.get('/usuarios', UsuariosController.index);
 routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
 

@@ -69,7 +69,6 @@ class PessoaFisicaController {
                     return res.status(200).json({ info: 'Erro ao cadastrar!' });
                 }
 
-
             }
 
         } catch (error) {

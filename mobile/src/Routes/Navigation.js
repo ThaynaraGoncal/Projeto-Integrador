@@ -7,6 +7,7 @@ import * as color from '../Colors';
 import Home from '../Routes/HomeStack';
 import CadastroStack from '../Routes/CadastroStack';
 import AnuncioStack from '../Routes/AnuncioStack';
+import ContaHome from '../Routes/ContaStack';
 
 import PayButton from '../components/PayButton';
 
@@ -54,8 +55,8 @@ export default function Navigation() {
                     }}
                 />
                 <Screen
-                    name="Cadastro"
-                    component={CadastroStack}
+                    name="ContaHome"
+                    component={ContaHome}
                     options={{
                         tabBarLabel: 'Cadastro',
                         tabBarIcon: ({ color, size, focused }) => {

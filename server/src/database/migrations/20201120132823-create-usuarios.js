@@ -9,27 +9,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      cd_pessoa_fisica: {
-        type: Sequelize.INTEGER,
-        references: { model: 'pessoa_fisicas', key: 'cd_pessoa_fisica' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
+      apelido: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      cd_pessoa_juridica: {
-        type: Sequelize.INTEGER,
-        references: { model: 'pessoa_juridicas', key: 'cd_pessoa_juridica' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      provider: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true,
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

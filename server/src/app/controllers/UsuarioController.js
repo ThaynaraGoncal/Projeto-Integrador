@@ -1,76 +1,77 @@
 const { QueryTypes, Sequelize } = require('sequelize');
 
 import Usuario from '../models/Usuario';
-import PessoaFisica from '../models/PessoaFisica';
-import PessoaJuridica from '../models/PessoaJuridica';
-import PessoaJuridicaController from '../controllers/PessoaJuridicaController';
-import PessoaFisicaController from '../controllers/PessoaFisicaController';
 import database from '../../config/database';
 
 class UsuarioController {
-    async store(req, res) {
-        const sequelize = new Sequelize(database);
-        //console.log('req', req.body)
-        try {
+  async store(req, res) {
+    const sequelize = new Sequelize(database);
 
-            if (req.body.password == '') {
-                res.status(201).json({ info: 'Defina uma senha' });
-            }
+    try {
+      //console.log('req', req.body)
+      if (req.body.apelido == '') {
+        res.status(201).json({ info: 'Informe um Apelido' });
+      }
+      if (req.body.email == '') {
+        res.status(201).json({ info: 'Informe um email' });
+      }
+      if (req.body.senha == '') {
+        res.status(201).json({ info: 'Informe uma senha' });
+      }
 
-            let usuario_cadastrado = await Usuario.create(req.body);
+      let email_exist = await sequelize
+        .query(`select email from usuarios where email = '${req.body.email}'`,
+          { type: QueryTypes.SELECT }).then(user => {
+            return user[0]
+          });
 
-            if (usuario_cadastrado) {
+      if (email_exist) {
+        return res.status(201).json({ info: 'Já existe um cadastro com esse email' });
+      }
 
-                const usuario = await sequelize
-                    .query(`select nome, to_char(dt_nascimento, 'dd/mm/yyyy') dt_nascimento,  email, telefone
-                        from usuarios usu inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = usu.cd_pessoa_fisica 
-                         inner join pessoa_complementos pc on pc.cd_pessoa_fisica = pf.cd_pessoa_fisica 
-                        where  usu.cd_pessoa_fisica ='${req.body.cd_pessoa_fisica}'`,
-                        { type: QueryTypes.SELECT }).then(user => {
-                            return user[0]
-                        });
+      let usuario = await Usuario.create(req.body);
 
-                //console.log('usuario', usuario)
-
-
-                return res.status(201).json({ usuario });
-            } else {
-                return res.status(201).json({ info: 'Erro ao cadastrar usuario' });
-            }
+      return res.status(201).json({ usuario });
 
 
-        } catch (error) {
-            console.log(error);
-            return res.status(400).json({ error: 'Não foi possível criar usuario' });
-        }
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: 'Não foi possível criar usuario' });
     }
+  }
 
-    async index(req, res) {
-        const sequelize = new Sequelize(database);
 
-        const usuarios = await sequelize
-            .query(`select pj.cd_pessoa_juridica cd_pessoa, pj.razao_social nome, pj.cnpj cpf_cnpj
-            from usuarios usu inner join pessoa_juridicas pj on usu.cd_pessoa_juridica = pj.cd_pessoa_juridica
-            union all
-            select pf.cd_pessoa_fisica , pf.nome, pf.cpf cpf_cnpj
-            from usuarios usu inner join pessoa_fisicas pf on usu.cd_pessoa_fisica = pf.cd_pessoa_fisica`,
-                { type: QueryTypes.SELECT });
 
-        return res.json({ usuarios });
+  async user(req, res) {
+    const sequelize = new Sequelize(database);
+
+    try {
+      console.log('req', req.query)
+
+      if (req.query.email === '' || req.query.email === undefined) {
+        res.status(201).json({ info: 'Informe um email' });
+      }
+      if (req.query.password === '' || req.query.password === undefined) {
+        res.status(201).json({ info: 'Informe uma senha' });
+      }
+
+      let user = await sequelize
+        .query(`select apelido, email from usuarios where email = '${req.query.email}' and password = '${req.query.password}'`,
+          { type: QueryTypes.SELECT }).then(user => {
+            return user[0]
+          });
+
+      if (user) {
+        return res.status(201).json({ user });
+      } else {
+        return res.status(201).json({ info: 'Login ou Senha inválidos!' });
+      }
+
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: 'Não foi possível criar usuario' });
     }
-
-    async user(req, res) {
-        const sequelize = new Sequelize(database);
-        //console.log(req.query)
-        let result = await sequelize
-            .query(`select cd_pessoa_fisica, nome, cpf, rg, dt_nascimento from pessoa_fisicas where cpf =  '${req.query.cpf}' `,
-                { type: QueryTypes.SELECT });
-        console.log(result[1].rowCount)
-        const pessoa = result[0];
-        //console.log(pessoa)
-
-        return res.status(200).json(pessoa[0]);
-    }
+  }
 
 }
 

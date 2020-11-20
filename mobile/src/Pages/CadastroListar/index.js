@@ -14,6 +14,7 @@ function CadastroHome() {
   const { navigate } = useNavigation();
 
   const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
   function listarMeusDados() {
     navigate('Cadastro')
@@ -27,14 +28,18 @@ function CadastroHome() {
     <View style={styles.container}>
       <Text style={styles.title}>Minha Conta</Text>
       <View style={styles.containerInputs}>
-        <Text style={styles.labelInput}> Nome</Text>
+        <Text style={styles.labelInput}> Email</Text>
         <InputText
           onChangeText={setEmail} value={email}
+        />
+        <Text style={styles.labelInput}> Senha</Text>
+        <InputText
+          onChangeText={setSenha} value={senha}
         />
       </View>
 
       <Button
-        titleButton="Buscar"
+        titleButton="Enviar"
         onPress={fazerCadastro}
       >
       </Button>

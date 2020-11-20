@@ -10,7 +10,7 @@ import api from '../../services/api';
 
 import styles from './styles';
 
-function Cadastro() {
+function CadastroOld() {
     const { navigate } = useNavigation();
 
 
@@ -105,4 +105,4 @@ function Cadastro() {
     );
 }
 
-export default Cadastro;
+export default CadastroOld;
