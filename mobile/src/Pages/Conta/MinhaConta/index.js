@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import { View, Text, ScrollView, KeyboardAvoidingView, TextInput, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Input from '../../../components/input';
 import InputText from '../../../components/InputText';
@@ -18,12 +19,17 @@ function MinhaConta() {
     const [password, setPassword] = useState('');
 
     function handleSubmit() {
+        AsyncStorage.clear().then(() => {
 
+        });
     }
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding" >
             <Text style={styles.title}>Minha conta</Text>
+            <Button onPress={handleSubmit}>
+                <Text>Logout</Text>
+            </Button>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.containerInputs}>
                     <Text style={styles.labelInput}>Minha conta logada</Text>

@@ -54,7 +54,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
         }
       }
     }

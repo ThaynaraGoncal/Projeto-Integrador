@@ -35,7 +35,7 @@ function Categoria({ route, }) {
           onPress={() => navigate('Comida', rota)}
         >
           <Icon name='food' size={34} color={'#15c3d6'} />
-          <Text style={styles.textButton}>Comida</Text>
+          <Text style={styles.textButton}>Alimentação</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
         <RectButton style={styles.categoriaButton}
@@ -56,7 +56,7 @@ function Categoria({ route, }) {
           onPress={() => navigate('Fotos', rota)}
         >
           <FontAwesome name='camera-retro' size={30} color={'#15c3d6'} />
-          <Text style={styles.textButton}>Fotos</Text>
+          <Text style={styles.textButton}>Fotos e Filmagem</Text>
           <AntDesign name="arrowright" size={27} color={'#8fa7b3'} />
         </RectButton>
 

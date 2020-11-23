@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import ContaHome from '../Pages/Conta';
-import Cadastro from '../Pages/Cadastro';
+import Cadastro from '../Pages/Conta/Cadastro';
 import CadastroDetalhe from '../Pages/CadastroDetalhes';
 import CadastroConcluido from '../Pages/CadastroConcluido';
 import CadastroListar from '../Pages/CadastroListar';

@@ -20,9 +20,9 @@ function Musica({ route }) {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Acustico' })}
+          onPress={() => navigate(rota, { name: 'Músicos' })}
         >
-          <Text style={styles.textButton}>Acústico</Text>
+          <Text style={styles.textButton}>Músicos</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate(rota, { name: 'DJ' })}
@@ -30,14 +30,14 @@ function Musica({ route }) {
           <Text style={styles.textButton}>DJ</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Carro de Som' })}
+          onPress={() => navigate(rota, { name: 'Som automotivo' })}
         >
-          <Text style={styles.textButton}>Carro de Som</Text>
+          <Text style={styles.textButton}>Som automotivo</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Caixa de Som' })}
+          onPress={() => navigate(rota, { name: 'Sistema de Audio' })}
         >
-          <Text style={styles.textButton}>Caixa de Som</Text>
+          <Text style={styles.textButton}>Sistema de Áudio</Text>
         </RectButton>
 
       </ScrollView>

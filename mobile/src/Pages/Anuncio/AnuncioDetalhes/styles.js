@@ -48,10 +48,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
+  line:{
+    borderColor: color.INPUT_BORDER_LABEL,
+    borderWidth: 0.5,
+    borderStyle: "solid",
+    height: 0.5,
+    marginTop: 40,
+    marginHorizontal: 10,
+  },
+
   labelTitulo: {
     fontFamily: 'Nunito_700Bold',
-    fontSize: 20,
-    color: color.CINZA_LABEL,
+    fontSize: 24,
+    color: color.CINZA_TITULO,
     marginTop: 10,
     marginLeft: 10,
   },
@@ -60,19 +69,29 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_600SemiBold',
     color: color.CINZA_LABEL,
     fontSize: 20,
-    marginLeft: 5,
+    marginLeft: 10,
+    marginTop: 10
   },
 
   viewInfo: {
-    height: 35,
-    backgroundColor: '#fff',
-    borderColor: '#d3e2e6',
-    borderWidth: 1.4,
+    height: 50,
     borderRadius: 10,
-    borderRadius: 8,
-    justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 10,
+  },
+
+  tituloCategoria: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 18,
+    color: color.CINZA_LABEL
+  },
+
+  labelCategoria: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 16,
+    color: color.CINZA_LABEL,
+    marginRight: 40,
   },
 
   viewDescricao: {
@@ -88,6 +107,7 @@ const styles = StyleSheet.create({
   },
 
   viewButtons: {
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

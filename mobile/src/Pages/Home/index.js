@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight, ActivityIndicator } from 'react-native';
 import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+
+import DataContext from '../../contexts/Anuncios';
 
 import api from '../../services/api';
 import ListaAnuncio from '../../components/ListaAnuncios';
@@ -12,6 +14,11 @@ import * as color from '../../Colors';
 import styles from './styles';
 
 function Home() {
+  const meusAnuncios = useContext(DataContext);
+
+  console.log('AnuncioHome:', meusAnuncios )
+
+
   const [anuncios, setAnuncios] = useState([]);
   const [filtro, setFiltro] = useState('');
   const [visible, setModalVisible] = useState(false);
@@ -21,36 +28,37 @@ function Home() {
   //console.log('useroute', route.params.teste)
 
 
-  useFocusEffect(() => {
-    if (route.params?.teste) {
-      setAnuncios(route.params.teste)
-    }
+  useEffect(() => {
+    setAnuncios(meusAnuncios)
   }, []);
 
-  useEffect(() => {
-    listaAnuncios();
-  }, [])
+  // useEffect(() => {
+  //   listaAnuncios();
+  // }, [])
 
   function listaAnuncios() {
 
     api.get(`/anuncios`).then(res => {
       const anunciosResp = res.data.anuncios;
-
+      console.log('chamou api')
       setAnuncios(anunciosResp)
     }).catch(error => {
       console.log(error);
     });
   }
 
-  function handleFiltro(filtro) {
+  function handleFiltro(paraFiltrar) {
 
-    setFiltro(filtro)
-    console.log(filtro)
-
-    if (filtro) {
-      const anuncios_filtrados = anuncios.filter((item) => {
+    setFiltro(paraFiltrar)
+    //console.log('filtro', filtro)
+    //console.log('meusanuncios', meusAnuncios)
+    if (paraFiltrar) {
+      const anuncios_filtrados = meusAnuncios.filter((item) => {
+        //console.log('item.titulo.', item.titulo)
+        //console.log('item.titulo.', filtro)
         return item.titulo.includes(filtro)
       })
+      //console.log('anuncios_filtrados', anuncios_filtrados)
       setAnuncios(anuncios_filtrados)
     } else {
       listaAnuncios();
@@ -77,11 +85,11 @@ function Home() {
             <Feather name='x' size={25} color={color.BUTTON_IMAGES} />
           </TouchableOpacity>
         </View>
-
+          <Text>{meusAnuncios.titulo}</Text>
         <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
           <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
         </BorderlessButton>
-
+      
       </View>
       {anuncios.length > 0 ?
         (

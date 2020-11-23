@@ -20,26 +20,15 @@ function Fotos({ route }) {
       <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Mesas' })}
+          onPress={() => navigate(rota, { name: '' })}
         >
-          <Text style={styles.textButton}>Mesas</Text>
+          <Text style={styles.textButton}>Fotógrofo</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Temas' })}
+          onPress={() => navigate(rota, { name: '' })}
         >
-          <Text style={styles.textButton}>Temas</Text>
+          <Text style={styles.textButton}>Filmagem</Text>
         </RectButton>
-        <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Flores' })}
-        >
-          <Text style={styles.textButton}>Flores</Text>
-        </RectButton>
-        <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: 'Baloes' })}
-        >
-          <Text style={styles.textButton}>Balões</Text>
-        </RectButton>
-
       </ScrollView>
     </View>
 
@@ -49,7 +38,6 @@ function Fotos({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.PRETO_BACKGROUND,
   },
 
   categoriaButton: {
@@ -69,7 +57,9 @@ const styles = StyleSheet.create({
   },
 
   textButton: {
-    fontSize: 24,
+    fontFamily: 'Nunito_600SemiBold',
+    color: '#8fa7b3',
+    fontSize: 22,
     marginLeft: 20
   }
 });

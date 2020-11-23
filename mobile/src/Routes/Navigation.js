@@ -10,10 +10,16 @@ import AnuncioStack from '../Routes/AnuncioStack';
 import ContaHome from '../Routes/ContaStack';
 
 import PayButton from '../components/PayButton';
+import { RectButton } from 'react-native-gesture-handler';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Navigation() {
+
+    function anuncios() {
+        console.log('anuncios')
+    }
+
     return (
         <NavigationContainer>
             <Navigator
@@ -42,7 +48,10 @@ export default function Navigation() {
                         tabBarLabel: "Anúncios",
                         tabBarIcon: ({ color, size, focused }) => {
                             return (
-                                <AntDesign name='home' color={focused ? '#15c3d6' : color} size={size} />
+                                <RectButton onPress={anuncios}>
+                                    <AntDesign name='home' color={focused ? '#15c3d6' : color} size={size} />
+                                </RectButton>
+                                
                             );
                         }
                     }}

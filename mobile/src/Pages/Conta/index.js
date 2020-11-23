@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, Alert, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -40,16 +41,12 @@ function ContaHome() {
 
       api.get(`/usuario?email=${email}&password=${senha}`).then(res => {
         console.log(res.data)
-        // if (res.data.info) {
-        //     alert(res.data.info)
-        // } else {
-        //     //alert(res.data.sucess)
-        //     navigate("CadastroConcluido", res.data);
-        // }
+
         if (res.data) {
           if (res.data.info) {
             Alert.alert('Atenção', res.data.info);
           } else {
+            AsyncStorage.setItem('@RSFest:user', JSON.stringify(res.data.user));
             navigate('MinhaConta', res.data)
           }
         }
@@ -61,9 +58,14 @@ function ContaHome() {
 
   }
 
+  function fazerCadastro() {
+    navigate('Cadastro');
+  }
+
   return (
     <KeyboardAvoidingView style={styles.container} >
       <Header title='Minha Conta' />
+      <ScrollView>
       <View style={{ alignItems: 'center' }}>
         <FontAwesome name="user-circle" size={150} color={color.CINZA_LABEL} style={{ marginTop: 20 }} />
       </View>
@@ -83,12 +85,18 @@ function ContaHome() {
           onChangeText={setSenha} value={senha}
         />
       </View>
-
+      <Text>Não tem cadastro?</Text>
+      <Button
+        titleButton="Fazer cadastro"
+        onPress={fazerCadastro}
+      >
+      </Button>
       <Button
         titleButton="Enviar"
         onPress={fazerLogin}
       >
       </Button>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
