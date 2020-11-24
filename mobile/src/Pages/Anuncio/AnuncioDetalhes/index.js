@@ -4,7 +4,7 @@ import Header from '../../../components/Header';
 import { RectButton } from 'react-native-gesture-handler';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-import DataContext from '../../../contexts/Anuncios';
+import DataContext from '../../../contexts/AnunciosContext';
 
 import styles from './styles';
 import * as color from '../../../Colors';
@@ -32,7 +32,7 @@ export default function AnuncioDetalhes({ route }) {
         <View style={styles.line} />
         <Text style={styles.labelTitulo}>Detalhes</Text>
         <View style={styles.viewInfo}>
-        <Text style={styles.tituloCategoria}>Categoria</Text>
+          <Text style={styles.tituloCategoria}>Categoria</Text>
           <Text style={styles.labelCategoria}>{categoria}</Text>
         </View>
         <View style={styles.line} />

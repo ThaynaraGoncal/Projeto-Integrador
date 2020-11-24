@@ -5,27 +5,28 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
+import useAuth from '../../hooks/useAuth';
+
 import * as color from '../../Colors';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
-//import Input from '../../components/input';
-//import InputText from '../../components/InputText';
 import api from '../../services/api';
 
+
 function ContaHome() {
+  const { user, login } = useAuth();
+
   const route = useRoute();
   const { navigate } = useNavigation();
 
-  const [inputEmail, setInputEmail] = useState(false);
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
   function validaCamposNull() {
     let validado = true;
 
-    if (email === '') {
-      setInputEmail(true);
+    if (email === '' || password === '') {
       Alert.alert('Informação', 'Informe os dados')
       validado = false;
     }
@@ -38,22 +39,11 @@ function ContaHome() {
     const validado = validaCamposNull();
 
     if (validado) {
+      //console.log('email', email)
+      //console.log('user', user)
+      login(email, password);
+      console.log('user', user)
 
-      api.get(`/usuario?email=${email}&password=${senha}`).then(res => {
-        console.log(res.data)
-
-        if (res.data) {
-          if (res.data.info) {
-            Alert.alert('Atenção', res.data.info);
-          } else {
-            AsyncStorage.setItem('@RSFest:user', JSON.stringify(res.data.user));
-            navigate('MinhaConta', res.data)
-          }
-        }
-
-      }).catch(error => {
-        console.log(error);
-      });
     }
 
   }
@@ -66,36 +56,36 @@ function ContaHome() {
     <KeyboardAvoidingView style={styles.container} >
       <Header title='Minha Conta' />
       <ScrollView>
-      <View style={{ alignItems: 'center' }}>
-        <FontAwesome name="user-circle" size={150} color={color.CINZA_LABEL} style={{ marginTop: 20 }} />
-      </View>
+        <View style={{ alignItems: 'center' }}>
+          <FontAwesome name="user-circle" size={150} color={color.CINZA_LABEL} style={{ marginTop: 20 }} />
+        </View>
 
-      <View style={styles.containerInputs}>
-        <Text style={styles.labelInput}> Email</Text>
-        <TextInput
-          placeholder='email@email.com'
-          style={inputEmail ? styles.inputRed : styles.input}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Text style={styles.labelInput}> Senha</Text>
-        <TextInput
-          placeholder='******************'
-          style={styles.input}
-          onChangeText={setSenha} value={senha}
-        />
-      </View>
-      <Text>Não tem cadastro?</Text>
-      <Button
-        titleButton="Fazer cadastro"
-        onPress={fazerCadastro}
-      >
-      </Button>
-      <Button
-        titleButton="Enviar"
-        onPress={fazerLogin}
-      >
-      </Button>
+        <View style={styles.containerInputs}>
+          <Text style={styles.labelInput}> Email</Text>
+          <TextInput
+            placeholder='email@email.com'
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Text style={styles.labelInput}> Senha</Text>
+          <TextInput
+            placeholder='******************'
+            style={styles.input}
+            onChangeText={setPassword} value={password}
+          />
+        </View>
+        <Text>Não tem cadastro?</Text>
+        <Button
+          titleButton="Fazer cadastro"
+          onPress={fazerCadastro}
+        >
+        </Button>
+        <Button
+          titleButton="Enviar"
+          onPress={fazerLogin}
+        >
+        </Button>
       </ScrollView>
     </KeyboardAvoidingView>
   );

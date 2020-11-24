@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useFocusEffect } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
@@ -17,32 +17,14 @@ import Convites from '../Pages/Anuncio/SubCategorias/Convites';
 import Local from '../Pages/Anuncio/SubCategorias/Local';
 import api from '../services/api';
 
-import dataContext from '../contexts/Anuncios';
+import { ContextAnuncio } from '../contexts/AnunciosContext';
 
 const { Navigator, Screen } = createStackNavigator();
 
 function CadastroStack() {
-  const [anuncio, setAnuncios] = useState([])
-
-  let anuncioData = [];
-  async function carregaAnuncios() {
-    let { data } = await api.get(`/anuncios`);
-    //console.log('anuncios contexto', data)
-    anuncioData = data.anuncios;
-    setTimeout(() => {
-
-      setAnuncios(data.anuncios)
-      //console.log('deu settimeout')
-    }, 1000)
-    //console.log('chamada anuncio', anuncio)
-  }
-
-  useEffect(() => {
-    carregaAnuncios();
-  }, [])
 
   return (
-    <dataContext.Provider value={anuncio}>
+    <ContextAnuncio>
       <Navigator
         screenOptions={{
           headerShown: false
@@ -63,7 +45,7 @@ function CadastroStack() {
         <Screen name="Convites" component={Convites} />
         <Screen name="Local" component={Local} />
       </Navigator>
-    </dataContext.Provider>
+    </ContextAnuncio>
   );
 }
 

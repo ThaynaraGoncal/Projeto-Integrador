@@ -16,7 +16,6 @@ export default function Filtro({ route }) {
 
   const { navigate } = useNavigation();
   const rotas = useRoute();
-  console.log(rotas)
 
   useMemo(() => {
 
@@ -57,6 +56,7 @@ export default function Filtro({ route }) {
           <Text style={styles.textStyle}>Limpar</Text>
         </TouchableOpacity>
         <Text style={styles.titleHeader}>Filtros</Text>
+
         <BorderlessButton style={styles.button}
           onPress={() => navigate('Home')}
         >
