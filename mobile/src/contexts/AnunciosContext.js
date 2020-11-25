@@ -10,7 +10,7 @@ export const ContextAnuncio = ({ children }) => {
 
   const getAnuncios = () => {
     api.get(`/anuncios`).then((res) => {
-      console.log('data', res.data);
+      //console.log('data', res.data);
       setAnuncios(res.data);
       setAnunciosInicial(res.data)
     }).catch((error) => {

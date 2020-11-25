@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -11,17 +10,23 @@ import * as color from '../../Colors';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
-import api from '../../services/api';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 function ContaHome() {
-  const { user, login } = useAuth();
+  const { user, login, logado } = useAuth();
 
-  const route = useRoute();
   const { navigate } = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
+  useEffect(() => {
+    if (logado) {
+      return navigate('ContaHome');
+    }
+  }, [])
 
   function validaCamposNull() {
     let validado = true;
@@ -30,7 +35,6 @@ function ContaHome() {
       Alert.alert('Informação', 'Informe os dados')
       validado = false;
     }
-
     return validado;
   }
 
@@ -39,22 +43,21 @@ function ContaHome() {
     const validado = validaCamposNull();
 
     if (validado) {
-      //console.log('email', email)
-      //console.log('user', user)
       login(email, password);
-      console.log('user', user)
-
+      if (user) {
+        navigate('MinhaConta');
+      }
     }
-
   }
 
   function fazerCadastro() {
-    navigate('Cadastro');
+    AsyncStorage.clear();
+    //navigate('Cadastro');
   }
 
   return (
     <KeyboardAvoidingView style={styles.container} >
-      <Header title='Minha Conta' />
+      <Header title='Entrar' />
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
           <FontAwesome name="user-circle" size={150} color={color.CINZA_LABEL} style={{ marginTop: 20 }} />

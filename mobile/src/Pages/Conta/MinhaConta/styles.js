@@ -4,14 +4,25 @@ import * as color from '../../../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.PRETO_BACKGROUND,
-    padding: 20,
   },
-  title: {
-    color: color.AMARELO,
-    fontSize: 38,
-    marginTop: 28,
-    fontWeight: 'bold'
+
+  containerDados: {
+    backgroundColor: color.INPUT_LAVEL,
+    flexDirection: 'row',
+    height: 100,
+  },
+
+  dadosTitulo: {
+    fontFamily: 'Nunito_700Bold',
+    color: color.AZUL_CIANETO,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  dados: {
+    fontFamily: 'Nunito_600SemiBold',
+    color: color.CINZA_TITULO,
+    fontSize: 16,
   },
   containerInputs: {
     marginTop: 20,
