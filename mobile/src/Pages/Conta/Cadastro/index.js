@@ -7,11 +7,15 @@ import InputText from '../../../components/InputText';
 import Button from '../../../components/Button';
 
 import api from '../../../services/api';
+import useAuth from '../../../hooks/useAuth';
 
 import styles from './styles';
 
 function Cadastro() {
+    const { logado, setLogado } = useAuth();
     const { navigate } = useNavigation();
+
+    console.log('logado no cadastro', logado)
 
 
     const [apelido, setApelido] = useState('');
@@ -74,6 +78,16 @@ function Cadastro() {
                     <Button
                         titleButton="Continuar"
                         onPress={handleSubmit}
+                    >
+                    </Button>
+                    <Button
+                        titleButton="SetLogado=False"
+                        onPress={() => setLogado(false)}
+                    >
+                    </Button>
+                    <Button
+                        titleButton="SetLogado=true"
+                        onPress={() => setLogado(true)}
                     >
                     </Button>
                 </View>

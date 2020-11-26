@@ -4,6 +4,7 @@ import React from "react";
 import { useFonts } from 'expo-font';
 import { Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
 
+import { ContextAuth } from './src/contexts/AuthContext';
 import Navigation from "./src/Routes/Navigation";
 
 export default function Main() {
@@ -18,9 +19,9 @@ export default function Main() {
   }
 
   return (
-    <>
+    <ContextAuth>
       <Navigation />
       <StatusBar style="light" />
-    </>
+    </ContextAuth>
   );
 }

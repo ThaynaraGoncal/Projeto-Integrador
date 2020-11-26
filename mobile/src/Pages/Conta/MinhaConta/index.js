@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -24,12 +24,23 @@ import api from '../../../services/api';
 import styles from './styles';
 
 function MinhaConta() {
-  const { setUser, setLogado, logado } = useAuth();
+  const { setUser, setLogado, logado, user } = useAuth();
   const { navigate } = useNavigation();
 
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
+  useFocusEffect(() => {
+    console.log('logado na minha conta', logado)
+    if (!logado) {
+      navigate('ContaHome')
+    }
+  }, []);
+
+  console.log('user', user)
+
 
   const logoff = async () => {
     console.log('veio para o logoff')
@@ -50,7 +61,7 @@ function MinhaConta() {
           <FontAwesome name="user-circle" size={60} color={color.CINZA_LABEL} />
         </View>
         <View style={{ marginTop: 5 }}>
-          <Text style={styles.dadosTitulo}>Thaynara Gonçalves</Text>
+          <Text style={styles.dadosTitulo}>{user ? user.apelido : 'Faça Login'}</Text>
           <Text style={styles.dados}>Email: thaynara@gmail.com</Text>
           <Text style={styles.dados}>Telefone: (62) 99562-7245</Text>
         </View>

@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
 function ContaHome() {
-  const { user, login, logado } = useAuth();
+  const { user, logado, login } = useAuth();
 
   const { navigate } = useNavigation();
 
@@ -44,15 +44,15 @@ function ContaHome() {
 
     if (validado) {
       login(email, password);
-      if (user) {
-        navigate('MinhaConta');
-      }
+      // if (user) {
+      //   navigate('MinhaConta');
+      // }
     }
   }
 
   function fazerCadastro() {
-    AsyncStorage.clear();
-    //navigate('Cadastro');
+    //AsyncStorage.clear();
+    navigate('Cadastro');
   }
 
   return (

@@ -42,8 +42,9 @@ export const ContextAuth = ({ children }) => {
       //console.log('userStorage', userStorage)
 
       if (userStorage) {
-        //console.log('existe userStorage')
+        console.log('existe userStorage', userStorage)
         setUser(JSON.parse(userStorage));
+        setLogado(true);
         return user;
       }
 
@@ -65,7 +66,7 @@ export const ContextAuth = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, setUser, logado, setLogado }}>
+    <AuthContext.Provider value={{ user, setUser, logado, setLogado, login }}>
       {children}
     </AuthContext.Provider>
   )

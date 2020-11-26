@@ -15,6 +15,7 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as color from '../../../Colors';
 
+import useAuth from '../../../hooks/useAuth';
 import api from '../../../services/api';
 
 import Header from '../../../components/Header';
@@ -25,7 +26,8 @@ import ImagePickerExample from '../../../components/Camera';
 import styles from './styles';
 
 function Anuncio({ route, limpa }) {
-  console.log('route params anuncio', route.params)
+  const { user } = useAuth();
+
   const { navigate } = useNavigation();
 
   const [titulo, setTitulo] = useState("");
@@ -35,9 +37,9 @@ function Anuncio({ route, limpa }) {
   const [images, setImages] = useState([]);
 
   useFocusEffect(() => {
-    if(route.params) {
+    if (route.params) {
       setCategoria(route.params.name)
-    }  
+    }
   }, [])
 
   function limpaCampos() {

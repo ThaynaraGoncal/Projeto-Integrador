@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import Home from '../Routes/HomeStack';
 import CadastroStack from '../Routes/CadastroStack';
 import AnuncioStack from '../Routes/AnuncioStack';
-import ContaHome from '../Routes/ContaStack';
+import ContaStack from '../Routes/ContaStack';
 
 import { ContextAuth } from '../contexts/AuthContext';
+import useAuth from '../hooks/useAuth';
 
 import PayButton from '../components/PayButton';
 import { RectButton } from 'react-native-gesture-handler';
@@ -16,10 +18,17 @@ import { RectButton } from 'react-native-gesture-handler';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Navigation() {
+    const { logado } = useAuth();
+    //const [component, setComponent] = useState(ContaStack);
 
-    function anuncios() {
-        console.log('anuncios')
-    }
+    // useFocusEffect(() => {
+    //     if (logado) {
+    //         setComponent(ContaStack)
+    //     } else {
+    //         setComponent(CadastroStack)
+    //     }
+    // })
+
 
     return (
         <ContextAuth>
@@ -50,9 +59,9 @@ export default function Navigation() {
                             tabBarLabel: "Anúncios",
                             tabBarIcon: ({ color, size, focused }) => {
                                 return (
-                                    <RectButton onPress={anuncios}>
-                                        <AntDesign name='home' color={focused ? '#15c3d6' : color} size={size} />
-                                    </RectButton>
+
+                                    <AntDesign name='home' color={focused ? '#15c3d6' : color} size={size} />
+
 
                                 );
                             }
@@ -66,8 +75,8 @@ export default function Navigation() {
                         }}
                     />
                     <Screen
-                        name="ContaHome"
-                        component={ContaHome}
+                        name="ContaStack"
+                        component={ContaStack}
                         options={{
                             tabBarLabel: 'Cadastro',
                             tabBarIcon: ({ color, size, focused }) => {
