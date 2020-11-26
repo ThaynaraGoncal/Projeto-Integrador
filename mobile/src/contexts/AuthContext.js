@@ -14,7 +14,6 @@ export const ContextAuth = ({ children }) => {
     console.log('caiu no useEffect')
     AsyncStorage.getItem("Dadosuser").then((res) => {
       console.log('res do then', res)
-      console.log('user', user)
       if (res) {
         setUser(JSON.parse(res));
         setLogado(true)
@@ -26,12 +25,13 @@ export const ContextAuth = ({ children }) => {
     });
   }, []);
 
-  const logoff = async (navigate) => {
-    await AsyncStorage.clear();
-    setUser({});
-    setLogado(false);
-    navigate('ContaHome');
-  }
+  // const logoff = async (navigate) => {
+  //   console.log('veio para o logoff')
+  //   await AsyncStorage.clear();
+  //   setUser({});
+  //   setLogado(false);
+  //   navigate('ContaHome');
+  // }
 
   const login = async (email, password) => {
     //console.log('Email ', email)
@@ -65,7 +65,7 @@ export const ContextAuth = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, setUser, logado, setLogado, logoff }}>
+    <AuthContext.Provider value={{ user, login, setUser, logado, setLogado }}>
       {children}
     </AuthContext.Provider>
   )

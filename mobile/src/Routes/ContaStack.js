@@ -17,12 +17,12 @@ function CadastroStack() {
 
   const { navigate } = useNavigation();
 
-  useEffect(() => {
-    console.log('logado?', logado);
-    if (!logado) {
-      return navigate('ContaHome')
-    }
-  }, [])
+  // useFocusEffect(() => {
+  //   console.log('logado?', logado);
+  //   if (logado) {
+  //     return navigate('ContaHome')
+  //   }
+  // }, [])
 
   return (
     <ContextAuth>

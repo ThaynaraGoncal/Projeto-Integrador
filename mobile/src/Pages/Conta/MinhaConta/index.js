@@ -24,12 +24,21 @@ import api from '../../../services/api';
 import styles from './styles';
 
 function MinhaConta() {
-  const { logoff } = useAuth();
+  const { setUser, setLogado, logado } = useAuth();
   const { navigate } = useNavigation();
 
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const logoff = async () => {
+    console.log('veio para o logoff')
+    await AsyncStorage.clear();
+    setUser({});
+    setLogado(false);
+    console.log('logado logo apos o set', logado)
+    navigate('ContaHome');
+  }
 
 
 

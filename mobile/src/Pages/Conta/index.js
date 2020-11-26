@@ -22,11 +22,11 @@ function ContaHome() {
   const [password, setPassword] = useState('');
 
 
-  useEffect(() => {
-    if (logado) {
-      return navigate('ContaHome');
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (logado) {
+  //     return navigate('ContaHome');
+  //   }
+  // }, [])
 
   function validaCamposNull() {
     let validado = true;
