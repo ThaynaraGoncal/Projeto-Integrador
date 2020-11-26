@@ -27,17 +27,19 @@ function MinhaConta() {
   const { setUser, setLogado, logado, user } = useAuth();
   const { navigate } = useNavigation();
 
+  console.log('logado', logado)
+
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
-  useFocusEffect(() => {
-    console.log('logado na minha conta', logado)
-    if (!logado) {
-      navigate('ContaHome')
-    }
-  }, []);
+  // useFocusEffect(() => {
+  //   console.log('logado na minha conta', logado)
+  //   if (!logado) {
+  //     navigate('ContaHome')
+  //   }
+  // }, []);
 
   console.log('user', user)
 
@@ -48,7 +50,7 @@ function MinhaConta() {
     setUser({});
     setLogado(false);
     console.log('logado logo apos o set', logado)
-    navigate('ContaHome');
+    navigate('TelaHome');
   }
 
 
@@ -61,7 +63,7 @@ function MinhaConta() {
           <FontAwesome name="user-circle" size={60} color={color.CINZA_LABEL} />
         </View>
         <View style={{ marginTop: 5 }}>
-          <Text style={styles.dadosTitulo}>{user ? user.apelido : 'Faça Login'}</Text>
+          <Text style={styles.dadosTitulo}>{user.apelido}</Text>
           <Text style={styles.dados}>Email: thaynara@gmail.com</Text>
           <Text style={styles.dados}>Telefone: (62) 99562-7245</Text>
         </View>
@@ -78,7 +80,7 @@ function MinhaConta() {
 
         <Button
           titleButton="Logof"
-          onPress={() => logoff(navigate)}
+          onPress={logoff}
         >
         </Button>
 

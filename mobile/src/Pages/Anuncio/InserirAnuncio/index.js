@@ -37,6 +37,7 @@ function Anuncio({ route, limpa }) {
   const [images, setImages] = useState([]);
 
   useFocusEffect(() => {
+    console.log('usuario', user)
     if (route.params) {
       setCategoria(route.params.name)
     }
@@ -76,6 +77,7 @@ function Anuncio({ route, limpa }) {
     data.append('descricao', descricao);
     data.append('categoria', categoria);
     data.append('valor', valor);
+    data.append('usuario', user.apelido);
 
     images.forEach((image, index) => {
       data.append('file', {

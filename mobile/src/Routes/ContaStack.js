@@ -6,6 +6,8 @@ import ContaHome from '../Pages/Conta';
 import MinhaConta from '../Pages/Conta/MinhaConta';
 import Cadastro from '../Pages/Conta/Cadastro';
 
+import { ContextAuth } from '../contexts/AuthContext';
+
 const { Navigator, Screen } = createStackNavigator();
 
 function ContaStack() {
@@ -13,8 +15,8 @@ function ContaStack() {
   return (
     <Navigator screenOptions={{ headerShown: false }}
       initialRouteName='MinhaConta'>
-      <Screen name="ContaHome" component={ContaHome} />
       <Screen name="MinhaConta" component={MinhaConta} />
+      <Screen name="ContaHome" component={ContaHome} />
       <Screen name="Cadastro" component={Cadastro} />
     </Navigator>
   );

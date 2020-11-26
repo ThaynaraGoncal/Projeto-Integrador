@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const ContextAuth = ({ children }) => {
   const [logado, setLogado] = useState(false);
   const [user, setUser] = useState({});
+  const [infoLogin, setInfoLogin] = useState('');
 
 
 
@@ -51,6 +52,11 @@ export const ContextAuth = ({ children }) => {
       api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
         console.log('data', res.data);
 
+        if (res.data?.info) {
+          setInfoLogin(res.data?.info);
+          return res.data?.info;
+        }
+
         if (res.data) {
           //console.log('setItem LocalStorage')
           AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data.user));
@@ -66,7 +72,7 @@ export const ContextAuth = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logado, setLogado, login }}>
+    <AuthContext.Provider value={{ user, setUser, logado, setLogado, login, infoLogin }}>
       {children}
     </AuthContext.Provider>
   )
