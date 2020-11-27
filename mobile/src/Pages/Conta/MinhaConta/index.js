@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -24,31 +24,33 @@ import api from '../../../services/api';
 import styles from './styles';
 
 function MinhaConta() {
-  const { setUser, setLogado, logado, user } = useAuth();
   const { navigate } = useNavigation();
-
-  console.log('logado', logado)
-
-  const [apelido, setApelido] = useState('');
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
+  let usuario = {};
 
-  // useFocusEffect(() => {
-  //   console.log('logado na minha conta', logado)
-  //   if (!logado) {
-  //     navigate('ContaHome')
-  //   }
-  // }, []);
+  useEffect(() => {
+    AsyncStorage.getItem("Dadosuser").then((res) => {
+      console.log('res do then', res);
+      if (res) {
+        usuario = JSON.parse(res);
+        setNome(usuario.apelido);
+        setEmail(usuario.email);
+        console.log('usuario', usuario.apelido)
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
+  }, []);
 
-  console.log('user', user)
 
 
   const logoff = async () => {
     console.log('veio para o logoff')
     await AsyncStorage.clear();
-    setUser({});
-    setLogado(false);
+    //setUser({});
+    //setLogado(false);
     console.log('logado logo apos o set', logado)
     navigate('TelaHome');
   }
@@ -63,8 +65,8 @@ function MinhaConta() {
           <FontAwesome name="user-circle" size={60} color={color.CINZA_LABEL} />
         </View>
         <View style={{ marginTop: 5 }}>
-          <Text style={styles.dadosTitulo}>{user.apelido}</Text>
-          <Text style={styles.dados}>Email: thaynara@gmail.com</Text>
+          <Text style={styles.dadosTitulo}>{nome}</Text>
+          <Text style={styles.dados}>Email: {email}</Text>
           <Text style={styles.dados}>Telefone: (62) 99562-7245</Text>
         </View>
       </View>
@@ -89,9 +91,9 @@ function MinhaConta() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.containerInputs}>
           <Text style={styles.labelInput}>Minha conta logada</Text>
-          <InputText
-            onChangeText={setApelido} value={apelido}
-          />
+          {/* <InputText
+            onChangeText={setNome} value={nome}
+          /> */}
 
           {/* <Button
                         titleButton="Continuar"

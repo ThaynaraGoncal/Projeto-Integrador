@@ -1,51 +1,39 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-import Navigation from '../Routes/Navigation';
+import api from '../services/api';
 
 import useAuth from '../hooks/useAuth';
 import * as color from '../Colors';
 
 export default function TelaHome() {
-  const { user, logado, login, infoLogin } = useAuth();
+  const { user, logado, setLogado, setUser } = useAuth();
+
   const [email, setEmail] = useState(user.apelido);
   const [password, setPassword] = useState('');
 
   const { navigate } = useNavigation();
 
+  function handleLogin() {
+    api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
+      console.log('data', res.data);
 
-  api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
-    console.log('data', res.data);
+      if (res.data?.info) {
+        Alert.alert('Atenção', res.data.info)
+      }
 
-    if (res.data?.info) {
-      setInfoLogin(res.data?.info);
-      return res.data?.info;
-    }
-
-    if (res.data) {
-      //console.log('setItem LocalStorage')
-      AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data.user));
-      //AsyncStorage.setItem("name", JSON.stringify(res.data.user.apelido));
-      setLogado(true);
-      setUser(res.data);
-    }
-  }).catch((error) => {
-    console.log(error);
-  });
-
-  async function handleNavigation() {
-    console.log('botao navigation');
-    login(email, password);
-
-    console.log('user depois de logado', user)
-    console.log('infoLogin.lenght', infoLogin.lenght)
-    if (infoLogin.lenght > 0) {
-      console.log('meu login', infoLogin)
-      alert('Atenção')
-      navigate('Navigation')
-    }
-
+      if (res.data) {
+        console.log('setItem LocalStorage')
+        AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data.user));
+        setLogado(true);
+        setUser(res.data);
+        navigate('Navigation')
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   function handleEntrar() {
