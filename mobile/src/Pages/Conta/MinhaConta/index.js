@@ -4,7 +4,8 @@ import {
   Text,
   ScrollView,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -44,14 +45,15 @@ function MinhaConta() {
     });
   }, []);
 
-
+  const handleAnuncios = () => {
+    navigate('MeusAnuncios')
+  }
 
   const logoff = async () => {
     console.log('veio para o logoff')
     await AsyncStorage.clear();
     //setUser({});
     //setLogado(false);
-    console.log('logado logo apos o set', logado)
     navigate('TelaHome');
   }
 
@@ -72,12 +74,17 @@ function MinhaConta() {
       </View>
 
       <View>
-        <TouchableOpacity>
+        <ActivityIndicator size="large" color="#0000ff" animating={true} />
+        <TouchableOpacity
+          onPress={handleAnuncios}>
           <Text>Meus Anúncios</Text>
         </TouchableOpacity>
         <Text>Meus Anúncios</Text>
+        <TouchableOpacity onPress={ActivityIndicator}>
+          <Text>Ativa</Text>
+        </TouchableOpacity>
         <TouchableOpacity>
-          <Text>Botao</Text>
+          <Text>Desativa</Text>
         </TouchableOpacity>
 
         <Button
