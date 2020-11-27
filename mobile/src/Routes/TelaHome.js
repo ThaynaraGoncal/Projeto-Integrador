@@ -22,14 +22,19 @@ export default function TelaHome() {
 
       if (res.data?.info) {
         Alert.alert('Atenção', res.data.info)
+        return null
       }
 
       if (res.data) {
         console.log('setItem LocalStorage')
-        AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data.user));
+        AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data))
+        // .then(() => {
         setLogado(true);
         setUser(res.data);
         navigate('Navigation')
+        // }).catch((err) => {
+        //   console.log(err)
+        // });
       }
     }).catch((error) => {
       console.log(error);

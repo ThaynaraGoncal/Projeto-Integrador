@@ -1,6 +1,7 @@
 const { QueryTypes, Sequelize } = require('sequelize');
 
 import Usuario from '../models/Usuario';
+import PessoaFisica from '../controllers/PessoaFisicaController';
 import database from '../../config/database';
 
 class UsuarioController {
@@ -8,7 +9,7 @@ class UsuarioController {
     const sequelize = new Sequelize(database);
 
     try {
-      //console.log('req', req.body)
+
       if (req.body.apelido == '') {
         res.status(201).json({ info: 'Informe um Apelido' });
       }
@@ -29,10 +30,38 @@ class UsuarioController {
         return res.status(201).json({ info: 'Já existe um cadastro com esse email' });
       }
 
-      let usuario = await Usuario.create(req.body);
+      //Cadastra a Pessoa Fisica
+      let pessoa = await PessoaFisica.store(req.body)
+      console.log('pessoa inserida', pessoa)
 
-      return res.status(201).json({ usuario });
+      if (pessoa.info) {
+        return res.status(201).json({ info: pessoa.info })
+      }
 
+      const user = {
+        apelido: req.body.apelido,
+        email: req.body.email,
+        password: req.body.password,
+        cd_pessoa_fisica: pessoa.id
+      }
+      console.log('Usuario para inserir', user)
+      let usuario = await Usuario.create(user);
+
+      if (usuario) {
+        const usuraioJson = {
+          cd_pessoa_fisica: pessoa.id,
+          nome: pessoa.nome,
+          apelido: usuario.dataValues.apelido,
+          dt_nascimento: pessoa.dt_nascimento,
+          cpf: pessoa.cpf,
+          email: usuario.dataValues.email,
+          telefone: req.body.telefone
+        }
+
+        return res.status(201).json(usuraioJson);
+      }
+
+      return res.status(201).json({ info: 'Não foi possível criar o usuário' });
 
     } catch (error) {
       console.log(error);
@@ -56,13 +85,13 @@ class UsuarioController {
       }
 
       let user = await sequelize
-        .query(`select apelido, email from usuarios where email = '${req.query.email}' and password = '${req.query.password}'`,
+        .query(`select usu.cd_pessoa_fisica, nome, apelido, email, cpf, to_char(dt_nascimento, 'dd/mm/yyy') dt_nascimento from usuarios usu inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = usu.cd_pessoa_fisica where email = '${req.query.email}' and password = '${req.query.password}'`,
           { type: QueryTypes.SELECT }).then(user => {
             return user[0]
           });
 
       if (user) {
-        return res.status(201).json({ user });
+        return res.status(201).json(user);
       } else {
         return res.status(201).json({ info: 'Login ou Senha inválidos!' });
       }

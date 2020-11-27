@@ -8,7 +8,7 @@ import { hostCasa, hostEmpresa } from '../../constants';
 
 class AnuncioController {
   async store(req, res) {
-    console.log(req.body)
+    console.log(req.body);
     try {
 
       let anuncio = await Anuncio.create(req.body);

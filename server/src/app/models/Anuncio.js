@@ -8,6 +8,7 @@ class Anuncio extends Model {
             categoria: Sequelize.STRING,
             descricao: Sequelize.STRING,
             valor: Sequelize.FLOAT,
+            cd_pessoa_fisica: Sequelize.INTEGER
         },
             {
                 sequelize,

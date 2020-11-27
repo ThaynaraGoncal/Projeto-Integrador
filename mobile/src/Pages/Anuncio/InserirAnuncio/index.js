@@ -77,7 +77,7 @@ function Anuncio({ route, limpa }) {
     data.append('descricao', descricao);
     data.append('categoria', categoria);
     data.append('valor', valor);
-    data.append('usuario', user.apelido);
+    data.append('cd_pessoa_fisica', user.cd_pessoa_fisica);
 
     images.forEach((image, index) => {
       data.append('file', {
