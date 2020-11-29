@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import api from '../services/api';
 
 const AnuncioContext = createContext();
@@ -10,7 +11,6 @@ export const ContextAnuncio = ({ children }) => {
 
   const getAnuncios = () => {
     api.get(`/anuncios`).then((res) => {
-      //console.log('data', res.data);
       setAnuncios(res.data);
       setAnunciosInicial(res.data)
     }).catch((error) => {

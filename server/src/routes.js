@@ -24,7 +24,9 @@ routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
 
 routes.get('/anuncios', AnuncioController.index);
+routes.get('/anuncio_prestador', AnuncioController.indexPrestador);
 routes.get('/anuncio', AnuncioController.indexFiltro);
+routes.delete('/anuncio', AnuncioController.deleteAnuncio);
 routes.post('/anuncios', upload.array('file'), AnuncioController.store);
 
 routes.get('/users', (req, res) => {

@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Anuncio from '../Pages/Anuncio/InserirAnuncio';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
-import MeusAnuncios from '../Pages/MeusAnuncios';
+import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
 import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import Decoracao from '../Pages/Anuncio/SubCategorias/Decoracao';

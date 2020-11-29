@@ -28,11 +28,11 @@ class AnuncioController {
         });
       }
 
-      return res.status(200).json({ msg: 'Cadastrado' });
+      return res.status(200).json({ info: 'Cadastrado com sucesso!' });
 
     } catch (error) {
       console.log(error);
-      //return res.status(400).json({ error: 'Não foi possível criar o anúncio' });
+      return res.status(400).json({ error: 'Não foi possível criar o anúncio' });
     }
   }
 
@@ -54,7 +54,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -82,12 +82,54 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
         }
       }
     }
 
     return res.status(200).json({ anuncios });
+
+  }
+
+  async indexPrestador(req, res) {
+    console.log(req.query);
+    const sequelize = new Sequelize(database);
+
+    const lista_anuncios = await sequelize
+      .query(`select anu.id, anu.cd_pessoa_fisica, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio where anu.cd_pessoa_fisica = '${req.query.cd_pessoa_fisica}'`,
+        { type: QueryTypes.SELECT }).then(user => {
+          return user
+        });
+
+    const anunciosFiltro = lista_anuncios.filter(
+      (v, i, a) => a.findIndex(t => t.id === v.id) === i,
+    );
+
+    const anuncios = anunciosFiltro.map(dado => ({ ...dado, path: [] }));
+
+    for (let anuncioF of anuncios) {
+      for (let anunciosAll of lista_anuncios) {
+        if (anuncioF.id === anunciosAll.id) {
+          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
+        }
+      }
+    }
+
+    return res.status(200).json({ anuncios });
+
+  }
+
+  async deleteAnuncio(req, res) {
+    console.log(req.query);
+    const sequelize = new Sequelize(database);
+
+    const anuncio_delete = await sequelize
+      .query(`delete from anuncios where cd_pessoa_fisica = '${req.query.cd_pessoa_fisica}' and id = '${req.query.id_anuncio}'`,
+        { type: QueryTypes.SELECT }).then(item => {
+          return item
+        });
+
+    return res.status(200).json({ info: 'Anuncio Deletado' });
 
   }
 

@@ -32,6 +32,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: color.AMARELO,
   },
+
+  containerButtons: {
+    flex: 1,
+    marginTop: 40,
+  },
+
+  button: {
+    backgroundColor: '#fff',
+    height: 50,
+    justifyContent: 'center',
+    padding: 10,
+  },
+
+  textButton: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 18,
+    color: color.AZUL_CIANETO,
+  },
+
+  line:{
+    borderColor: color.INPUT_BORDER_LABEL,
+    borderWidth: 0.5,
+    borderStyle: "solid",
+    height: 0.5,
+    marginHorizontal: 10,
+  },
 });
 
 export default styles;

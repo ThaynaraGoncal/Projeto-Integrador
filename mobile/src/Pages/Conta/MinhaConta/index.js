@@ -31,14 +31,14 @@ function MinhaConta() {
 
   let usuario = {};
 
-  useEffect(() => {
+  useFocusEffect(() => {
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      console.log('res do then', res);
+      //console.log('res do then', res);
       if (res) {
         usuario = JSON.parse(res);
         setNome(usuario.apelido);
         setEmail(usuario.email);
-        console.log('usuario', usuario.apelido)
+        //console.log('usuario', usuario.apelido)
       }
     }).catch((err) => {
       console.log(err)
@@ -46,7 +46,7 @@ function MinhaConta() {
   }, []);
 
   const handleAnuncios = () => {
-    navigate('MeusAnuncios')
+    navigate('MeusAnuncios', usuario)
   }
 
   const logoff = async () => {
@@ -73,42 +73,20 @@ function MinhaConta() {
         </View>
       </View>
 
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" animating={true} />
-        <TouchableOpacity
-          onPress={handleAnuncios}>
-          <Text>Meus Anúncios</Text>
-        </TouchableOpacity>
-        <Text>Meus Anúncios</Text>
-        <TouchableOpacity onPress={ActivityIndicator}>
-          <Text>Ativa</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Desativa</Text>
-        </TouchableOpacity>
-
-        <Button
-          titleButton="Logof"
+      <View style={styles.containerButtons}>
+        <TouchableOpacity style={styles.button}
+          onPress={handleAnuncios}
+        >
+          <Text style={styles.textButton}>Meus Anúncios</Text>
+        </TouchableOpacity >
+        <View  style={styles.line}/>
+        <TouchableOpacity style={styles.button}
           onPress={logoff}
         >
-        </Button>
+          <Text style={styles.textButton}>Sair</Text>
+        </TouchableOpacity>
 
       </View>
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.containerInputs}>
-          <Text style={styles.labelInput}>Minha conta logada</Text>
-          {/* <InputText
-            onChangeText={setNome} value={nome}
-          /> */}
-
-          {/* <Button
-                        titleButton="Continuar"
-                        onPress={handleSubmit}
-                    >
-                    </Button> */}
-        </View>
-      </ScrollView>
 
     </KeyboardAvoidingView>
   );

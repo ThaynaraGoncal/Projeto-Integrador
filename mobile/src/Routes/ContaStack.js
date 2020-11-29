@@ -6,8 +6,7 @@ import ContaHome from '../Pages/Conta';
 import MinhaConta from '../Pages/Conta/MinhaConta';
 import Cadastro from '../Pages/Conta/Cadastro';
 import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
-
-import { ContextAuth } from '../contexts/AuthContext';
+import AnuncioDetalhesPrestador from '../Pages/Conta/MeusAnuncios/AnuncioDetalhesPrestador';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -20,6 +19,7 @@ function ContaStack() {
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="ContaHome" component={ContaHome} />
       <Screen name="Cadastro" component={Cadastro} />
+      <Screen name="AnuncioDetalhesPrestador" component={AnuncioDetalhesPrestador} />
     </Navigator>
   );
 }

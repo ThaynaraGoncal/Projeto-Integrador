@@ -88,22 +88,15 @@ function Anuncio({ route, limpa }) {
     })
 
     if (validaCampos) {
-      api.post('/anuncios', data);
+      api.post('/anuncios', data).then((res) => {
+        console.log(res.data.info);
+        Alert.alert('Informação', res.data.info)
+      }).catch((error) => {
+
+      });
 
       limpaCampos();
-      navigate('Home')
-
-      // api.post("/anuncios", data)
-      //   .then((res) => {
-      //     console.log(data)
-      //     Alert.alert(res.data.msg);
-      //     limpaCampos();
-      //     navigate('MeusAnuncios')
-      //   })
-      //   .catch((error) => {
-      //     alert("Houve um erro!");
-      //     console.log(error);
-      //   });
+      navigate('MinhaConta')
     }
   }
 
