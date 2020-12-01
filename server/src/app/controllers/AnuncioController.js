@@ -40,7 +40,12 @@ class AnuncioController {
     const sequelize = new Sequelize(database);
 
     const anuncio_list = await sequelize
-      .query(`select anu.id, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio`,
+      .query(`select anu.id, anu.cd_pessoa_fisica, pf.nome, anu.titulo, 
+            anu.categoria, anu.descricao, anu.valor, arq.name, arq.path,
+            pf.telefone 
+      from anuncios anu 
+      left join arquivos arq on anu.id = arq.id_anuncio
+      inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = anu.cd_pessoa_fisica`,
         { type: QueryTypes.SELECT }).then(user => {
           return user
         });

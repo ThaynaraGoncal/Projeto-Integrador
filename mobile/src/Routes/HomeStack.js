@@ -4,6 +4,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 
 import Home from '../Pages/Home';
 import AnuncioDetalhes from '../Pages/Anuncio/AnuncioDetalhes';
+import AnuncioAvaliacao from '../Pages/Anuncio/AnuncioAvalicao';
 import Filtro from '../Pages/Filtro';
 import Categoria from '../Pages/Anuncio/Categorias';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
@@ -33,6 +34,9 @@ function CadastroStack() {
         <Screen name="Home" component={Home} />
         <Screen name="AnuncioDetalhes" component={AnuncioDetalhes} />
         <Screen name="Filtro" component={Filtro}
+          options={{ cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS }}
+        />
+        <Screen name="AnuncioAvaliacao" component={AnuncioAvaliacao} 
           options={{ cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS }}
         />
         <Screen name="Categoria" component={Categoria} />

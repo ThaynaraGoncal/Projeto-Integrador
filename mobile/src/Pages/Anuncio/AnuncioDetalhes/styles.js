@@ -120,6 +120,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  viewAvaliacao: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: 10,
   }
 
 });

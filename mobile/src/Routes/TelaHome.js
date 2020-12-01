@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/api';
 
-import useAuth from '../hooks/useAuth';
+import Input from '../components/input';
 import * as color from '../Colors';
 
 export default function TelaHome() {
@@ -70,6 +70,10 @@ export default function TelaHome() {
     navigate('Navigation')
   }
 
+  function handleCadastro() {
+    navigate('Cadastro');
+  }
+
   return (
     <View style={styles.container}>
       {
@@ -88,7 +92,8 @@ export default function TelaHome() {
           )
           : <KeyboardAvoidingView style={{
             width: '100%', 
-            alignItems: 'center' 
+            alignItems: 'center' ,
+            marginBottom: 60,
             }} behavior="padding" >
           {/* <View style={{
               width: '100%', 
@@ -107,7 +112,6 @@ export default function TelaHome() {
               value={email}
               onChangeText={setEmail}
               placeholder="email@email.com">
-
             </TextInput>
             <TextInput style={styles.input}
               value={password}
@@ -122,6 +126,25 @@ export default function TelaHome() {
             >
               <Text style={styles.titleButton}>Entrar</Text>
             </TouchableOpacity>
+            <View style={{ 
+                flexDirection: 'row',
+                marginTop: 10,
+              }}>
+              <Text style={{
+                fontFamily: 'Nunito_700Bold',
+                fontSize: 16,
+                color: color.CINZA_TITULO
+              }}>Não tem cadastro?</Text>
+              <TouchableOpacity onPress={handleCadastro}>
+                <Text style={{
+                fontFamily: 'Nunito_700Bold',
+                fontSize: 16,
+                color: color.AMARELO
+               }}
+              > Clique aqui!</Text>
+              </TouchableOpacity>
+            </View>
+
           {/* </View> */}
           </KeyboardAvoidingView>
       }

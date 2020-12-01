@@ -9,6 +9,8 @@ import useAuth from '../hooks/useAuth';
 
 import TelaHome from '../Routes/TelaHome';
 import Navigation from '../Routes/Navigation';
+import Cadastro from '../Pages/Conta/Cadastro';
+import CadastroDetalhes from '../Pages/Conta/CadastroDetalhes';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -20,6 +22,8 @@ function NavigationBottom() {
         <Navigator screenOptions={{ headerShown: false }}>
           <Screen name="TelaHome" component={TelaHome} />
           <Screen name="Navigation" component={Navigation} />
+          <Screen name="Cadastro" component={Cadastro} />
+          <Screen name="CadastroDetalhes" component={CadastroDetalhes} />
         </Navigator>
       </NavigationContainer>
     </ContextAuth>

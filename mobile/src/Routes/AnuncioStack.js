@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Anuncio from '../Pages/Anuncio/InserirAnuncio';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
 import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
+import AnuncioAvaliacao from '../Pages/Anuncio/AnuncioAvalicao'
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
 import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import Decoracao from '../Pages/Anuncio/SubCategorias/Decoracao';
@@ -23,6 +24,7 @@ function AnuncioStack() {
       <Screen name="Anuncio" component={Anuncio} />
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
+      <Screen name="AnuncioAvaliacao" component={AnuncioAvaliacao} />
       <Screen name="SubCategoria" component={SubCategoria} />
       <Screen name="Comida" component={Comida} />
       <Screen name="Decoracao" component={Decoracao} />

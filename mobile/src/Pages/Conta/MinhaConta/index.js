@@ -28,6 +28,7 @@ function MinhaConta() {
   const { navigate } = useNavigation();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
+  const [telefone, setTelefone] = useState('');
 
   let usuario = {};
 
@@ -38,6 +39,7 @@ function MinhaConta() {
         usuario = JSON.parse(res);
         setNome(usuario.apelido);
         setEmail(usuario.email);
+        setTelefone(usuario.telefone);
         //console.log('usuario', usuario.apelido)
       }
     }).catch((err) => {
@@ -69,7 +71,7 @@ function MinhaConta() {
         <View style={{ marginTop: 5 }}>
           <Text style={styles.dadosTitulo}>{nome}</Text>
           <Text style={styles.dados}>Email: {email}</Text>
-          <Text style={styles.dados}>Telefone: (62) 99562-7245</Text>
+          <Text style={styles.dados}>Telefone: {telefone}</Text>
         </View>
       </View>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   ScrollView,
@@ -26,18 +27,30 @@ import ImagePickerExample from '../../../components/Camera';
 import styles from './styles';
 
 function Anuncio({ route, limpa }) {
-  const { user } = useAuth();
 
   const { navigate } = useNavigation();
 
+  const [cd_pessoa, setCd_pessoa] = useState('');
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
   const [valor, setValor] = useState("");
   const [images, setImages] = useState([]);
 
+  let usuario = {};
+
   useFocusEffect(() => {
-    console.log('usuario', user)
+    AsyncStorage.getItem("Dadosuser").then((res) => {
+      if (res) {
+        usuario = JSON.parse(res);
+        setCd_pessoa(usuario.cd_pessoa_fisica);
+        //console.log('usuario no anuncio', usuario)
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
+
+
     if (route.params) {
       setCategoria(route.params.name)
     }
@@ -60,7 +73,6 @@ function Anuncio({ route, limpa }) {
     }
 
     setValor(valor.replace(',', '.'));
-    console.log(valor);
 
     return validado;
   }
@@ -77,7 +89,7 @@ function Anuncio({ route, limpa }) {
     data.append('descricao', descricao);
     data.append('categoria', categoria);
     data.append('valor', valor);
-    data.append('cd_pessoa_fisica', user.cd_pessoa_fisica);
+    data.append('cd_pessoa_fisica', cd_pessoa);
 
     images.forEach((image, index) => {
       data.append('file', {

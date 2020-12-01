@@ -10,6 +10,7 @@ const Item = ({ data }) => {
   const { navigate } = useNavigation();
 
   function handleDetalhes(item) {
+    console.log('item', item)
     navigate('AnuncioDetalhes', item)
   }
 

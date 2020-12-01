@@ -8,6 +8,7 @@ class PessoaFisica extends Model {
             cpf: Sequelize.STRING,
             rg: Sequelize.STRING,
             dt_nascimento: Sequelize.DATE,
+            telefone: Sequelize.STRING,
         },
             {
                 sequelize,

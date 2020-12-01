@@ -23,10 +23,18 @@ class PessoaFisicaController {
                 return ({ info: "Data de nascimento não informada!" });
             }
 
+            if (req.telefone === '' || req.telefone === undefined) {
+                return ({ info: "Telefone não informado!" });
+            }
+
             if (req.email === '' || req.email === undefined) {
                 return ({ info: "Email não informado!" });
             }
-
+            req.telefone = req.telefone.replace('(', '');
+            req.telefone = req.telefone.replace(')', '');
+            req.telefone = req.telefone.replace('-', '');
+            console.log(req.telefone);
+            //req.telefone = replace(replace(replace(req.telefone, '(', ''), ')', ''), ' ', '')
             req.dt_nascimento = moment(req.dt_nascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
             console.log('req.dt_nascimento ', req.dt_nascimento)
             const usuarioExistente = await sequelize

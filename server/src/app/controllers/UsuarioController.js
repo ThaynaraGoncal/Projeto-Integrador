@@ -84,11 +84,20 @@ class UsuarioController {
         res.status(201).json({ info: 'Informe uma senha' });
       }
 
+      req.query.email = req.query.email.toUpperCase();
+
+      //console.log('req.query.email.toUpercase()', req.query.email.toUpperCase())
+
       let user = await sequelize
-        .query(`select usu.cd_pessoa_fisica, nome, apelido, email, cpf, to_char(dt_nascimento, 'dd/mm/yyy') dt_nascimento from usuarios usu inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = usu.cd_pessoa_fisica where email = '${req.query.email}' and password = '${req.query.password}'`,
+        .query(`select usu.cd_pessoa_fisica, nome, apelido, email, telefone, cpf, 
+            to_char(dt_nascimento, 'dd/mm/yyy') dt_nascimento 
+          from usuarios usu inner join pessoa_fisicas pf on 
+          pf.cd_pessoa_fisica = usu.cd_pessoa_fisica 
+          where UPPER(email) = '${req.query.email}' and password = '${req.query.password}'`,
           { type: QueryTypes.SELECT }).then(user => {
             return user[0]
           });
+      console.log(user)
 
       if (user) {
         return res.status(201).json(user);
