@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Anuncio from '../Pages/Anuncio/InserirAnuncio';
+import MinhaConta from '../Pages/Conta/MinhaConta';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
 import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
 import AnuncioAvaliacao from '../Pages/Anuncio/AnuncioAvalicao'
@@ -22,6 +23,7 @@ function AnuncioStack() {
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="Anuncio">
       <Screen name="Anuncio" component={Anuncio} />
+      <Screen name="MinhaConta" component={MinhaConta} />
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
       <Screen name="AnuncioAvaliacao" component={AnuncioAvaliacao} />

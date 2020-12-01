@@ -142,7 +142,9 @@ function Anuncio({ route, limpa }) {
   return (
     <View style={styles.container}>
       <Header title="Inserir Anúncio" />
-      <KeyboardAvoidingView style={styles.box} behavior="padding" >
+      <KeyboardAvoidingView style={styles.box}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.labelInput}>Selecione as imagens</Text>
 

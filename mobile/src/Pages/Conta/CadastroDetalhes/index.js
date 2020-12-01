@@ -50,55 +50,56 @@ function CadastroDetalhes() {
       api.post(`/usuario`, data).then(res => {
         console.log('status', res.status)
         if (res.data.info) {
-            alert(res.data.info)
+          alert(res.data.info)
         } else {
-            //alert(res.data.sucess)
-            navigate('Navigation');
-          }
-        }).catch(error => {
-            console.log(error);
-        });
+          //alert(res.data.sucess)
+          navigate('Navigation');
+        }
+      }).catch(error => {
+        console.log(error);
+      });
     }
   }
 
   return (
     <View style={styles.container}>
       <Header title='Cadastro' buttonBack route='Cadastro' />
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={{ paddingTop: 20, flex: 1 }}>
-      <ScrollView>
-      <Text style={styles.labelInput}>Nome</Text>
-        <TextInput style={styles.input}
-          placeholder='clique para digirar'
-          onChangeText={setNome} value={nome}
-        />
-      <Text style={styles.labelInput}>Data Nascimento</Text>
-      <Input type={'custom'}
-        options={{ mask: '99/99/9999' }}
-        keyboardType='numeric'
-        onChangeText={setDtNascimento}
-        value={dt_nascimento}
-      />
-      <Text style={styles.labelInput}> CPF</Text>
-      <Input type={'custom'}
-        options={{ mask: '999.999.999-99' }}
-        keyboardType='numeric'
-        onChangeText={setCPF} value={cpf}
-      />
-      <Text style={styles.labelInput}>Telefone</Text>
-      <Input type={'custom'}
-        options={{ mask: '(99) 99999-9999' }}
-        keyboardType='numeric'
-        onChangeText={setTelefone}
-        value={telefone}
-      />
-      <Button
-        titleButton="Continuar"
-        onPress={handleSubmit}
-      >
-      </Button>
-      </ScrollView>
+        <ScrollView>
+          <Text style={styles.labelInput}>Nome</Text>
+          <TextInput style={styles.input}
+            returnKeyType='done'
+            placeholder='clique para digirar'
+            onChangeText={setNome} value={nome}
+          />
+          <Text style={styles.labelInput}>Data Nascimento</Text>
+          <Input type={'custom'}
+            options={{ mask: '99/99/9999' }}
+            keyboardType='numeric'
+            onChangeText={setDtNascimento}
+            value={dt_nascimento}
+          />
+          <Text style={styles.labelInput}> CPF</Text>
+          <Input type={'custom'}
+            options={{ mask: '999.999.999-99' }}
+            keyboardType='numeric'
+            onChangeText={setCPF} value={cpf}
+          />
+          <Text style={styles.labelInput}>Telefone</Text>
+          <Input type={'custom'}
+            options={{ mask: '(99) 99999-9999' }}
+            keyboardType='numeric'
+            onChangeText={setTelefone}
+            value={telefone}
+          />
+          <Button
+            titleButton="Continuar"
+            onPress={handleSubmit}
+          >
+          </Button>
+        </ScrollView>
       </KeyboardAvoidingView>
     </View>
   );

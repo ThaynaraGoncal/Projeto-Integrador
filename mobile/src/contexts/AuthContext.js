@@ -14,7 +14,7 @@ export const ContextAuth = ({ children }) => {
   useEffect(() => {
     console.log('caiu no useEffect')
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      console.log('res do then', res)
+      //console.log('res do then', res)
       if (res) {
         setUser(JSON.parse(res));
         setLogado(true)

@@ -1,21 +1,42 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, Linking, BorderlessButton, TouchableHighlight } from 'react-native';
-import Header from '../../../components/Header';
+import AsyncStorage from '@react-native-community/async-storage';
 import { RectButton } from 'react-native-gesture-handler';
 import { AntDesign, Entypo, Feather } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 
+import Header from '../../../components/Header';
 import DataContext from '../../../contexts/AnunciosContext';
 import Modal from '../../../components/ModalFiltro';
 import styles from './styles';
 import * as color from '../../../Colors';
 
 export default function AnuncioDetalhes({ route }) {
-  const imagens = route.params.path;
-  const { categoria, descricao, valor, titulo, telefone } = route.params;
+  const imagens = route.params[0].path;
+  console.log('imagens', route.params[1])
+  const [pessoa, setPessoa] = useState({});
+  const [isPessoa, setIspessoa] = useState(route.params[1]);
+  const { categoria, descricao, valor, titulo, telefone, cd_pessoa_fisica } = route.params[0];
   const { navigate } = useNavigation();
 
-  const [visible, setModalVisible] = useState(false);
+  // useEffect(() => {
+  //   //console.log('caiu no useEffect')
+  //   AsyncStorage.getItem("Dadosuser").then((res) => {
+  //     //console.log('res do then', res)
+  //     if (res) {
+  //       setPessoa(JSON.parse(res));
+  //       //console.log('pessoa do async: ', pessoa)
+  //       if (pessoa.cd_pessoa_fisica === cd_pessoa_fisica) {
+  //         setIspessoa(true);
+  //         //console.log('mesma pessoa', isPessoa)
+  //       }
+  //     }
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   });
+  // }, []);
+
+
 
   function apiWhats() {
     Linking.openURL(`whatsapp://send?phone=55${telefone}`)
@@ -38,9 +59,12 @@ export default function AnuncioDetalhes({ route }) {
         </View>
         <View style={styles.viewAvaliacao}>
           <Text style={styles.labelValor}>R$ {valor}</Text>
-          <RectButton onPress={() => navigate('AnuncioAvaliacao', route.params)}>
-            <Text>Avaliar</Text>
-          </RectButton>
+          {
+            !isPessoa &&
+            <RectButton onPress={() => navigate('AnuncioAvaliacao', route.params)}>
+              <Text>Avaliar</Text>
+            </RectButton>
+          }
         </View>
         <View style={styles.line} />
         <Text style={styles.labelTitulo}>Descrição</Text>

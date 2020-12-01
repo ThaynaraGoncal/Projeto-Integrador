@@ -58,37 +58,42 @@ function Cadastro() {
   return (
     <View style={styles.container}>
       <Header title='Cadastro' buttonBack route='TelaHome' />
-      <KeyboardAvoidingView 
+      <View
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={{ paddingTop: 20, flex: 1 }}>
-      <ScrollView>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.labelInput}> Apelido</Text>
-        <Text style={styles.infoApelido}>Como aparecerá em seus anúncios.</Text>
+        <ScrollView>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.labelInput}> Apelido</Text>
+            <Text style={styles.infoApelido}>Como aparecerá em seus anúncios.</Text>
+          </View>
+          <TextInput style={styles.input}
+            returnKeyType='done'
+            placeholder='clique para digitar'
+            onChangeText={setApelido} value={apelido}
+          />
+          <Text style={styles.labelInput}> E-mail</Text>
+          <TextInput style={styles.input}
+            returnKeyType='done'
+            keyboardType="email-address"
+            placeholder='clique para digitar'
+            onChangeText={setEmail}
+            value={email}
+          />
+          <Text style={styles.labelInput}> Password</Text>
+          <TextInput style={styles.input}
+            returnKeyType='done'
+            keyboardType='numeric'
+            placeholder='clique para digitar'
+            onChangeText={setPassword}
+            value={password}
+          />
+          <Button
+            titleButton="Continuar"
+            onPress={handleSubmit}
+          >
+          </Button>
+        </ScrollView>
       </View>
-      <TextInput style={styles.input}
-        placeholder='clique para digitar'
-        onChangeText={setApelido} value={apelido}
-        />
-      <Text style={styles.labelInput}> E-mail</Text>
-      <TextInput style={styles.input}
-        placeholder='clique para digitar'
-        onChangeText={setEmail}
-        value={email}
-      />
-      <Text style={styles.labelInput}> Password</Text>
-      <TextInput style={styles.input}
-        placeholder='clique para digitar'
-        onChangeText={setPassword}
-        value={password}
-      />
-      <Button
-        titleButton="Continuar"
-        onPress={handleSubmit}
-      >
-      </Button>
-      </ScrollView>
-      </KeyboardAvoidingView>
     </View>
   );
 }

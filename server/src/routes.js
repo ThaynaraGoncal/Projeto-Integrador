@@ -9,6 +9,7 @@ import UsuariosController from './app/controllers/UsuarioController';
 import UsuarioController from './app/controllers/UsuarioController';
 import AnuncioController from './app/controllers/AnuncioController';
 import ArquivoController from './app/controllers/ArquivoController';
+import AvaliacaoController from './app/controllers/AvaliacaoController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -29,10 +30,8 @@ routes.get('/anuncio', AnuncioController.indexFiltro);
 routes.delete('/anuncio', AnuncioController.deleteAnuncio);
 routes.post('/anuncios', upload.array('file'), AnuncioController.store);
 
-routes.get('/users', (req, res) => {
-    let msg = { msg: "hello word" }
-    return res.status(200).json(msg);
-});
+routes.post('/avaliar', AvaliacaoController.store);
+routes.get('/avaliacao', AvaliacaoController.index);
 
 routes.post('/arquivos', upload.single('file'), ArquivoController.store);
 

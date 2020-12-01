@@ -19,7 +19,7 @@ export default function TelaHome() {
   useFocusEffect(() => {
     AsyncStorage.getItem("Dadosuser").then((res) => {
       //console.log('res do then', res)
-      if(!res) {
+      if (!res) {
         setLogado(false);
       }
       if (res) {
@@ -33,7 +33,7 @@ export default function TelaHome() {
     }).catch((err) => {
       console.log(err)
     });
-  },[])
+  }, [])
 
   function limpaCampos() {
     setEmail('');
@@ -91,11 +91,11 @@ export default function TelaHome() {
             </View>
           )
           : <KeyboardAvoidingView style={{
-            width: '100%', 
-            alignItems: 'center' ,
+            width: '100%',
+            alignItems: 'center',
             marginBottom: 60,
-            }} behavior="padding" >
-          {/* <View style={{
+          }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
+            {/* <View style={{
               width: '100%', 
               alignItems: 'center' 
               }}
@@ -126,10 +126,10 @@ export default function TelaHome() {
             >
               <Text style={styles.titleButton}>Entrar</Text>
             </TouchableOpacity>
-            <View style={{ 
-                flexDirection: 'row',
-                marginTop: 10,
-              }}>
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 10,
+            }}>
               <Text style={{
                 fontFamily: 'Nunito_700Bold',
                 fontSize: 16,
@@ -137,15 +137,15 @@ export default function TelaHome() {
               }}>Não tem cadastro?</Text>
               <TouchableOpacity onPress={handleCadastro}>
                 <Text style={{
-                fontFamily: 'Nunito_700Bold',
-                fontSize: 16,
-                color: color.AMARELO
-               }}
-              > Clique aqui!</Text>
+                  fontFamily: 'Nunito_700Bold',
+                  fontSize: 16,
+                  color: color.AMARELO
+                }}
+                > Clique aqui!</Text>
               </TouchableOpacity>
             </View>
 
-          {/* </View> */}
+            {/* </View> */}
           </KeyboardAvoidingView>
       }
     </View>
