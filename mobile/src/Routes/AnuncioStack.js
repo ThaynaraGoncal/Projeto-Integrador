@@ -5,7 +5,8 @@ import Anuncio from '../Pages/Anuncio/InserirAnuncio';
 import MinhaConta from '../Pages/Conta/MinhaConta';
 import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
 import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
-import AnuncioAvaliacao from '../Pages/Anuncio/AnuncioAvalicao'
+import AnuncioAvaliar from '../Pages/Anuncio/AnuncioAvaliar'
+import AnuncioAvaliacoes from '../Pages/Anuncio/AnuncioAvaliacoes';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
 import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import Decoracao from '../Pages/Anuncio/SubCategorias/Decoracao';
@@ -26,7 +27,8 @@ function AnuncioStack() {
       <Screen name="MinhaConta" component={MinhaConta} />
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
-      <Screen name="AnuncioAvaliacao" component={AnuncioAvaliacao} />
+      <Screen name="AnuncioAvaliar" component={AnuncioAvaliar} />
+      <Screen name="AnuncioAvaliacoes" component={AnuncioAvaliacoes} />
       <Screen name="SubCategoria" component={SubCategoria} />
       <Screen name="Comida" component={Comida} />
       <Screen name="Decoracao" component={Decoracao} />

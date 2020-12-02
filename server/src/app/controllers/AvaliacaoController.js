@@ -34,28 +34,28 @@ class AvaliacoesController {
     console.log(req.query)
 
     const anuncio_list = await sequelize
-      .query(`select ava.id, ava.id_anuncio, ava.titulo, ava.texto, ava.like
-        from   avaliacoes ava
+      .query(`select ava.id, ava.id_anuncio, ava.titulo, ava.texto, ava.like, ava.cd_pessoa_avaliou, pf.nome 
+        from   avaliacoes ava inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = ava.cd_pessoa_avaliou 
         where  id_anuncio = ${req.query.id_anuncio}`,
         { type: QueryTypes.SELECT }).then(user => {
           return user
         });
 
-    const anunciosFiltro = anuncio_list.filter(
-      (v, i, a) => a.findIndex(t => t.id_anuncio === v.id_anuncio) === i,
-    );
+    // const anunciosFiltro = anuncio_list.filter(
+    //   (v, i, a) => a.findIndex(t => t.id_anuncio === v.id_anuncio) === i,
+    // );
 
-    const anuncios = anunciosFiltro.map(dado => ({ ...dado, path: [] }));
+    // const anuncios = anunciosFiltro.map(dado => ({ ...dado, path: [] }));
 
-    for (let anuncioF of anuncios) {
-      for (let anunciosAll of anuncio_list) {
-        if (anuncioF.id_anuncio === anunciosAll.id_anuncio) {
-          anuncioF.path.push(`${anunciosAll.titulo}`);
-        }
-      }
-    }
+    // for (let anuncioF of anuncios) {
+    //   for (let anunciosAll of anuncio_list) {
+    //     if (anuncioF.id_anuncio === anunciosAll.id_anuncio) {
+    //       anuncioF.path.push(`${anunciosAll.titulo}`);
+    //     }
+    //   }
+    // }
 
-    return res.status(200).json(anuncios);
+    return res.status(200).json(anuncio_list);
 
   }
 }

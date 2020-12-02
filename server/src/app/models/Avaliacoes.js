@@ -8,6 +8,7 @@ class Avaliacoes extends Model {
             titulo: Sequelize.STRING,
             texto: Sequelize.STRING,
             like: Sequelize.BOOLEAN,
+            cd_pessoa_avaliou: Sequelize.INTEGER,
         },
             {
                 sequelize,

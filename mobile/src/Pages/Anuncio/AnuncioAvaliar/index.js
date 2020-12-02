@@ -5,13 +5,18 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Textarea from 'react-native-textarea';
 
+import useAuth from '../../../hooks/useAuth';
+
 import Header from '../../../components/Header';
 import api from '../../../services/api';
 
 import styles from './styles';
 import * as color from '../../../Colors';
 
-export default function AnuncioAvaliacao() {
+export default function AnuncioAvaliar() {
+  const { user } = useAuth();
+  console.log('usuario logado', user)
+
   const { params } = useRoute();
   const titulotRef = useRef();
   const textRef = useRef();
@@ -21,12 +26,13 @@ export default function AnuncioAvaliacao() {
   const [titulo, setTitulo] = useState('');
   const [gostei, setGostei] = useState(false);
 
-  //console.log('meus params', params)
+  console.log('meus params', params)
 
   async function handleAvaliar() {
     console.log('Inserir avaliacao')
     const dados = {
       id_anuncio: params[0].id,
+      cd_pessoa_avaliou: user.cd_pessoa_fisica,
       titulo: titulo,
       texto: text,
       like: gostei
@@ -98,10 +104,22 @@ export default function AnuncioAvaliacao() {
         > */}
         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '95%' }}>
           <Text style={styles.title}>Compartilhe com todos a sua opnião!</Text>
-          <View style={styles.viewText}>
-            <Text style={styles.anuncio}>{params[0].titulo}</Text>
-            <Text>{params[0].categoria}</Text>
+          <View style={styles.viewAnuncio}>
+            <View style={styles.headerAnuncio}>
+              <Text style={styles.textAnuncio}>Anúncio</Text>
+            </View>
+            <View style={styles.viewText}>
+              <View style={{ width: '50%', alignItems: 'center', height: 20, }}>
+                <Text style={{ fontFamily: 'Nunito_600SemiBold', color: '#3A3E3B', fontSize: 14 }}>Título</Text>
+                <Text style={styles.anuncio}>{params[0].titulo}</Text>
+              </View>
+              <View style={{ width: '50%', alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Nunito_600SemiBold', color: '#3A3E3B', fontSize: 14 }}>Categoria</Text>
+                <Text style={styles.anuncio}>{params[0].categoria}</Text>
+              </View>
+            </View>
           </View>
+
           <Text style={styles.text}>Título*</Text>
           <TextInput
             ref={titulotRef}
@@ -145,6 +163,6 @@ export default function AnuncioAvaliacao() {
         </ScrollView>
         {/* </KeyboardAvoidingView> */}
       </View>
-    </View>
+    </View >
   )
 };

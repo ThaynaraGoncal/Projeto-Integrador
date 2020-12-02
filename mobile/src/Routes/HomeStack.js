@@ -4,7 +4,8 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 
 import Home from '../Pages/Home';
 import AnuncioDetalhes from '../Pages/Anuncio/AnuncioDetalhes';
-import AnuncioAvaliacao from '../Pages/Anuncio/AnuncioAvalicao';
+import AnuncioAvaliar from '../Pages/Anuncio/AnuncioAvaliar';
+import AnuncioAvaliacoes from '../Pages/Anuncio/AnuncioAvaliacoes';
 import Filtro from '../Pages/Filtro';
 import Categoria from '../Pages/Anuncio/Categorias';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
@@ -19,6 +20,7 @@ import Local from '../Pages/Anuncio/SubCategorias/Local';
 import api from '../services/api';
 
 import { ContextAnuncio } from '../contexts/AnunciosContext';
+import { ContextAuth } from '../contexts/AuthContext';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -36,9 +38,10 @@ function CadastroStack() {
         <Screen name="Filtro" component={Filtro}
           options={{ cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS }}
         />
-        <Screen name="AnuncioAvaliacao" component={AnuncioAvaliacao} 
+        <Screen name="AnuncioAvaliar" component={AnuncioAvaliar}
           options={{ cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS }}
         />
+        <Screen name="AnuncioAvaliacoes" component={AnuncioAvaliacoes} />
         <Screen name="Categoria" component={Categoria} />
         <Screen name="Comida" component={Comida} />
         <Screen name="Decoracao" component={Decoracao} />

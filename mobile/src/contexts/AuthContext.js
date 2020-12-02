@@ -50,7 +50,7 @@ export const ContextAuth = ({ children }) => {
       }
 
       api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
-        console.log('data', res.data);
+        //console.log('data', res.data);
 
         if (res.data?.info) {
           setInfoLogin(res.data?.info);

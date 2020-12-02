@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Image } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/api';
 
+import Logo from '../images/logo.png';
+
 import Input from '../components/input';
 import * as color from '../Colors';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TelaHome() {
   //const { user, logado, setLogado, setUser } = useAuth();
@@ -70,91 +73,112 @@ export default function TelaHome() {
     navigate('Navigation')
   }
 
+  async function handleOutraConta() {
+    await AsyncStorage.clear();
+    setLogado(false)
+  }
+
   function handleCadastro() {
     navigate('Cadastro');
   }
 
   return (
     <View style={styles.container}>
-      {
-        logado
-          ? (
-            <View>
-              <Text> Que bom te ver de volta {user.apelido}, faça login!</Text>
-              <TouchableOpacity style={[styles.buttonLogar]}
-                onPress={
-                  handleEntrar
-                }
-              >
-                <Text style={styles.titleButton}>Entrar</Text>
-              </TouchableOpacity>
-            </View>
-          )
-          : <KeyboardAvoidingView style={{
-            width: '100%',
-            alignItems: 'center',
-            marginBottom: 60,
-          }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
-            {/* <View style={{
+      {logado ? (
+        <KeyboardAvoidingView style={{
+          flex: 1,
+          width: '100%',
+        }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
+          {/* <ScrollView style={{ width: '100%', backgroundColor: 'blue' }}
+            showsVerticalScrollIndicator={false}
+          > */}
+          <View style={styles.viewLogado}>
+            <Text style={styles.title}>
+              Que bom te ver de volta
+            </Text>
+            <Text style={styles.textUsuario}>
+              {user.apelido}
+            </Text>
+            <TouchableOpacity style={styles.buttonLogar}
+              onPress={handleEntrar}
+            >
+              <Text style={styles.titleButton}>Entrar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonLogar}
+              onPress={handleOutraConta}
+            >
+              <Text style={styles.titleButton} >
+                Entrar com outra conta
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+          {/* </ScrollView> */}
+        </KeyboardAvoidingView>
+      ) :
+        <KeyboardAvoidingView style={{
+          width: '100%',
+          alignItems: 'center',
+          marginBottom: 60,
+        }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
+          {/* <View style={{
               width: '100%', 
               alignItems: 'center' 
               }}
             > */}
-            <Text
-              style={{
-                fontFamily: 'Nunito_800ExtraBold',
-                fontSize: 22,
-                lineHeight: 24,
-                color: '#fff',
-              }}
-            >Faça Login e tenha uma melhor experiência</Text>
-            <View style={{ 
-              alignItems: 'flex-start',
-              backgroundColor: 'red',
-              width: '100%'
-              }}>
-            <Text>Email</Text>
+          <Text
+            style={{
+              fontFamily: 'Nunito_800ExtraBold',
+              fontSize: 22,
+              lineHeight: 24,
+              color: '#fff',
+            }}
+          >Faça Login e tenha uma melhor experiência</Text>
+          <View style={styles.viewDados}>
+            <Text style={styles.textEmail}>Email</Text>
             <TextInput style={styles.input}
               value={email}
               onChangeText={setEmail}
               placeholder="email@email.com">
             </TextInput>
-            </View>
-            <Text>Senha</Text>
+          </View>
+          <View style={styles.viewDados}>
+            <Text style={styles.textEmail}>Senha</Text>
             <TextInput style={styles.input}
               value={password}
               onChangeText={setPassword}
               placeholder="****************">
 
             </TextInput>
-            <TouchableOpacity style={[styles.buttonLogar]}
-              onPress={
-                handleLogin
-              }
-            >
-              <Text style={styles.titleButton}>Entrar</Text>
-            </TouchableOpacity>
-            <View style={{
-              flexDirection: 'row',
-              marginTop: 10,
-            }}>
+          </View>
+          <TouchableOpacity style={[styles.buttonLogar]}
+            onPress={
+              handleLogin
+            }
+          >
+            <Text style={styles.titleButton}>Entrar</Text>
+          </TouchableOpacity>
+          <View style={{
+            flexDirection: 'row',
+            marginTop: 10,
+          }}>
+            <Text style={{
+              fontFamily: 'Nunito_700Bold',
+              fontSize: 16,
+              color: color.CINZA_TITULO
+            }}>Não tem cadastro?</Text>
+            <TouchableOpacity onPress={handleCadastro}>
               <Text style={{
                 fontFamily: 'Nunito_700Bold',
                 fontSize: 16,
-                color: color.CINZA_TITULO
-              }}>Não tem cadastro?</Text>
-              <TouchableOpacity onPress={handleCadastro}>
-                <Text style={{
-                  fontFamily: 'Nunito_700Bold',
-                  fontSize: 16,
-                  color: color.AMARELO
-                }}
-                > Clique aqui!</Text>
-              </TouchableOpacity>
-            </View>
+                color: color.AMARELO
+              }}
+              > Clique aqui!</Text>
+            </TouchableOpacity>
+          </View>
 
-            {/* </View> */}
-          </KeyboardAvoidingView>
+          {/* </View> */}
+        </KeyboardAvoidingView>
       }
     </View>
   )
@@ -166,17 +190,36 @@ const styles = StyleSheet.create({
     backgroundColor: color.AZUL_CIANETO,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 40,
+    padding: 20,
+  },
+
+  viewLogado: {
+    flex: 1,
+    paddingBottom: 120,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+
+  title: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 24,
+    color: '#fff',
+  },
+
+  textUsuario: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 26,
+    color: color.AMARELO,
   },
 
   buttonLogar: {
-    width: '90%',
+    width: '100%',
     height: 50,
     borderRadius: 10,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 30,
   },
 
   titleButton: {
@@ -185,8 +228,32 @@ const styles = StyleSheet.create({
     color: color.CINZA_TITULO
   },
 
+  buttonOutraConta: {
+    width: '100%',
+    height: 30,
+    marginTop: 5,
+  },
+
+  textButton: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 18,
+    color: color.AMARELO
+  },
+
+  viewDados: {
+    alignItems: 'flex-start',
+    width: '100%'
+  },
+
+  textEmail: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 24,
+    color: '#fff',
+    marginBottom: 5,
+  },
+
   input: {
-    width: '90%',
+    width: '100%',
     height: 50,
     backgroundColor: '#fff',
     borderColor: '#d3e2e6',
@@ -195,6 +262,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     paddingHorizontal: 16,
-    marginTop: 10,
   }
 })

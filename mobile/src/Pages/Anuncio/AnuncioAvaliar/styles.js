@@ -8,9 +8,11 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 18,
+    fontSize: 20,
     color: color.CINZA_TITULO,
-    marginVertical: 5,
+    marginTop: 5,
+    marginBottom: 10,
+    textAlign: 'center'
   },
 
   text: {
@@ -21,16 +23,42 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 
+  viewAnuncio: {
+    borderWidth: 1,
+    borderColor: color.INPUT_BORDER_LABEL,
+    borderRadius: 5,
+  },
+
+  headerAnuncio: {
+    backgroundColor: color.INPUT_BORDER_LABEL,
+    height: 30,
+    marginBottom: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
   anuncio: {
     fontFamily: 'Nunito_700Bold',
     fontSize: 18,
     color: color.CINZA_TITULO,
-    marginVertical: 10,
+  },
+
+  textAnuncio: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 18,
+    color: color.CINZA_TITULO,
+  },
+
+  line: {
+    backgroundColor: color.INPUT_BORDER_LABEL,
+    height: 1.5,
+    marginTop: 5,
+    marginBottom: 10,
   },
 
   viewText: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
 
   input: {

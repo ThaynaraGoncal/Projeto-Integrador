@@ -22,7 +22,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_700Bold',
     fontSize: 24,
     color: color.CINZA_TITULO,
-    fontWeight: 'bold'
+  },
+
+  textCategoria: {
+    fontFamily: 'Nunito_600SemiBold',
+    fontSize: 16,
+    color: color.CINZA_LABEL,
+  },
+
+  categoria: {
+    fontFamily: 'Nunito_600SemiBold',
+    fontSize: 14,
+    color: color.AZUL_CIANETO,
+    marginTop: 1,
   },
 
   containerItens: {

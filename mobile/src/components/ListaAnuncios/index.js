@@ -13,6 +13,7 @@ const Item = ({ data }) => {
   const { navigate } = useNavigation();
 
   function handleDetalhes(item) {
+    console.log('meu anuncio', item)
     getPessoa(item);
     //console.log('item', item)
     navigate('AnuncioDetalhes', [item, isPessoa])
@@ -21,10 +22,10 @@ const Item = ({ data }) => {
   function getPessoa(item) {
     //console.log('item', item)
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      console.log('resposta do async', res)
+      //console.log('resposta do async', res)
       if (res) {
         setPessoa(JSON.parse(res));
-        console.log('pessoa do async: ', pessoa.cd_pessoa_fisica)
+        //console.log('pessoa do async: ', pessoa.cd_pessoa_fisica)
         //console.log('pessoa do anuncio: ', item.cd_pessoa_fisica)
         if (pessoa.cd_pessoa_fisica === item.cd_pessoa_fisica) {
           setIspessoa(true);
@@ -42,6 +43,10 @@ const Item = ({ data }) => {
       <View style={styles.containerText}>
         <Text style={styles.label}>{data.titulo}</Text>
         <Text style={styles.label}>R$: {data.valor}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textCategoria}>Categoria: </Text>
+          <Text style={styles.categoria}>{data.categoria}</Text>
+        </View>
       </View>
     </RectButton>
   )

@@ -14,9 +14,7 @@ import * as color from '../../Colors';
 import styles from './styles';
 
 function Home() {
-
   const { anuncios, setAnuncios, anunciosInicial } = useAnuncio();
-  //console.log('anuncios', anuncios)
   const [filtro, setFiltro] = useState('');
   const [visible, setModalVisible] = useState(false);
 

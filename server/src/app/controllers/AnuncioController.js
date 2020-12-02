@@ -42,7 +42,7 @@ class AnuncioController {
     const anuncio_list = await sequelize
       .query(`select anu.id, anu.cd_pessoa_fisica, pf.nome, anu.titulo, 
             anu.categoria, anu.descricao, anu.valor, arq.name, arq.path,
-            pf.telefone 
+            pf.nome, pf.telefone 
       from anuncios anu 
       left join arquivos arq on anu.id = arq.id_anuncio
       inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = anu.cd_pessoa_fisica`,
@@ -59,7 +59,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -87,7 +87,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -115,7 +115,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of lista_anuncios) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostCasa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
         }
       }
     }
