@@ -37,6 +37,7 @@ class AnuncioController {
   }
 
   async index(req, res) {
+    console.log('Rota /anuncios requisitada')
     const sequelize = new Sequelize(database);
 
     const anuncio_list = await sequelize
@@ -72,8 +73,19 @@ class AnuncioController {
     console.log(req.query);
     const sequelize = new Sequelize(database);
 
+    // let precoMin = ''
+    // let precoMax = '';
+    let sqlWhere = '';
+    if (req.query.precoMin != '' && req.query.precoMax != '') {
+      sqlWhere = `and valor between '${req.query.precoMin}' and '${req.query.precoMin}'`
+    }
+
+
     const anuncio_list = await sequelize
-      .query(`select anu.id, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio where anu.categoria = '${req.query.categoria}'`,
+      .query(`select anu.id, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path 
+        from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio 
+        where anu.categoria = '${req.query.categoria}'
+        ${sqlWhere}`,
         { type: QueryTypes.SELECT }).then(user => {
           return user
         });

@@ -14,12 +14,22 @@ import * as color from '../../Colors';
 import styles from './styles';
 
 function Home() {
-  const { anuncios, setAnuncios, anunciosInicial } = useAnuncio();
+  const { anuncios, setAnuncios, anunciosInicial, setAnunciosInicial } = useAnuncio();
   const [filtro, setFiltro] = useState('');
   const [visible, setModalVisible] = useState(false);
 
   const { navigate } = useNavigation();
   const route = useRoute();
+
+  function handleAtualizar() {
+    api.get(`/anuncios`).then((res) => {
+      console.log('todos anuncios', res.data);
+      setAnuncios(res.data);
+      //setAnunciosInicial(res.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
 
   function listaAnuncios() {
@@ -61,6 +71,9 @@ function Home() {
         </View>
         <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
           <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
+        </BorderlessButton>
+        <BorderlessButton style={styles.button} onPress={handleAtualizar}>
+          <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
         </BorderlessButton>
 
       </View>

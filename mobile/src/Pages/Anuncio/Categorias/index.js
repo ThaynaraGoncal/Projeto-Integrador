@@ -19,7 +19,7 @@ import Header from '../../../components/Header';
 import styles from './styles';
 
 function Categoria({ route, }) {
-  console.log('route', route)
+  //console.log('route', route)
   const { navigate } = useNavigation();
 
   let rota = 'Anuncio';

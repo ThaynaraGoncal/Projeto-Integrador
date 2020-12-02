@@ -1,50 +1,79 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight, ScrollView, Alert } from 'react-native';
 import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import Button from '../../components/Button';
+import useAnuncio from '../../hooks/useAnuncio';
 
+import Button from '../../components/Button';
 import styles from './styles';
 import api from '../../services/api';
 
 export default function Filtro({ route }) {
-  const [categoria, setCategoria] = useState('');
+  const { setAnuncios } = useAnuncio();
+
   const [precoMin, setPrecoMin] = useState('');
   const [precoMax, setPrecoMax] = useState('');
 
   const { navigate } = useNavigation();
-  const rotas = useRoute();
+  const { params } = useRoute();
+  console.log('rota que veio do filtro', params)
 
-  useMemo(() => {
+  let categoria = '';
+  if (params != undefined) {
+    const { name } = params;
+    console.log('categoria', name)
+    categoria = name;
+  }
 
-    if (categoria) {
-      api.get(`/anuncio?categoria=${categoria}&precoMin=${precoMin}&precoMax=${precoMax}`).then(res => {
-        const data = res.data.anuncios;
-        //console.log('data', data)
-        navigate('Home', { teste: data })
-        // if (data) {
-        //   setCategoria('')
-        //   navigate('Home', data)
-        // }
-
-      }).catch(error => {
-        console.log(error);
-      });
+  function validaFiltros(categoria, precoMin, precoMax) {
+    if (precoMin != '' || precoMax != '') {
+      if (categoria === '') {
+        Alert.alert('Atenção!', 'Selecione uma categoria');
+        return false
+      }
     }
-
-    console.log('categoria selecionada: ', categoria)
-    console.log(precoMin)
-    console.log(precoMax)
-  }, [categoria])
+    return true
+  }
 
   function handleSubmit() {
-    if (route.params) {
-      setCategoria(route.params.name);
-    } else {
-      setCategoria('');
-      navigate('Home')
+    console.log('categoria', categoria)
+    console.log('precoMin', precoMin)
+    console.log('precoMax', precoMax)
+
+    let ok = validaFiltros(categoria, precoMin, precoMax);
+    console.log('ok', ok)
+    if (ok) {
+      if (categoria === '') {
+        console.log('informe uma categoria')
+        api.get(`/anuncios`).then(res => {
+          const data = res.data;
+          console.log('data', data)
+          //navigate('Home', { teste: data })
+          if (data) {
+            setAnuncios(data)
+            navigate('Home')
+          }
+
+        }).catch(error => {
+          console.log(error);
+        });
+      } else {
+        console.log('Rota com parametro')
+        api.get(`/anuncio?categoria=${categoria}&precoMin=${precoMin}&precoMax=${precoMax}`).then(res => {
+          const data = res.data.anuncios;
+          console.log('data', data)
+          //navigate('Home', { teste: data })
+          if (data) {
+            setAnuncios(data)
+            navigate('Home')
+          }
+
+        }).catch(error => {
+          console.log(error);
+        });
+      }
     }
 
   }
@@ -71,7 +100,7 @@ export default function Filtro({ route }) {
           value={categoria}
         // onChangeText={setCategoria}
         >
-          <Text style={styles.textButton}>{rotas.params ? rotas.params.name : 'Selecione uma categoria'}</Text>
+          <Text style={styles.textButton}>{params ? params.name : 'Selecione uma categoria'}</Text>
           <AntDesign name="arrowright" size={24} color="#c1bccc" />
         </RectButton>
         <Text style={styles.titleOpcoes}>Preço(R$)</Text>
