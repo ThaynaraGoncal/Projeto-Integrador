@@ -108,11 +108,19 @@ export default function TelaHome() {
                 color: '#fff',
               }}
             >Faça Login e tenha uma melhor experiência</Text>
+            <View style={{ 
+              alignItems: 'flex-start',
+              backgroundColor: 'red',
+              width: '100%'
+              }}>
+            <Text>Email</Text>
             <TextInput style={styles.input}
               value={email}
               onChangeText={setEmail}
               placeholder="email@email.com">
             </TextInput>
+            </View>
+            <Text>Senha</Text>
             <TextInput style={styles.input}
               value={password}
               onChangeText={setPassword}
