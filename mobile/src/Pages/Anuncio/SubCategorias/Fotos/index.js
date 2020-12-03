@@ -20,12 +20,12 @@ function Fotos({ route }) {
       <Header title="Escolha uma categoria" buttonBack route="Categoria" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: '' })}
+          onPress={() => navigate(rota, { name: 'Fotógrafo' })}
         >
           <Text style={styles.textButton}>Fotógrofo</Text>
         </RectButton>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, { name: '' })}
+          onPress={() => navigate(rota, { name: 'Filmagem' })}
         >
           <Text style={styles.textButton}>Filmagem</Text>
         </RectButton>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -14,19 +14,19 @@ import {
 } from "react-native";
 import { AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import * as color from '../../../Colors';
+import * as color from '../../../../Colors';
 
-import useAuth from '../../../hooks/useAuth';
-import api from '../../../services/api';
+import api from '../../../../services/api';
 
-import Header from '../../../components/Header';
-import Button from '../../../components/Button';
-import InputText from '../../../components/InputText';
-import ImagePickerExample from '../../../components/Camera';
+import Header from '../../../../components/Header';
+import Button from '../../../../components/Button';
+import InputText from '../../../../components/InputText';
 
 import styles from './styles';
 
-function Anuncio({ route, limpa }) {
+export default function EditarAnuncio({ route }) {
+  const { params } = useRoute();
+  console.log(route.params)
 
   const { navigate } = useNavigation();
 
@@ -40,29 +40,13 @@ function Anuncio({ route, limpa }) {
   let usuario = {};
 
   useFocusEffect(() => {
-    AsyncStorage.getItem("Dadosuser").then((res) => {
-      if (res) {
-        usuario = JSON.parse(res);
-        setCd_pessoa(usuario.cd_pessoa_fisica);
-        //console.log('usuario no anuncio', usuario)
-      }
-    }).catch((err) => {
-      console.log(err)
-    });
-
-
-    if (route.params) {
-      setCategoria(route.params.name)
-    }
+    console.log('parametros para editar', params)
+    setTitulo(params.titulo);
+    setDescricao(params.descricao);
+    setCategoria(params.categoria);
+    setValor(params.valor);
+    setImages(params.path)
   }, [])
-
-  function limpaCampos() {
-    setTitulo('');
-    setDescricao('');
-    setCategoria('');
-    setValor('');
-    setImages([]);
-  }
 
   function validaCamposNull() {
     let validado = true;
@@ -123,7 +107,7 @@ function Anuncio({ route, limpa }) {
   }
 
   function handleCategorias() {
-    navigate('Categoria');
+    navigate('CategoriaAnuncio', { rota: 'EditarAnuncio' });
   }
 
   async function handleSelectImages() {
@@ -151,9 +135,9 @@ function Anuncio({ route, limpa }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Inserir Anúncio" />
+      <Header title="Editar Anúncio" buttonBack route='AnuncioDetalhesPrestador' />
       <KeyboardAvoidingView style={styles.box}
-        behavior={Platform.OS == "ios" ? "padding" : ""}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.labelInput}>Selecione as imagens</Text>
@@ -185,7 +169,7 @@ function Anuncio({ route, limpa }) {
             value={categoria}
             onChangeText={setCategoria}
           >
-            <Text style={styles.textButton}>{route.params ? route.params.name : 'Selecione uma categoria'}</Text>
+            <Text style={styles.textButton}>{params ? params.categoria : 'Selecione uma categoria'}</Text>
             <AntDesign name="arrowright" size={24} color="#c1bccc" />
           </RectButton>
           <Text style={styles.labelInput}>Valor</Text>
@@ -212,5 +196,3 @@ function Anuncio({ route, limpa }) {
     </View>
   );
 }
-
-export default Anuncio;

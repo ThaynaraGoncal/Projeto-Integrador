@@ -24,8 +24,8 @@ function AnuncioStack() {
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="Anuncio">
       <Screen name="Anuncio" component={Anuncio} />
-      <Screen name="MinhaConta" component={MinhaConta} />
-      <Screen name="MeusAnuncios" component={MeusAnuncios} />
+      {/* <Screen name="MinhaConta" component={MinhaConta} /> */}
+      {/* <Screen name="MeusAnuncios" component={MeusAnuncios} /> */}
       <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
       <Screen name="AnuncioAvaliar" component={AnuncioAvaliar} />
       <Screen name="AnuncioAvaliacoes" component={AnuncioAvaliacoes} />

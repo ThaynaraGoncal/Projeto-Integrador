@@ -20,7 +20,7 @@ function Decoracao({ route }) {
       <Header title="Escolha uma categoria" buttonBack route="Categoria" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
-          onPress={() => navigate(rota, 'Mesas')}
+          onPress={() => navigate(rota, { name: 'Mesas' })}
         >
           <Text style={styles.textButton}>Mesas</Text>
         </RectButton>

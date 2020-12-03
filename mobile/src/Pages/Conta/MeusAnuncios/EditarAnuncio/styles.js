@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
-import * as color from '../../../Colors';
+import * as color from '../../../../Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 50
   },
 
   box: {
     padding: 10,
+    marginBottom: 50
   },
 
   title: {

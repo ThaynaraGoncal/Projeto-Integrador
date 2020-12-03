@@ -111,6 +111,21 @@ class UsuarioController {
     }
   }
 
+  async userUpdate(req, res) {
+    const sequelize = new Sequelize(database);
+
+    try {
+      console.log('req', req.body)
+
+
+      return res.status(201).json({ info: 'Login ou Senha inválidos!' });
+
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: 'Não foi possível criar usuario' });
+    }
+  }
+
 }
 
 export default new UsuarioController();

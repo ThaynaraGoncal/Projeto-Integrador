@@ -59,6 +59,9 @@ function MinhaConta() {
     navigate('TelaHome');
   }
 
+  function handleEditar() {
+    navigate('EditarCadastro', usuario)
+  }
 
 
   return (
@@ -81,7 +84,13 @@ function MinhaConta() {
         >
           <Text style={styles.textButton}>Meus Anúncios</Text>
         </TouchableOpacity >
-        <View  style={styles.line}/>
+        <View style={styles.line} />
+        <TouchableOpacity style={styles.button}
+          onPress={handleEditar}
+        >
+          <Text style={styles.textButton}>Editar Cadastro</Text>
+        </TouchableOpacity >
+        <View style={styles.line} />
         <TouchableOpacity style={styles.button}
           onPress={logoff}
         >

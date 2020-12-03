@@ -19,7 +19,6 @@ import Header from '../../../components/Header';
 import styles from './styles';
 
 function Categoria({ route, }) {
-  //console.log('route', route)
   const { navigate } = useNavigation();
 
   let rota = 'Anuncio';
@@ -29,7 +28,7 @@ function Categoria({ route, }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Escolha uma categoria" buttonBack route={route.params} />
+      <Header title="Escolha uma categoria" buttonBack route={rota} />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate('Comida', rota)}
