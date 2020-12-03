@@ -17,7 +17,7 @@ function Fotos({ route }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Escolha uma categoria" buttonBack route="CategoriaAnuncio" />
+      <Header title="Escolha uma categoria" buttonBack route="Categoria" />
       <ScrollView>
         <RectButton style={styles.categoriaButton}
           onPress={() => navigate(rota, { name: '' })}

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
 
-  infoApelido :{
+  infoApelido: {
     fontFamily: color.FONT_NUNITO_600,
     fontSize: 14,
     color: color.CINZA_TITULO,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Image } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import useAuth from '../hooks/useAuth';
@@ -14,7 +15,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TelaHome() {
   const { user, logado, setLogado, setUser } = useAuth();
-  //const [logado, setLogado] = useState(false);
+  const [visiblePsw, setVisiblePsw] = useState(false);
   //const [user, setUser] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,19 +46,19 @@ export default function TelaHome() {
   }
 
   const createAlertOk = (info) =>
-  Alert.alert(
-    "Atenção",
-    info,
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "OK", onPress: () => navigate('TelaHome') }
-    ],
-    { cancelable: false }
-  );
+    Alert.alert(
+      "Atenção",
+      info,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => navigate('TelaHome') }
+      ],
+      { cancelable: false }
+    );
 
   function handleLogin() {
     api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
@@ -107,6 +108,7 @@ export default function TelaHome() {
         <KeyboardAvoidingView style={{
           flex: 1,
           width: '100%',
+          padding: 20
         }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
           {/* <ScrollView style={{ width: '100%', backgroundColor: 'blue' }}
             showsVerticalScrollIndicator={false}
@@ -130,73 +132,71 @@ export default function TelaHome() {
                 Entrar com outra conta
               </Text>
             </TouchableOpacity>
+            <View style={styles.viewCadastro}>
+              <Text style={styles.textCadastro}>
+                Não tem cadastro?
+                </Text>
+              <TouchableOpacity onPress={handleCadastro}>
+                <Text style={styles.textCliqueAqui}
+                > Clique aqui!</Text>
+              </TouchableOpacity>
+            </View>
 
           </View>
           {/* </ScrollView> */}
         </KeyboardAvoidingView>
       ) :
-        <KeyboardAvoidingView style={{
-          width: '100%',
-          alignItems: 'center',
-          marginBottom: 60,
-        }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
-          {/* <View style={{
-              width: '100%', 
-              alignItems: 'center' 
-              }}
-            > */}
-          <Text
-            style={{
-              fontFamily: 'Nunito_800ExtraBold',
-              fontSize: 22,
-              lineHeight: 24,
-              color: '#fff',
-            }}
-          >Faça Login e tenha uma melhor experiência</Text>
-          <View style={styles.viewDados}>
-            <Text style={styles.textEmail}>Email</Text>
-            <TextInput style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="email@email.com">
-            </TextInput>
-          </View>
-          <View style={styles.viewDados}>
-            <Text style={styles.textEmail}>Senha</Text>
-            <TextInput style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="****************">
 
-            </TextInput>
-          </View>
-          <TouchableOpacity style={[styles.buttonLogar]}
-            onPress={
-              handleLogin
-            }
-          >
-            <Text style={styles.titleButton}>Entrar</Text>
-          </TouchableOpacity>
-          <View style={{
-            flexDirection: 'row',
-            marginTop: 10,
-          }}>
-            <Text style={{
-              fontFamily: 'Nunito_700Bold',
-              fontSize: 16,
-              color: color.CINZA_TITULO
-            }}>Não tem cadastro?</Text>
-            <TouchableOpacity onPress={handleCadastro}>
-              <Text style={{
-                fontFamily: 'Nunito_700Bold',
-                fontSize: 16,
-                color: color.AMARELO
-              }}
-              > Clique aqui!</Text>
-            </TouchableOpacity>
-          </View>
+        <KeyboardAvoidingView style={styles.box}
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
+          <ScrollView style={{ width: '100%', height: '100%', backgroundColor: 'red' }}>
+            <View style={styles.viewContainer}>
+              <Image source={Logo} style={styles.logo} />
+              {/* <Text style={styles.titleLogin}>
+                Faça Login e tenha uma melhor experiência
+              </Text> */}
 
-          {/* </View> */}
+              <View style={styles.viewDados}>
+                <Text style={styles.textEmail}>Email</Text>
+                <TextInput style={styles.input}
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="email@email.com">
+                </TextInput>
+                <Text style={styles.textEmail}>Senha</Text>
+                <View style={styles.viewPass}>
+                  <TextInput style={styles.inputPass}
+                    secureTextEntry={visiblePsw}
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder="****************"
+                  />
+                  <TouchableOpacity onPress={() => { setVisiblePsw(!visiblePsw); console.log('visiblePsw', visiblePsw) }}>
+                    {visiblePsw ? <Feather name='eye-off' size={25} color={color.AMARELO} /> :
+                      <Feather name='eye' size={25} color={color.AMARELO} />
+                    }
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <TouchableOpacity style={[styles.buttonLogar]}
+                onPress={
+                  handleLogin
+                }
+              >
+                <Text style={styles.titleButton}>Entrar</Text>
+              </TouchableOpacity>
+              <View style={styles.viewCadastro}>
+                <Text style={styles.textCadastro}>
+                  Não tem cadastro?
+                </Text>
+                <TouchableOpacity onPress={handleCadastro}>
+                  <Text style={styles.textCliqueAqui}
+                  > Clique aqui!</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
         </KeyboardAvoidingView>
       }
     </View>
@@ -209,7 +209,48 @@ const styles = StyleSheet.create({
     backgroundColor: color.AZUL_CIANETO,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: 20,
+    paddingTop: 20,
+  },
+
+  box: {
+    flex: 1,
+    width: '100%',
+  },
+
+  titleLogin: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 22,
+    lineHeight: 24,
+    color: '#fff',
+  },
+
+  viewCadastro: {
+    flexDirection: 'row',
+  },
+
+  textCadastro: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 16,
+    color: color.CINZA_TITULO
+  },
+
+  textCliqueAqui: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 16,
+    color: color.AMARELO
+  },
+
+  viewContainer: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 60,
+    paddingHorizontal: 20,
+  },
+
+  logo: {
+    width: 200,
+    height: 200
   },
 
   viewLogado: {
@@ -238,7 +279,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 30,
   },
 
   titleButton: {
@@ -250,7 +290,6 @@ const styles = StyleSheet.create({
   buttonOutraConta: {
     width: '100%',
     height: 30,
-    marginTop: 5,
   },
 
   textButton: {
@@ -268,7 +307,26 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_700Bold',
     fontSize: 24,
     color: '#fff',
-    marginBottom: 5,
+    marginTop: 5,
+  },
+
+  viewPass: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#fff',
+    borderColor: '#d3e2e6',
+    borderWidth: 1.4,
+    borderRadius: 10,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    alignItems: 'center'
+  },
+
+  inputPass: {
+    width: '100%',
+    height: 50,
   },
 
   input: {

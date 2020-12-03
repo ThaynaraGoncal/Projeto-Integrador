@@ -34,7 +34,23 @@ export default function Filtro({ route }) {
         return false
       }
     }
+    if (precoMin != '' && precoMax === '') {
+      Alert.alert('Atenção!', 'Informe um preço Máximo');
+      return false
+    }
+
+    if (precoMin === '' && precoMax != '') {
+      Alert.alert('Atenção!', 'Informe um preço Máximo');
+      return false
+    }
     return true
+  }
+
+
+  function limpaCampos() {
+    params.categoria = 'oii';
+    setPrecoMin('');
+    setPrecoMax('');
   }
 
   function handleSubmit() {
@@ -81,7 +97,7 @@ export default function Filtro({ route }) {
   return (
     <View style={styles.centeredView}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={limpaCampos}>
           <Text style={styles.textStyle}>Limpar</Text>
         </TouchableOpacity>
         <Text style={styles.titleHeader}>Filtros</Text>
@@ -105,11 +121,15 @@ export default function Filtro({ route }) {
         </RectButton>
         <Text style={styles.titleOpcoes}>Preço(R$)</Text>
         <View style={styles.viewInputPrecos}>
-          <TextInput placeholder="Valor Mínimo" style={styles.inputPrecos}
+          <TextInput placeholder="Mínimo" style={styles.inputPrecos}
+            returnKeyType='done'
+            keyboardType="numeric"
             value={precoMin}
             onChangeText={setPrecoMin}
           />
-          <TextInput placeholder="Valor Máximo" style={styles.inputPrecos}
+          <TextInput placeholder="Máximo" style={styles.inputPrecos}
+            returnKeyType='done'
+            keyboardType="numeric"
             value={precoMax}
             onChangeText={setPrecoMax}
           />

@@ -77,7 +77,7 @@ class AnuncioController {
     // let precoMax = '';
     let sqlWhere = '';
     if (req.query.precoMin != '' && req.query.precoMax != '') {
-      sqlWhere = `and valor between '${req.query.precoMin}' and '${req.query.precoMin}'`
+      sqlWhere = `and valor between '${req.query.precoMin}' and '${req.query.precoMax}'`
     }
 
 

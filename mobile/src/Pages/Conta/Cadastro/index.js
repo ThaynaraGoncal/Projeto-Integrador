@@ -83,6 +83,8 @@ function Cadastro() {
           <TextInput style={styles.input}
             returnKeyType='done'
             keyboardType='numeric'
+            secureTextEntry={true}
+            //multiline={true}
             placeholder='clique para digitar'
             onChangeText={setPassword}
             value={password}
