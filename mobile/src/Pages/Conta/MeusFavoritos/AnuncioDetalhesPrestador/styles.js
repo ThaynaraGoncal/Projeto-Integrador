@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import * as color from '../../../Colors';
+import * as color from '../../../../Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  line: {
+  line:{
     borderColor: color.INPUT_BORDER_LABEL,
     borderWidth: 0.5,
     borderStyle: "solid",
@@ -114,68 +114,12 @@ const styles = StyleSheet.create({
 
   button: {
     flex: 1,
-    height: 50,
+    height: 70,
     margin: 10,
-    backgroundColor: '#44b528',
+    backgroundColor: color.AZUL_CIANETO,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  buttonLike: {
-    flex: 1,
-    height: 50,
-    margin: 10,
-    backgroundColor: '#c7f3ff',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  viewAvaliacao: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginRight: 10,
-  },
-
-  textAvaliacao: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 16,
-    color: color.AMARELO,
-    textAlign: 'center'
-  },
-
-  viewAvaliacao: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  viewAvaliacaoButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 15,
-    paddingHorizontal: 10,
-
-  },
-
-  buttonAvaliar: {
-    backgroundColor: '#fff',
-    width: 150,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: color.AMARELO,
-  },
-
-  textButtonAvaliar: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 16,
-    color: color.AMARELO,
-    textAlign: 'center'
   }
 
 });

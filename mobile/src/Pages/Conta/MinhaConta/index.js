@@ -51,6 +51,10 @@ function MinhaConta() {
     navigate('MeusAnuncios', usuario)
   }
 
+  const handleFavoritos = () => {
+    navigate('MeusFavoritos')
+  }
+
   const logoff = async () => {
     console.log('veio para o logoff')
     await AsyncStorage.clear();
@@ -80,6 +84,12 @@ function MinhaConta() {
           onPress={handleAnuncios}
         >
           <Text style={styles.textButton}>Meus Anúncios</Text>
+        </TouchableOpacity >
+        <View  style={styles.line}/>
+        <TouchableOpacity style={styles.button}
+          onPress={handleFavoritos}
+        >
+          <Text style={styles.textButton}>Meus Favoritos</Text>
         </TouchableOpacity >
         <View  style={styles.line}/>
         <TouchableOpacity style={styles.button}
