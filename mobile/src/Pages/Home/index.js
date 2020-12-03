@@ -33,7 +33,8 @@ function Home() {
 
 
   function listaAnuncios() {
-    setAnuncios(anunciosInicial);
+    handleAtualizar();
+    //setAnuncios(anunciosInicial);
   }
 
   function handleFiltro(paraFiltrar) {

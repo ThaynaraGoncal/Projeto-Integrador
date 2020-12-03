@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvo
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import useAuth from '../hooks/useAuth';
 import api from '../services/api';
 
 import Logo from '../images/logo.png';
@@ -12,9 +13,9 @@ import * as color from '../Colors';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TelaHome() {
-  //const { user, logado, setLogado, setUser } = useAuth();
-  const [logado, setLogado] = useState(false);
-  const [user, setUser] = useState({});
+  const { user, logado, setLogado, setUser } = useAuth();
+  //const [logado, setLogado] = useState(false);
+  //const [user, setUser] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { navigate } = useNavigation();
@@ -43,6 +44,21 @@ export default function TelaHome() {
     setPassword('');
   }
 
+  const createAlertOk = (info) =>
+  Alert.alert(
+    "Atenção",
+    info,
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => navigate('TelaHome') }
+    ],
+    { cancelable: false }
+  );
+
   function handleLogin() {
     api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
       console.log('data', res.data);
@@ -55,11 +71,14 @@ export default function TelaHome() {
       if (res.data) {
         console.log('setItem LocalStorage')
         AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data))
-        // .then(() => {
+        console.log(res.data);
+
+        //createAlertOk('Cadatrado com sucesso');
+
         setLogado(true);
         setUser(res.data);
         limpaCampos();
-        navigate('Navigation')
+        navigate('Navigation');
         // }).catch((err) => {
         //   console.log(err)
         // });

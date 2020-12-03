@@ -99,10 +99,20 @@ function Anuncio({ route, limpa }) {
       })
     })
 
+    const createAlert = (info) =>
+    Alert.alert(
+      "Informação",
+      info,
+      [
+        { text: "OK", onPress: () => navigate('MinhaConta') }
+      ],
+      { cancelable: false }
+    )
+
     if (validaCampos) {
       api.post('/anuncios', data).then((res) => {
         console.log(res.data.info);
-        Alert.alert('Informação', res.data.info)
+        createAlert(res.data.info)
       }).catch((error) => {
 
       });

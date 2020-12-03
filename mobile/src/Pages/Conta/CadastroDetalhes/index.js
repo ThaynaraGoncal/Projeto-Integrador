@@ -31,12 +31,27 @@ function CadastroDetalhes() {
     let validado = true;
 
     if (nome == '' || cpf == '') {
-      Alert.alert('Informação', 'Preencha todos os campos')
+      Alert.alert('Atenção', 'Preencha todos os campos')
       validado = false;
     }
 
     return validado;
   }
+
+  const createAlert = (info) =>
+  Alert.alert(
+    "Informação",
+    info,
+    [
+      // {
+      //   text: "Cancel",
+      //   onPress: () => console.log("Cancel Pressed"),
+      //   style: "cancel"
+      // },
+      { text: "OK", onPress: () => navigate('TelaHome') }
+    ],
+    { cancelable: false }
+  )
 
   function handleSubmit() {
 
@@ -48,12 +63,11 @@ function CadastroDetalhes() {
 
     if (validaCampos) {
       api.post(`/usuario`, data).then(res => {
-        console.log('status', res.status)
+        console.log('status', res.data);
         if (res.data.info) {
-          alert(res.data.info)
+          Alert.alert('Atenção', res.data.info)
         } else {
-          //alert(res.data.sucess)
-          navigate('Navigation');
+          createAlert('Cadastrado com sucesso, faça login!');
         }
       }).catch(error => {
         console.log(error);
