@@ -93,7 +93,7 @@ class UsuarioController {
             to_char(dt_nascimento, 'dd/mm/yyy') dt_nascimento 
           from usuarios usu inner join pessoa_fisicas pf on 
           pf.cd_pessoa_fisica = usu.cd_pessoa_fisica 
-          where UPPER(email) = '${req.query.email}' and password = '${req.query.password}'`,
+          where UPPER(email) = '${req.query.email}' and password_hash = '${req.query.password}'`,
           { type: QueryTypes.SELECT }).then(user => {
             return user[0]
           });

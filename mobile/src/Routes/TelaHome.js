@@ -105,52 +105,49 @@ export default function TelaHome() {
   return (
     <View style={styles.container}>
       {logado ? (
-        <KeyboardAvoidingView style={{
-          flex: 1,
-          width: '100%',
-          padding: 20
-        }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
-          {/* <ScrollView style={{ width: '100%', backgroundColor: 'blue' }}
-            showsVerticalScrollIndicator={false}
-          > */}
-          <View style={styles.viewLogado}>
-            <Text style={styles.title}>
-              Que bom te ver de volta
+        <KeyboardAvoidingView style={styles.box}
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
+          <ScrollView style={{ width: '100%', height: '100%' }}>
+            <View style={styles.viewContainer}>
+              <Image source={Logo} style={styles.logo} />
+              <Text style={styles.title}>
+                Que bom te ver de volta
             </Text>
-            <Text style={styles.textUsuario}>
-              {user.apelido}
-            </Text>
-            <TouchableOpacity style={styles.buttonLogar}
-              onPress={handleEntrar}
-            >
-              <Text style={styles.titleButton}>Entrar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonLogar}
-              onPress={handleOutraConta}
-            >
-              <Text style={styles.titleButton} >
-                Entrar com outra conta
+              <Text style={styles.textUsuario}>
+                {user.apelido}
               </Text>
-            </TouchableOpacity>
-            <View style={styles.viewCadastro}>
-              <Text style={styles.textCadastro}>
-                Não tem cadastro?
-                </Text>
-              <TouchableOpacity onPress={handleCadastro}>
-                <Text style={styles.textCliqueAqui}
-                > Clique aqui!</Text>
+              <TouchableOpacity style={styles.buttonLogar}
+                onPress={handleEntrar}
+              >
+                <Text style={styles.titleButton}>Entrar</Text>
               </TouchableOpacity>
-            </View>
+              <TouchableOpacity style={styles.buttonLogar}
+                onPress={handleOutraConta}
+              >
+                <Text style={styles.titleButton} >
+                  Entrar com outra conta
+              </Text>
+              </TouchableOpacity>
+              <View style={styles.viewCadastro}>
+                <Text style={styles.textCadastro}>
+                  Não tem cadastro?
+                </Text>
+                <TouchableOpacity onPress={handleCadastro}>
+                  <Text style={styles.textCliqueAqui}
+                  > Clique aqui!</Text>
+                </TouchableOpacity>
+              </View>
 
-          </View>
-          {/* </ScrollView> */}
+            </View>
+          </ScrollView>
         </KeyboardAvoidingView>
       ) :
 
         <KeyboardAvoidingView style={styles.box}
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
-          <ScrollView style={{ width: '100%', height: '100%', backgroundColor: 'red' }}>
+          <ScrollView style={{ width: '100%', height: '100%' }}>
             <View style={styles.viewContainer}>
               <Image source={Logo} style={styles.logo} />
               {/* <Text style={styles.titleLogin}>
@@ -199,7 +196,7 @@ export default function TelaHome() {
           </ScrollView>
         </KeyboardAvoidingView>
       }
-    </View>
+    </View >
   )
 }
 
@@ -241,16 +238,16 @@ const styles = StyleSheet.create({
   },
 
   viewContainer: {
-    height: '100%',
+    paddingTop: 5,
+    height: 600,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 60,
+    marginTop: 40,
     paddingHorizontal: 20,
   },
 
   logo: {
     width: 200,
-    height: 200
+    height: 213,
   },
 
   viewLogado: {
@@ -264,6 +261,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_800ExtraBold',
     fontSize: 24,
     color: '#fff',
+    marginTop: 40
   },
 
   textUsuario: {
@@ -279,6 +277,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 5,
   },
 
   titleButton: {
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
 
   textEmail: {
     fontFamily: 'Nunito_700Bold',
-    fontSize: 24,
+    fontSize: 20,
     color: '#fff',
     marginTop: 5,
   },
