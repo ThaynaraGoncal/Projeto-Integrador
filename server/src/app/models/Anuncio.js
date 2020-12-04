@@ -5,13 +5,14 @@ class Anuncio extends Model {
     static init(sequelize) {
         super.init({
             titulo: Sequelize.STRING,
+            categoria: Sequelize.STRING,
             descricao: Sequelize.STRING,
-            categoria: Sequelize.INTEGER,
-            archivo_photo: Sequelize.STRING,
+            valor: Sequelize.FLOAT,
+            cd_pessoa_fisica: Sequelize.INTEGER
         },
-        {
-            sequelize,
-        }
+            {
+                sequelize,
+            }
         );
 
         return this;

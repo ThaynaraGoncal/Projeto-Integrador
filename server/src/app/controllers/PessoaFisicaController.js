@@ -1,92 +1,91 @@
-import PessoaFisica from '../models/Pessoa';
-import PessoaComplemento from '../models/PessoaComplemento';
-import PessoaComplementoController from '../controllers/PessoaComplementeController';
+const { QueryTypes, Sequelize } = require('sequelize');
+
+import PessoaFisica from '../models/PessoaFisica';
+import database from '../../config/database';
 import moment from 'moment';
+import PessoaComplementeController from './PessoaComplementeController';
 
 class PessoaFisicaController {
     async store(req, res) {
-
-        if (req.dt_nascimento === '' || req.dt_nascimento === undefined) {
-            return ({ info: 'Data de nascimento não informada!' });
-        }
-        req.dt_nascimento = moment(req.dt_nascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
-
+        const sequelize = new Sequelize(database);
+        console.log('Pessoa que veio do usuario', req);
         try {
 
             if (req.nome === '' || req.nome === undefined) {
-                return ({ info: 'Nome não informado!' });
+                return ({ info: "Nome não informado!" });
             }
+
             if (req.cpf === '' || req.cpf === undefined) {
-                return ({ info: 'CPF não informado!' });
+                return ({ info: "CPF não informado!" });
+            }
+
+            if (req.dt_nascimento === '' || req.dt_nascimento === undefined) {
+                return ({ info: "Data de nascimento não informada!" });
+            }
+
+            if (req.telefone === '' || req.telefone === undefined) {
+                return ({ info: "Telefone não informado!" });
             }
 
             if (req.email === '' || req.email === undefined) {
-                return ({ info: 'Email não informado!' });
+                return ({ info: "Email não informado!" });
+            }
+            req.telefone = req.telefone.replace('(', '');
+            req.telefone = req.telefone.replace(')', '');
+            req.telefone = req.telefone.replace('-', '');
+            console.log(req.telefone);
+            //req.telefone = replace(replace(replace(req.telefone, '(', ''), ')', ''), ' ', '')
+            req.dt_nascimento = moment(req.dt_nascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
+            console.log('req.dt_nascimento ', req.dt_nascimento)
+            const usuarioExistente = await sequelize
+                .query(`select cd_pessoa_fisica, replace(replace(cpf, '.',''), '-', '') cpf, dt_nascimento from pessoa_fisicas where cpf = '${req.cpf}'`,
+                    { type: QueryTypes.SELECT }).then(user => {
+                        return user[0]
+                    });
+
+            if (usuarioExistente) {
+                console.log('Pessoa Fisica existente');
+                return ({ info: 'Já existe um usuário com esse CPF' });
             }
 
-            const cpfExists = await PessoaFisica.findOne({ where: { cpf: req.cpf } });
-            const rgExists = await PessoaFisica.findOne({ where: { rg: req.rg } });
-            const emailExists = await PessoaComplemento.findOne({ where: { email: req.email } })
+            let email = await sequelize
+                .query(`select email from pessoa_complementos where email = '${req.email}'`,
+                    { type: QueryTypes.SELECT }).then(user => {
+                        return user[0]
+                    });
 
-            if (cpfExists) {
-                return ({
-                    info: `CPF: ${cpfExists.dataValues.cpf} já está cadastrado!`
-                });
-            };
-
-            if (rgExists) {
-                return ({ info: `RG ${rgExists.dataValues.rg} já cadastrado!` });
+            if (email) {
+                return ({ info: 'Já existe um usuário com esse Email' });
             }
 
-            if (emailExists) {
-                return ({ info: `Email ${emailExists.dataValues.email} já cadastrado!` });
-            }
+            const pessoa = await PessoaFisica.create(req);
+            //console.log('pessoa inserida', pessoa)
 
-            const pessoaCadastrada = await PessoaFisica.create(req);
+            return (pessoa.dataValues);
+            // if (pessoa) {
+            //     console.log('Pessoa Fisica cadastrada');
 
-            const cd_pessoa_fisica = pessoaCadastrada.dataValues.id;
+            //     let dados_compl = {
+            //         cd_pessoa_fisica: pessoa.dataValues.cd_pessoa_fisica,
+            //         telefone: req.body.telefone,
+            //         email: req.body.email
+            //     }
 
-            let completoPessoaJson = {
-                cd_pessoa_fisica: cd_pessoa_fisica,
-                telefone: req.body.telefone,
-                ramal: req.body.ramal,
-                email: req.body.email,
-                cep: req.body.cep,
-                rua: req.body.rua,
-                complemento: req.body.complemento,
-                bairro: req.body.bairro,
-                cidade: req.body.cidade,
-                uf: req.body.uf,
-                pais: req.body.pais,
-            }
+            //     let p_compl = await PessoaComplementeController.store(dados_compl);
 
-            const result = await PessoaComplementoController.store(completoPessoaJson);
+            //     if (p_compl) {
+            //         return res.status(200).json({ cd_pessoa_fisica: `${dados_compl.cd_pessoa_fisica}` });
+            //     } else {
+            //         return res.status(200).json({ info: 'Erro ao cadastrar!' });
+            //     }
 
-            if (result) {
-                return cd_pessoa_fisica;
-            } else {
-                return ({ msg: 'Houve um erro no cadastrado' });
-            }
+            // }
 
         } catch (error) {
-            console.log(error);
-            return ({ error: 'Não foi possível criar a Pessoa' });
+            console.log(error)
         }
     }
-
-    async index(req, res) {
-        const pessoas = await PessoaFisica.findAll({
-            attributes: ['nome', 'cpf', 'dt_nascimento', 'cd_pessoa_fisica'],
-            include: [
-                {
-                    model: PessoaComplemento,
-                    attributes: ['telefone', 'email', 'cep']
-                },
-            ],
-        });
-
-        return res.json({ pessoas });
-    }
 }
+
 
 export default new PessoaFisicaController;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import { Feather } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -12,6 +13,7 @@ function PayButton({ label, focused }) {
         focused ? styles.buttonOff : {}
       ]}
     >
+      <Feather name='edit' color={focused ? '#15c3d6' : '#fff'} size={20} />
       <Text
         style={[
           styles.label,

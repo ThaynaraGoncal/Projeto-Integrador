@@ -1,2 +1,0 @@
-# ProjectsSchool
-Projetos de estudos
