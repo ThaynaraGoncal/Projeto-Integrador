@@ -113,10 +113,20 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: '95%',
+    flex: 1,
     height: 50,
     margin: 10,
     backgroundColor: '#44b528',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  buttonLike: {
+    flex: 1,
+    height: 50,
+    margin: 10,
+    backgroundColor: '#c7f3ff',
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',

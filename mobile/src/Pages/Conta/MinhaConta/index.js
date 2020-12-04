@@ -27,6 +27,7 @@ function MinhaConta() {
     AsyncStorage.getItem("Dadosuser").then((res) => {
       if (res) {
         usuario = JSON.parse(res);
+        console.log('usuario', usuario);
         setNome(usuario.apelido);
         setEmail(usuario.email);
         setTelefone(usuario.telefone);
@@ -43,6 +44,10 @@ function MinhaConta() {
   const logoff = async () => {
     await AsyncStorage.clear();
     navigate('TelaHome');
+  }
+
+  const handleFavoritos = () => {
+    navigate('MeusFavoritos')
   }
 
   function handleEditar() {
@@ -74,6 +79,12 @@ function MinhaConta() {
           onPress={handleEditar}
         >
           <Text style={styles.textButton}>Editar Cadastro</Text>
+        </TouchableOpacity >
+        <View style={styles.line} />
+        <TouchableOpacity style={styles.button}
+          onPress={handleFavoritos}
+        >
+          <Text style={styles.textButton}>Meus Favoritos</Text>
         </TouchableOpacity >
         <View style={styles.line} />
         <TouchableOpacity style={styles.button}
