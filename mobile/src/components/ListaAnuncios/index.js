@@ -13,23 +13,16 @@ const Item = ({ data }) => {
   const { navigate } = useNavigation();
 
   function handleDetalhes(item) {
-    console.log('meu anuncio', item)
     getPessoa(item);
-    //console.log('item', item)
     navigate('AnuncioDetalhes', [item, isPessoa])
   }
 
   function getPessoa(item) {
-    //console.log('item', item)
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      //console.log('resposta do async', res)
       if (res) {
         setPessoa(JSON.parse(res));
-        //console.log('pessoa do async: ', pessoa.cd_pessoa_fisica)
-        //console.log('pessoa do anuncio: ', item.cd_pessoa_fisica)
         if (pessoa.cd_pessoa_fisica === item.cd_pessoa_fisica) {
           setIspessoa(true);
-          //console.log('mesma pessoa', isPessoa)
         }
       }
     }).catch((err) => {

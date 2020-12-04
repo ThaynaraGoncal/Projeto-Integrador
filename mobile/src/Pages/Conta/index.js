@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Alert, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -10,23 +9,15 @@ import * as color from '../../Colors';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
-import AsyncStorage from '@react-native-community/async-storage';
 
 
 function ContaHome() {
-  const { user, logado, login } = useAuth();
+  const { login } = useAuth();
 
   const { navigate } = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-
-  // useEffect(() => {
-  //   if (logado) {
-  //     return navigate('ContaHome');
-  //   }
-  // }, [])
 
   function validaCamposNull() {
     let validado = true;
@@ -44,14 +35,10 @@ function ContaHome() {
 
     if (validado) {
       login(email, password);
-      // if (user) {
-      //   navigate('MinhaConta');
-      // }
     }
   }
 
   function fazerCadastro() {
-    //AsyncStorage.clear();
     navigate('Cadastro');
   }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -16,18 +16,15 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as color from '../../../Colors';
 
-import useAuth from '../../../hooks/useAuth';
 import api from '../../../services/api';
 
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
 import InputText from '../../../components/InputText';
-import ImagePickerExample from '../../../components/Camera';
 
 import styles from './styles';
 
-function Anuncio({ route, limpa }) {
-
+function Anuncio({ route }) {
   const { navigate } = useNavigation();
 
   const [cd_pessoa, setCd_pessoa] = useState('');
@@ -44,7 +41,6 @@ function Anuncio({ route, limpa }) {
       if (res) {
         usuario = JSON.parse(res);
         setCd_pessoa(usuario.cd_pessoa_fisica);
-        //console.log('usuario no anuncio', usuario)
       }
     }).catch((err) => {
       console.log(err)
@@ -104,21 +100,20 @@ function Anuncio({ route, limpa }) {
         "Informação",
         info,
         [
-          { text: "OK", onPress: () => navigate('MinhaConta') }
+          { text: "OK", onPress: () => navigate('Home') }
         ],
         { cancelable: false }
       )
 
     if (validaCampos) {
       api.post('/anuncios', data).then((res) => {
-        console.log(res.data.info);
         createAlert(res.data.info)
       }).catch((error) => {
 
       });
 
       limpaCampos();
-      navigate('MinhaConta')
+      //navigate('MinhaConta')
     }
   }
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useFocusEffect } from '@react-navigation/native'
+import React from 'react';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import Home from '../Pages/Home';
@@ -8,7 +7,6 @@ import AnuncioAvaliar from '../Pages/Anuncio/AnuncioAvaliar';
 import AnuncioAvaliacoes from '../Pages/Anuncio/AnuncioAvaliacoes';
 import Filtro from '../Pages/Filtro';
 import Categoria from '../Pages/Anuncio/Categorias';
-import SubCategoria from '../Pages/Anuncio/SubCategorias';
 import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import Decoracao from '../Pages/Anuncio/SubCategorias/Decoracao';
 import Musica from '../Pages/Anuncio/SubCategorias/Musica';
@@ -17,14 +15,12 @@ import Lembrancas from '../Pages/Anuncio/SubCategorias/Lembrancas';
 import Entretenimento from '../Pages/Anuncio/SubCategorias/Entretenimento';
 import Convites from '../Pages/Anuncio/SubCategorias/Convites';
 import Local from '../Pages/Anuncio/SubCategorias/Local';
-import api from '../services/api';
 
 import { ContextAnuncio } from '../contexts/AnunciosContext';
-import { ContextAuth } from '../contexts/AuthContext';
 
 const { Navigator, Screen } = createStackNavigator();
 
-function CadastroStack() {
+export default function HomeStack() {
 
   return (
     <ContextAnuncio>
@@ -55,5 +51,3 @@ function CadastroStack() {
     </ContextAnuncio>
   );
 }
-
-export default CadastroStack;

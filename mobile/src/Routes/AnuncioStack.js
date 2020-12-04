@@ -2,11 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Anuncio from '../Pages/Anuncio/InserirAnuncio';
-import MinhaConta from '../Pages/Conta/MinhaConta';
-import CategoriaAnuncio from '../Pages/Anuncio/Categorias';
-import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
-import AnuncioAvaliar from '../Pages/Anuncio/AnuncioAvaliar'
-import AnuncioAvaliacoes from '../Pages/Anuncio/AnuncioAvaliacoes';
+import Categoria from '../Pages/Anuncio/Categorias';
 import SubCategoria from '../Pages/Anuncio/SubCategorias';
 import Comida from '../Pages/Anuncio/SubCategorias/Comida';
 import Decoracao from '../Pages/Anuncio/SubCategorias/Decoracao';
@@ -17,6 +13,8 @@ import Entretenimento from '../Pages/Anuncio/SubCategorias/Entretenimento';
 import Convites from '../Pages/Anuncio/SubCategorias/Convites';
 import Local from '../Pages/Anuncio/SubCategorias/Local';
 
+import MinhaConta from '../Pages/Conta/MinhaConta';
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -24,11 +22,7 @@ function AnuncioStack() {
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="Anuncio">
       <Screen name="Anuncio" component={Anuncio} />
-      {/* <Screen name="MinhaConta" component={MinhaConta} /> */}
-      {/* <Screen name="MeusAnuncios" component={MeusAnuncios} /> */}
-      <Screen name="CategoriaAnuncio" component={CategoriaAnuncio} />
-      <Screen name="AnuncioAvaliar" component={AnuncioAvaliar} />
-      <Screen name="AnuncioAvaliacoes" component={AnuncioAvaliacoes} />
+      <Screen name="Categoria" component={Categoria} />
       <Screen name="SubCategoria" component={SubCategoria} />
       <Screen name="Comida" component={Comida} />
       <Screen name="Decoracao" component={Decoracao} />
@@ -38,6 +32,7 @@ function AnuncioStack() {
       <Screen name="Entretenimento" component={Entretenimento} />
       <Screen name="Convites" component={Convites} />
       <Screen name="Local" component={Local} />
+      <Screen name="MinhaConta" component={MinhaConta} />
     </Navigator>
   );
 }

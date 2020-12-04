@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, { useState } from 'react';
+import { View, Text, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { AntDesign, Entypo, Feather, FontAwesome } from '@expo/vector-icons';
-import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import useAuth from '../../../hooks/useAuth';
 
 import api from '../../../services/api';
 import Header from '../../../components/Header';
@@ -13,10 +11,8 @@ import styles from './styles';
 import * as color from '../../../Colors';
 
 export default function AnuncioDetalhes({ route }) {
-  console.log('parametros', route.params[0])
 
   const imagens = route.params[0].path;
-  const [pessoa, setPessoa] = useState({});
   const [isPessoa, setIspessoa] = useState(route.params[1]);
   const { categoria, descricao, valor, titulo, telefone, cd_pessoa_fisica, nome } = route.params[0];
   const { navigate } = useNavigation();
@@ -28,7 +24,6 @@ export default function AnuncioDetalhes({ route }) {
   async function handleAvaliacoes() {
     const { id } = route.params[0];
     const { data } = await api.get(`/avaliacao?id_anuncio=${id}`);
-    console.log(data)
     navigate('AnuncioAvaliacoes', data);
   }
 

@@ -23,9 +23,7 @@ function Home() {
 
   function handleAtualizar() {
     api.get(`/anuncios`).then((res) => {
-      console.log('todos anuncios', res.data);
       setAnuncios(res.data);
-      //setAnunciosInicial(res.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -34,7 +32,6 @@ function Home() {
 
   function listaAnuncios() {
     handleAtualizar();
-    //setAnuncios(anunciosInicial);
   }
 
   function handleFiltro(paraFiltrar) {

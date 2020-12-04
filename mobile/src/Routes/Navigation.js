@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
-import Home from '../Routes/HomeStack';
+import HomeStack from '../Routes/HomeStack';
 import CadastroStack from '../Routes/CadastroStack';
 import AnuncioStack from '../Routes/AnuncioStack';
 import ContaStack from '../Routes/ContaStack';
@@ -22,7 +22,7 @@ export default function Navigation() {
         <Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
-                    if (route.name === 'Anuncio') {
+                    if (route.name === 'AnuncioStack') {
                         return (
                             <PayButton label="Anunciar" focused={focused} />
                         )
@@ -39,8 +39,8 @@ export default function Navigation() {
             }}
         >
             <Screen
-                name="Home"
-                component={Home}
+                name="HomeStack"
+                component={HomeStack}
                 options={{
                     tabBarLabel: "Anúncios",
                     tabBarIcon: ({ color, size, focused }) => {
@@ -54,7 +54,7 @@ export default function Navigation() {
                 }}
             />
             <Screen
-                name="Anuncio"
+                name="AnuncioStack"
                 component={AnuncioStack}
                 options={{
                     tabBarLabel: ""

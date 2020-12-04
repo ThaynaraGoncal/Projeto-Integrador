@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         references: { model: 'anuncios', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       },
       titulo: {
         type: Sequelize.STRING,

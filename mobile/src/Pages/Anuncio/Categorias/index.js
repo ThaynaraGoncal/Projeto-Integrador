@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
-import {
-  Text,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  TextInput,
-  Alert,
-  View,
-} from "react-native";
+import { Text, ScrollView, View } from "react-native";
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { AntDesign, Fontisto, Entypo, FontAwesome } from '@expo/vector-icons';
-import * as color from '../../../Colors';
 
 import Header from '../../../components/Header';
 import styles from './styles';
@@ -90,7 +81,6 @@ function Categoria({ route, }) {
         </RectButton>
       </ScrollView>
     </View>
-
   );
 }
 

@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import api from '../services/api';
 
 const AnuncioContext = createContext();

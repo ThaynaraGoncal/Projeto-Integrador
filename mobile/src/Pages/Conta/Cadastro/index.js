@@ -1,21 +1,15 @@
-import React, { useReducer, useState } from 'react';
-import { View, Text, ScrollView, KeyboardAvoidingView, TextInput, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, TextInput, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Header from '../../../components/Header';
-import Input from '../../../components/input';
-import InputText from '../../../components/InputText';
 import Button from '../../../components/Button';
-
-import api from '../../../services/api';
-import useAuth from '../../../hooks/useAuth';
 
 import styles from './styles';
 
 function Cadastro() {
   const { navigate } = useNavigation();
 
-  const [nome, setNome] = useState('');
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,18 +34,7 @@ function Cadastro() {
     let validaCampos = validaCamposNull();
 
     if (validaCampos) {
-      navigate('CadastroDetalhes', data)
-      // api.post(`/usuario`, data).then(res => {
-      //   console.log(res.data)
-      //   if (res.data.info) {
-      //       alert(res.data.info)
-      //   } else {
-      //       //alert(res.data.sucess)
-      //       navigate("CadastroConcluido", res.data);
-      //     }
-      //   }).catch(error => {
-      //       console.log(error);
-      //   });
+      navigate('CadastroDetalhes', data);
     }
   }
 
@@ -84,7 +67,6 @@ function Cadastro() {
             returnKeyType='done'
             keyboardType='numeric'
             secureTextEntry={true}
-            //multiline={true}
             placeholder='clique para digitar'
             onChangeText={setPassword}
             value={password}

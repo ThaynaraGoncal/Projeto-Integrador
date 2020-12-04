@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   ScrollView,
@@ -26,7 +25,6 @@ import styles from './styles';
 
 export default function EditarAnuncio({ route }) {
   const { params } = useRoute();
-  console.log(route.params)
 
   const { navigate } = useNavigation();
 
@@ -40,7 +38,6 @@ export default function EditarAnuncio({ route }) {
   let usuario = {};
 
   useFocusEffect(() => {
-    console.log('parametros para editar', params)
     setTitulo(params.titulo);
     setDescricao(params.descricao);
     setCategoria(params.categoria);
@@ -95,7 +92,6 @@ export default function EditarAnuncio({ route }) {
 
     if (validaCampos) {
       api.post('/anuncios', data).then((res) => {
-        console.log(res.data.info);
         createAlert(res.data.info)
       }).catch((error) => {
 

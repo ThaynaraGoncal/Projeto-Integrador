@@ -9,12 +9,10 @@ import {
 } from "react-native";
 
 import Header from '../../../../components/Header';
-import * as color from '../../../../Colors';
 
 function Comida({ route }) {
   const rota = route.params;
   const { navigate } = useNavigation();
-  console.log('rota que veio para a categoria', rota)
 
   return (
     <View style={styles.container}>

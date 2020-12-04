@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TextInput, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, ScrollView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Textarea from 'react-native-textarea';
 
@@ -15,7 +15,6 @@ import * as color from '../../../Colors';
 
 export default function AnuncioAvaliar() {
   const { user } = useAuth();
-  console.log('usuario logado', user)
 
   const { params } = useRoute();
   const titulotRef = useRef();
@@ -26,10 +25,7 @@ export default function AnuncioAvaliar() {
   const [titulo, setTitulo] = useState('');
   const [gostei, setGostei] = useState(false);
 
-  console.log('meus params', params)
-
   async function handleAvaliar() {
-    console.log('Inserir avaliacao')
     const dados = {
       id_anuncio: params[0].id,
       cd_pessoa_avaliou: user.cd_pessoa_fisica,
@@ -42,19 +38,11 @@ export default function AnuncioAvaliar() {
     console.log(data.info);
     if (data.info) {
       createAlert(data.info);
-
     }
 
     if (data.msg) {
-      //Alert.alert('Atenção!', data.msg);
       createAlertErro(data.msg);
     }
-
-
-    // console.log('pessoa logada', params[0].cd_pessoa_fisica)
-    // console.log('id_anuncio', params[0].id)
-    // console.log('texto inserido', text)
-    // console.log('gostei', gostei)
     setGostei(false)
   }
 
@@ -99,9 +87,6 @@ export default function AnuncioAvaliar() {
     <View style={styles.container}>
       <Header title='Avaliação' buttonBack route='AnuncioDetalhes' />
       <View style={{ flex: 1, alignItems: 'center' }}>
-        {/* <KeyboardAvoidingView style={{ alignItems: 'center', backgroundColor: '#c7c7c7' }}
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        > */}
         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '95%' }}>
           <Text style={styles.title}>Compartilhe com todos a sua opnião!</Text>
           <View style={styles.viewAnuncio}>
@@ -125,7 +110,6 @@ export default function AnuncioAvaliar() {
             ref={titulotRef}
             returnKeyType='done'
             keyboardType="default"
-            // onSubmitEditing={() => setTimeout(() => textRef.current.focus(), 0)}
             style={styles.input}
             placeholder='clique para digitar'
             onChangeText={setTitulo}
@@ -161,7 +145,6 @@ export default function AnuncioAvaliar() {
             <Text style={styles.textButton}>Avaliar</Text>
           </RectButton>
         </ScrollView>
-        {/* </KeyboardAvoidingView> */}
       </View>
     </View >
   )
