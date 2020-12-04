@@ -41,12 +41,20 @@ class AnuncioController {
     const sequelize = new Sequelize(database);
 
     const anuncio_list = await sequelize
-      .query(`select anu.id, anu.cd_pessoa_fisica, pf.nome, anu.titulo, 
-            anu.categoria, anu.descricao, anu.valor, arq.name, arq.path,
-            pf.nome, pf.telefone 
-      from anuncios anu 
-      left join arquivos arq on anu.id = arq.id_anuncio
-      inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = anu.cd_pessoa_fisica`,
+      .query(` select	   anu.id,
+      anu.cd_pessoa_fisica,
+      pf.nome, anu.titulo, 
+        anu.categoria, 
+        anu.descricao, 
+        anu.valor, 
+        arq.name, 
+        arq.path,
+        pf.nome, 
+        pf.telefone, 
+        (select count(avaliacoes.like) from avaliacoes where avaliacoes.like = true and id_anuncio = anu.id) gostei
+       from anuncios anu 
+       left join arquivos arq on anu.id = arq.id_anuncio
+       inner join pessoa_fisicas pf on pf.cd_pessoa_fisica = anu.cd_pessoa_fisica`,
         { type: QueryTypes.SELECT }).then(user => {
           return user
         });
@@ -73,8 +81,6 @@ class AnuncioController {
     console.log(req.query);
     const sequelize = new Sequelize(database);
 
-    // let precoMin = ''
-    // let precoMax = '';
     let sqlWhere = '';
     if (req.query.precoMin != '' && req.query.precoMax != '') {
       sqlWhere = `and valor between '${req.query.precoMin}' and '${req.query.precoMax}'`
@@ -109,7 +115,7 @@ class AnuncioController {
   }
 
   async indexPrestador(req, res) {
-    console.log(req.query);
+
     const sequelize = new Sequelize(database);
 
     const lista_anuncios = await sequelize
@@ -146,7 +152,27 @@ class AnuncioController {
           return item
         });
 
-    return res.status(200).json({ info: 'Anuncio Deletado' });
+    const lista_anuncios = await sequelize
+      .query(`select anu.id, anu.cd_pessoa_fisica, anu.titulo, anu.categoria, anu.descricao, anu.valor, arq.name, arq.path from anuncios anu left join arquivos arq on anu.id = arq.id_anuncio where anu.cd_pessoa_fisica = '${req.query.cd_pessoa_fisica}'`,
+        { type: QueryTypes.SELECT }).then(user => {
+          return user
+        });
+
+    const anunciosFiltro = lista_anuncios.filter(
+      (v, i, a) => a.findIndex(t => t.id === v.id) === i,
+    );
+
+    const anuncios = anunciosFiltro.map(dado => ({ ...dado, path: [] }));
+
+    for (let anuncioF of anuncios) {
+      for (let anunciosAll of lista_anuncios) {
+        if (anuncioF.id === anunciosAll.id) {
+          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+        }
+      }
+    }
+
+    return res.status(200).json({ info: 'Anuncio Deletado', anuncios });
 
   }
 

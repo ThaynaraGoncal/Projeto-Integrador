@@ -23,6 +23,7 @@ routes.post('/arquivo', ArquivoController.store);
 //routes.get('/usuarios', UsuariosController.index);
 routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
+routes.put('/usuario', UsuarioController.userUpdate)
 
 routes.get('/anuncios', AnuncioController.index);
 routes.get('/anuncio_prestador', AnuncioController.indexPrestador);

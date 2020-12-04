@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 import Header from '../../../../components/Header';
-import * as color from '../../../../Colors';
 
 function Lembrancas({ route }) {
   const rota = route.params;

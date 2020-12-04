@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 import Header from '../../../../components/Header';
-import * as color from '../../../../Colors';
 
 function Entretenimento({ route }) {
   const rota = route.params;

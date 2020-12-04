@@ -18,12 +18,10 @@ export default function Filtro({ route }) {
 
   const { navigate } = useNavigation();
   const { params } = useRoute();
-  console.log('rota que veio do filtro', params)
 
   let categoria = '';
   if (params != undefined) {
     const { name } = params;
-    console.log('categoria', name)
     categoria = name;
   }
 
@@ -54,19 +52,13 @@ export default function Filtro({ route }) {
   }
 
   function handleSubmit() {
-    console.log('categoria', categoria)
-    console.log('precoMin', precoMin)
-    console.log('precoMax', precoMax)
 
     let ok = validaFiltros(categoria, precoMin, precoMax);
     console.log('ok', ok)
     if (ok) {
       if (categoria === '') {
-        console.log('informe uma categoria')
         api.get(`/anuncios`).then(res => {
           const data = res.data;
-          console.log('data', data)
-          //navigate('Home', { teste: data })
           if (data) {
             setAnuncios(data)
             navigate('Home')
@@ -76,10 +68,8 @@ export default function Filtro({ route }) {
           console.log(error);
         });
       } else {
-        console.log('Rota com parametro')
         api.get(`/anuncio?categoria=${categoria}&precoMin=${precoMin}&precoMax=${precoMax}`).then(res => {
           const data = res.data.anuncios;
-          console.log('data', data)
           //navigate('Home', { teste: data })
           if (data) {
             setAnuncios(data)

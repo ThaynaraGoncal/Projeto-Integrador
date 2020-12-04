@@ -1,14 +1,12 @@
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, KeyboardAvoidingView, TextInput, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Header from '../../../components/Header';
 import Input from '../../../components/input';
-import InputText from '../../../components/InputText';
 import Button from '../../../components/Button';
 
 import api from '../../../services/api';
-import useAuth from '../../../hooks/useAuth';
 
 import styles from './styles';
 
@@ -20,8 +18,6 @@ function CadastroDetalhes() {
   const [dt_nascimento, setDtNascimento] = useState('');
   const [cpf, setCPF] = useState('');
   const [telefone, setTelefone] = useState('');
-
-  console.log('params', params);
 
   const apelido = params.apelido;
   const email = params.email;
@@ -39,19 +35,14 @@ function CadastroDetalhes() {
   }
 
   const createAlert = (info) =>
-  Alert.alert(
-    "Informação",
-    info,
-    [
-      // {
-      //   text: "Cancel",
-      //   onPress: () => console.log("Cancel Pressed"),
-      //   style: "cancel"
-      // },
-      { text: "OK", onPress: () => navigate('TelaHome') }
-    ],
-    { cancelable: false }
-  )
+    Alert.alert(
+      "Informação",
+      info,
+      [
+        { text: "OK", onPress: () => navigate('TelaHome') }
+      ],
+      { cancelable: false }
+    )
 
   function handleSubmit() {
 
@@ -63,7 +54,6 @@ function CadastroDetalhes() {
 
     if (validaCampos) {
       api.post(`/usuario`, data).then(res => {
-        console.log('status', res.data);
         if (res.data.info) {
           Alert.alert('Atenção', res.data.info)
         } else {

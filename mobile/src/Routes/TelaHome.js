@@ -15,25 +15,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TelaHome() {
   const { user, logado, setLogado, setUser } = useAuth();
-  const [visiblePsw, setVisiblePsw] = useState(false);
-  //const [user, setUser] = useState({});
+  const [visiblePsw, setVisiblePsw] = useState(true);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { navigate } = useNavigation();
 
   useFocusEffect(() => {
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      //console.log('res do then', res)
       if (!res) {
         setLogado(false);
       }
       if (res) {
         setUser(JSON.parse(res));
         setLogado(true);
-        //setLogado(true)
-        //console.log('JSON.parse(res)', JSON.parse(res))
-        //return user;
-        //console.log('usuario do asyncStorage', user)
       }
     }).catch((err) => {
       console.log(err)
@@ -62,7 +57,6 @@ export default function TelaHome() {
 
   function handleLogin() {
     api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
-      console.log('data', res.data);
 
       if (res.data?.info) {
         Alert.alert('Atenção', res.data.info)
@@ -70,19 +64,12 @@ export default function TelaHome() {
       }
 
       if (res.data) {
-        console.log('setItem LocalStorage')
         AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data))
-        console.log(res.data);
-
-        //createAlertOk('Cadatrado com sucesso');
 
         setLogado(true);
         setUser(res.data);
         limpaCampos();
         navigate('Navigation');
-        // }).catch((err) => {
-        //   console.log(err)
-        // });
       }
     }).catch((error) => {
       console.log(error);
@@ -169,7 +156,7 @@ export default function TelaHome() {
                     onChangeText={setPassword}
                     placeholder="****************"
                   />
-                  <TouchableOpacity onPress={() => { setVisiblePsw(!visiblePsw); console.log('visiblePsw', visiblePsw) }}>
+                  <TouchableOpacity onPress={() => { setVisiblePsw(!visiblePsw) }}>
                     {visiblePsw ? <Feather name='eye-off' size={25} color={color.AMARELO} /> :
                       <Feather name='eye' size={25} color={color.AMARELO} />
                     }

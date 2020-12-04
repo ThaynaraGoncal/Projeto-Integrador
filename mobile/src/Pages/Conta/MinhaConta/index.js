@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
-  ActivityIndicator
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -14,13 +12,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import * as color from '../../../Colors';
 
 import Header from '../../../components/Header';
-import Input from '../../../components/input';
-import InputText from '../../../components/InputText';
-import Button from '../../../components/Button';
-
-import useAuth from '../../../hooks/useAuth';
-
-import api from '../../../services/api';
 
 import styles from './styles';
 
@@ -34,13 +25,11 @@ function MinhaConta() {
 
   useFocusEffect(() => {
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      //console.log('res do then', res);
       if (res) {
         usuario = JSON.parse(res);
         setNome(usuario.apelido);
         setEmail(usuario.email);
         setTelefone(usuario.telefone);
-        //console.log('usuario', usuario.apelido)
       }
     }).catch((err) => {
       console.log(err)
@@ -56,14 +45,13 @@ function MinhaConta() {
   }
 
   const logoff = async () => {
-    console.log('veio para o logoff')
     await AsyncStorage.clear();
-    //setUser({});
-    //setLogado(false);
     navigate('TelaHome');
   }
 
-
+  function handleEditar() {
+    navigate('EditarCadastro', usuario)
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" >
@@ -85,7 +73,13 @@ function MinhaConta() {
         >
           <Text style={styles.textButton}>Meus Anúncios</Text>
         </TouchableOpacity >
-        <View  style={styles.line}/>
+        <View style={styles.line} />
+        <TouchableOpacity style={styles.button}
+          onPress={handleEditar}
+        >
+          <Text style={styles.textButton}>Editar Cadastro</Text>
+        </TouchableOpacity >
+        <View style={styles.line} />
         <TouchableOpacity style={styles.button}
           onPress={handleFavoritos}
         >

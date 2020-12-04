@@ -1,27 +1,32 @@
-import React, { useContext, useState, useRef } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TextInput, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import Textarea from 'react-native-textarea';
+import React, { useState } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
 
 import Header from '../../../components/Header';
-import api from '../../../services/api';
 
 import styles from './styles';
-import * as color from '../../../Colors';
 
 export default function AnuncioAvaliacoes() {
   const { params } = useRoute();
+  const [vazio, setVazio] = useState(true);
 
-  console.log('params', params)
+  useFocusEffect(() => {
+    if (params.length > 0) {
+      setVazio(false);
+    }
+  }, [])
 
   return (
     <View style={styles.container}>
       <Header title='Avaliações' buttonBack route='AnuncioDetalhes' />
       <View style={{ flex: 1, alignItems: 'center' }}>
         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%', }}>
-          {
+          {vazio ?
+            <View style={styles.viewInfo}>
+              <Text style={styles.info}>Ops... Sem Avaliações no momento!</Text>
+            </View>
+            :
             params.map(item => {
               return (
                 <View key={item.id}
@@ -40,7 +45,6 @@ export default function AnuncioAvaliacoes() {
                 </View>
               )
             })
-
           }
         </ScrollView>
       </View>

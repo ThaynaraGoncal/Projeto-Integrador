@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   ScrollView,
@@ -14,17 +13,19 @@ import {
 } from "react-native";
 import { AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import * as color from '../../../Colors';
+import * as color from '../../../../Colors';
 
-import api from '../../../services/api';
+import api from '../../../../services/api';
 
-import Header from '../../../components/Header';
-import Button from '../../../components/Button';
-import InputText from '../../../components/InputText';
+import Header from '../../../../components/Header';
+import Button from '../../../../components/Button';
+import InputText from '../../../../components/InputText';
 
 import styles from './styles';
 
-function Anuncio({ route }) {
+export default function EditarAnuncio({ route }) {
+  const { params } = useRoute();
+
   const { navigate } = useNavigation();
 
   const [cd_pessoa, setCd_pessoa] = useState('');
@@ -37,28 +38,12 @@ function Anuncio({ route }) {
   let usuario = {};
 
   useFocusEffect(() => {
-    AsyncStorage.getItem("Dadosuser").then((res) => {
-      if (res) {
-        usuario = JSON.parse(res);
-        setCd_pessoa(usuario.cd_pessoa_fisica);
-      }
-    }).catch((err) => {
-      console.log(err)
-    });
-
-
-    if (route.params) {
-      setCategoria(route.params.name)
-    }
+    setTitulo(params.titulo);
+    setDescricao(params.descricao);
+    setCategoria(params.categoria);
+    setValor(params.valor);
+    setImages(params.path)
   }, [])
-
-  function limpaCampos() {
-    setTitulo('');
-    setDescricao('');
-    setCategoria('');
-    setValor('');
-    setImages([]);
-  }
 
   function validaCamposNull() {
     let validado = true;
@@ -100,7 +85,7 @@ function Anuncio({ route }) {
         "Informação",
         info,
         [
-          { text: "OK", onPress: () => navigate('Home') }
+          { text: "OK", onPress: () => navigate('MinhaConta') }
         ],
         { cancelable: false }
       )
@@ -113,12 +98,12 @@ function Anuncio({ route }) {
       });
 
       limpaCampos();
-      //navigate('MinhaConta')
+      navigate('MinhaConta')
     }
   }
 
   function handleCategorias() {
-    navigate('Categoria');
+    navigate('CategoriaAnuncio', { rota: 'EditarAnuncio' });
   }
 
   async function handleSelectImages() {
@@ -146,9 +131,9 @@ function Anuncio({ route }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Inserir Anúncio" />
+      <Header title="Editar Anúncio" buttonBack route='AnuncioDetalhesPrestador' />
       <KeyboardAvoidingView style={styles.box}
-        behavior={Platform.OS == "ios" ? "padding" : ""}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.labelInput}>Selecione as imagens</Text>
@@ -180,7 +165,7 @@ function Anuncio({ route }) {
             value={categoria}
             onChangeText={setCategoria}
           >
-            <Text style={styles.textButton}>{route.params ? route.params.name : 'Selecione uma categoria'}</Text>
+            <Text style={styles.textButton}>{params ? params.categoria : 'Selecione uma categoria'}</Text>
             <AntDesign name="arrowright" size={24} color="#c1bccc" />
           </RectButton>
           <Text style={styles.labelInput}>Valor</Text>
@@ -207,5 +192,3 @@ function Anuncio({ route }) {
     </View>
   );
 }
-
-export default Anuncio;

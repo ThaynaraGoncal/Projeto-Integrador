@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
@@ -13,23 +14,16 @@ const Item = ({ data }) => {
   const { navigate } = useNavigation();
 
   function handleDetalhes(item) {
-    console.log('meu anuncio', item)
     getPessoa(item);
-    //console.log('item', item)
     navigate('AnuncioDetalhes', [item, isPessoa])
   }
 
   function getPessoa(item) {
-    //console.log('item', item)
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      //console.log('resposta do async', res)
       if (res) {
         setPessoa(JSON.parse(res));
-        //console.log('pessoa do async: ', pessoa.cd_pessoa_fisica)
-        //console.log('pessoa do anuncio: ', item.cd_pessoa_fisica)
         if (pessoa.cd_pessoa_fisica === item.cd_pessoa_fisica) {
           setIspessoa(true);
-          //console.log('mesma pessoa', isPessoa)
         }
       }
     }).catch((err) => {
@@ -42,6 +36,52 @@ const Item = ({ data }) => {
       <Image source={{ uri: data.path[0] }} style={styles.image} />
       <View style={styles.containerText}>
         <Text style={styles.label}>{data.titulo}</Text>
+
+        {Number(data.gostei) === 0 &&
+          (<>
+            <Text style={{ color: 'gray' }}>★★★★★</Text>
+          </>)
+        }
+
+        {Number(data.gostei) > 0 && Number(data.gostei) < 2 &&
+          (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★</Text>
+              <Text style={{ color: 'gray' }}>★★★★</Text>
+            </View>
+
+          )
+        }
+
+        {Number(data.gostei) > 1 && Number(data.gostei) < 4 &&
+          (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★</Text>
+              <Text style={{ color: 'gray' }}>★★★</Text>
+            </View>
+
+          )
+        }
+
+        {Number(data.gostei) > 3 && Number(data.gostei) < 6 &&
+          (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★</Text>
+              <Text style={{ color: 'gray' }}>★★</Text>
+            </View>
+
+          )
+        }
+
+        {Number(data.gostei) > 5 &&
+          (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★★★</Text>
+            </View>
+
+          )
+        }
+
         <Text style={styles.label}>R$: {data.valor}</Text>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textCategoria}>Categoria: </Text>

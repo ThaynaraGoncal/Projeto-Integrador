@@ -1,23 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Linking,
-  TouchableOpacity,
-} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, { useState } from 'react';
+import { View, Text, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { AntDesign, Entypo, Feather, FontAwesome } from '@expo/vector-icons';
-import {
-  useNavigation,
-  useRoute,
-  useFocusEffect,
-} from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import useAuth from '../../../hooks/useAuth';
 
 import api from '../../../services/api';
 import Header from '../../../components/Header';
@@ -30,10 +16,9 @@ import {
 } from '../../../storage/anunciosFavoritos';
 
 export default function AnuncioDetalhes({ route }) {
-  console.log('parametros', route.params[0]);
+  console.log('route', route.params[0].gostei)
 
   const imagens = route.params[0].path;
-  const [pessoa, setPessoa] = useState({});
   const [isPessoa, setIspessoa] = useState(route.params[1]);
   const {
     categoria,
@@ -55,7 +40,6 @@ export default function AnuncioDetalhes({ route }) {
   async function handleAvaliacoes() {
     const { id } = route.params[0];
     const { data } = await api.get(`/avaliacao?id_anuncio=${id}`);
-    console.log(data);
     navigate('AnuncioAvaliacoes', data);
   }
 
@@ -97,38 +81,58 @@ export default function AnuncioDetalhes({ route }) {
             onPress={handleAvaliacoes}
           >
             <Text style={styles.textAvaliacao}>Ver Avaliações</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <FontAwesome
-                name="star"
-                size={22}
-                color={color.AMARELO}
-                style={{ marginHorizontal: 3 }}
-              />
-              <FontAwesome
-                name="star"
-                size={22}
-                color={color.AMARELO}
-                style={{ marginHorizontal: 3 }}
-              />
-              <FontAwesome
-                name="star-half-empty"
-                size={22}
-                color={color.AMARELO}
-                style={{ marginHorizontal: 3 }}
-              />
-              <FontAwesome
-                name="star-half-empty"
-                size={22}
-                color={color.AMARELO}
-                style={{ marginHorizontal: 3 }}
-              />
-              <FontAwesome
-                name="star-o"
-                size={22}
-                color={color.AMARELO}
-                style={{ marginHorizontal: 3 }}
-              />
-            </View>
+            {Number(route.params[0].gostei) === 0 &&
+              (<>
+                <Text style={{ color: 'gray' }}>★★★★★</Text>
+              </>)
+            }
+
+            {Number(route.params[0].gostei) > 0 && Number(route.params[0].gostei) < 2 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★</Text>
+                  <Text style={{ color: 'gray' }}>★★★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 1 && Number(route.params[0].gostei) < 4 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★</Text>
+                  <Text style={{ color: 'gray' }}>★★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 3 && Number(route.params[0].gostei) < 6 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★</Text>
+                  <Text style={{ color: 'gray' }}>★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 5 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★★★</Text>
+                </View>
+
+              )
+            }
+            {/* <View style={{ flexDirection: 'row' }}>
+              <FontAwesome name='star' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
+              <FontAwesome name='star' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
+              <FontAwesome name='star-half-empty' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
+              <FontAwesome name='star-half-empty' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
+              <FontAwesome name='star-o' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
+            </View> */}
+
           </TouchableOpacity>
         </View>
         <View style={styles.viewAvaliacao}>

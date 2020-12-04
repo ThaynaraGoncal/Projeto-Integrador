@@ -9,16 +9,11 @@ export const ContextAuth = ({ children }) => {
   const [user, setUser] = useState({});
   const [infoLogin, setInfoLogin] = useState('');
 
-
-
   useEffect(() => {
-    console.log('caiu no useEffect')
     AsyncStorage.getItem("Dadosuser").then((res) => {
-      //console.log('res do then', res)
       if (res) {
         setUser(JSON.parse(res));
         setLogado(true)
-        //console.log('JSON.parse(res)', JSON.parse(res))
         return user;
       }
     }).catch((err) => {
@@ -26,31 +21,18 @@ export const ContextAuth = ({ children }) => {
     });
   }, []);
 
-  // const logoff = async (navigate) => {
-  //   console.log('veio para o logoff')
-  //   await AsyncStorage.clear();
-  //   setUser({});
-  //   setLogado(false);
-  //   navigate('ContaHome');
-  // }
-
   const login = async (email, password) => {
-    //console.log('Email ', email)
-    //console.log('password ', password)
 
     if (email && password) {
       const userStorage = await AsyncStorage.getItem("Dadosuser");
-      //console.log('userStorage', userStorage)
 
       if (userStorage) {
-        console.log('existe userStorage', userStorage)
         setUser(JSON.parse(userStorage));
         setLogado(true);
         return user;
       }
 
       api.get(`/usuario?email=${email}&password=${password}`).then((res) => {
-        //console.log('data', res.data);
 
         if (res.data?.info) {
           setInfoLogin(res.data?.info);
@@ -58,9 +40,7 @@ export const ContextAuth = ({ children }) => {
         }
 
         if (res.data) {
-          //console.log('setItem LocalStorage')
           AsyncStorage.setItem("Dadosuser", JSON.stringify(res.data.user));
-          //AsyncStorage.setItem("name", JSON.stringify(res.data.user.apelido));
           setLogado(true);
           setUser(res.data);
         }
@@ -68,7 +48,6 @@ export const ContextAuth = ({ children }) => {
         console.log(error);
       });
     }
-
   }
 
   return (

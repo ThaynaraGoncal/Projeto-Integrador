@@ -63,7 +63,6 @@ function SubCategoria({ route }) {
       <ScrollView>
         {subComida.map((item) => {
           let itemCategoria = item;
-          //console.log('item',itemCategoria)
           return (
             <RectButton style={styles.categoriaButton}
               key={itemCategoria}

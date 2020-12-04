@@ -22,6 +22,21 @@ const styles = StyleSheet.create({
     elevation: 5
   },
 
+  viewInfo: {
+    height: 200,
+    backgroundColor: color.INPUT_LAVEL,
+    borderRadius: 5,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  info: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 30,
+    color: color.CINZA_TITULO
+  },
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',

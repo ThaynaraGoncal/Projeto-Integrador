@@ -14,12 +14,10 @@ export default function HeaderHome() {
   const { navigate } = useNavigation();
 
   function handleFiltro() {
-    console.log(filtro)
 
     api.get(`/anuncio?categoria=${filtro}`).then(res => {
       const anunciosResp = res.data;
       navigate('Home', anunciosResp)
-      //console.log('anunciosResp', anunciosResp)
 
     }).catch(error => {
       console.log(error);

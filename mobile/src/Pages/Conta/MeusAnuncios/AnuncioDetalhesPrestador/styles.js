@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  line:{
+  line: {
     borderColor: color.INPUT_BORDER_LABEL,
     borderWidth: 0.5,
     borderStyle: "solid",
@@ -107,19 +107,26 @@ const styles = StyleSheet.create({
   },
 
   viewButtons: {
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
   button: {
     flex: 1,
-    height: 70,
-    margin: 10,
+    height: 40,
+    marginHorizontal: 5,
     backgroundColor: color.AZUL_CIANETO,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  textButtonExluir: {
+    fontFamily: 'Nunito_700Bold',
+    fontSize: 22,
+    color: color.BACKGROUND_HEADER,
   }
 
 });
