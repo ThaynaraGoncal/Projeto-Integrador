@@ -40,6 +40,10 @@ function MinhaConta() {
     navigate('MeusAnuncios', usuario)
   }
 
+  const handleFavoritos = () => {
+    navigate('MeusFavoritos')
+  }
+
   const logoff = async () => {
     await AsyncStorage.clear();
     navigate('TelaHome');
@@ -76,6 +80,12 @@ function MinhaConta() {
           <Text style={styles.textButton}>Editar Cadastro</Text>
         </TouchableOpacity >
         <View style={styles.line} />
+        <TouchableOpacity style={styles.button}
+          onPress={handleFavoritos}
+        >
+          <Text style={styles.textButton}>Meus Favoritos</Text>
+        </TouchableOpacity >
+        <View  style={styles.line}/>
         <TouchableOpacity style={styles.button}
           onPress={logoff}
         >

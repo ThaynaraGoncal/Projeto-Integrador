@@ -5,6 +5,7 @@ import ContaHome from '../Pages/Conta';
 import MinhaConta from '../Pages/Conta/MinhaConta';
 import CadastroDetalhes from '../Pages/Conta/CadastroDetalhes';
 import MeusAnuncios from '../Pages/Conta/MeusAnuncios';
+import MeusFavoritos from '../Pages/Conta/MeusFavoritos';
 import AnuncioDetalhesPrestador from '../Pages/Conta/MeusAnuncios/AnuncioDetalhesPrestador';
 import EditarAnuncio from '../Pages/Conta/MeusAnuncios/EditarAnuncio';
 import EditarCadastro from '../Pages/Conta/EditarCadastro';
@@ -18,6 +19,7 @@ function ContaStack() {
       initialRouteName='MinhaConta'>
       <Screen name="MinhaConta" component={MinhaConta} />
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
+      <Screen name="MeusFavoritos" component={MeusFavoritos} />
       <Screen name="CadastroDetalhes" component={CadastroDetalhes} />
       <Screen name="EditarCadastro" component={EditarCadastro} />
       <Screen name="AnuncioDetalhesPrestador" component={AnuncioDetalhesPrestador} />
