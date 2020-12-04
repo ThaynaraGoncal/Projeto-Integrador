@@ -49,7 +49,6 @@ function MinhaConta() {
     navigate('EditarCadastro', usuario)
   }
 
-
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" >
       <Header title='Minha Conta' />

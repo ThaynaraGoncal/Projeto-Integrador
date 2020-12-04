@@ -3,7 +3,7 @@ const { QueryTypes, Sequelize } = require('sequelize');
 import Usuario from '../models/Usuario';
 import PessoaFisica from '../controllers/PessoaFisicaController';
 import database from '../../config/database';
-
+import moment from 'moment';
 class UsuarioController {
   async store(req, res) {
     const sequelize = new Sequelize(database);
@@ -116,9 +116,32 @@ class UsuarioController {
 
     try {
       console.log('req', req.body)
+      let cpf = req.body.cpf;
+      cpf = cpf.replace('.', '');
+      cpf = cpf.replace('-', '');
+      let telefone = req.body.telefone
+      telefone = telefone.replace(' ', '');
+      req.body.dt_nascimento = moment(req.body.dt_nascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
 
+      let update_pessoa = await sequelize
+        .query(`update pessoa_fisicas 
+                set nome = '${req.body.nome}', cpf = '${cpf}', 
+                dt_nascimento = '${req.body.dt_nascimento}', telefone = '${telefone}'
+                where  cd_pessoa_fisica = ${req.body.cd_pessoa}`,
+          { type: QueryTypes.SELECT }).then((res) => {
+            return res
+          });
 
-      return res.status(201).json({ info: 'Login ou Senha inválidos!' });
+      let update_usuario = await sequelize
+        .query(`update usuarios 
+              set apelido = '${req.body.apelido}', email = '${req.body.email}'
+              where  cd_pessoa_fisica = ${req.body.cd_pessoa}`,
+          { type: QueryTypes.SELECT }).then((res) => {
+            return res
+          });
+      //console.log(update_pessoa);
+
+      return res.status(201).json({ info: 'Dados atualizados com sucesso!' });
 
     } catch (error) {
       console.log(error);

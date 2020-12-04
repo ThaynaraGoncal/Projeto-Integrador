@@ -11,6 +11,7 @@ import styles from './styles';
 import * as color from '../../../Colors';
 
 export default function AnuncioDetalhes({ route }) {
+  console.log('route', route.params[0].gostei)
 
   const imagens = route.params[0].path;
   const [isPessoa, setIspessoa] = useState(route.params[1]);
@@ -50,13 +51,57 @@ export default function AnuncioDetalhes({ route }) {
             onPress={handleAvaliacoes}
           >
             <Text style={styles.textAvaliacao}>Ver Avaliações</Text>
-            <View style={{ flexDirection: 'row' }}>
+            {Number(route.params[0].gostei) === 0 &&
+              (<>
+                <Text style={{ color: 'gray' }}>★★★★★</Text>
+              </>)
+            }
+
+            {Number(route.params[0].gostei) > 0 && Number(route.params[0].gostei) < 2 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★</Text>
+                  <Text style={{ color: 'gray' }}>★★★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 1 && Number(route.params[0].gostei) < 4 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★</Text>
+                  <Text style={{ color: 'gray' }}>★★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 3 && Number(route.params[0].gostei) < 6 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★</Text>
+                  <Text style={{ color: 'gray' }}>★★</Text>
+                </View>
+
+              )
+            }
+
+            {Number(route.params[0].gostei) > 5 &&
+              (
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: '#fcbf49', fontWeight: 'bold' }}>★★★★★</Text>
+                </View>
+
+              )
+            }
+            {/* <View style={{ flexDirection: 'row' }}>
               <FontAwesome name='star' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
               <FontAwesome name='star' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
               <FontAwesome name='star-half-empty' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
               <FontAwesome name='star-half-empty' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
               <FontAwesome name='star-o' size={22} color={color.AMARELO} style={{ marginHorizontal: 3 }} />
-            </View>
+            </View> */}
 
           </TouchableOpacity>
         </View>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { View, TextInput, Text, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
@@ -10,6 +10,9 @@ import styles from './styles';
 
 export default function EditarCadastro() {
   const { params } = useRoute();
+  const { goBack } = useNavigation();
+
+  const [cd_pessoa, setCdPessoa] = useState('');
   const [nome, setNome] = useState('');
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
@@ -18,6 +21,7 @@ export default function EditarCadastro() {
   const [cpf, setCPF] = useState('');
 
   useEffect(() => {
+    setCdPessoa(params.cd_pessoa_fisica)
     setNome(params.nome);
     setApelido(params.apelido);
     setEmail(params.email);
@@ -28,12 +32,27 @@ export default function EditarCadastro() {
 
   async function editaCadastro() {
     const dados = {
-      nome, apelido, email, dt_nascimento, telefone, cpf
+      cd_pessoa, nome, apelido, email, dt_nascimento, telefone, cpf
     }
 
     const { data } = await api.put('/usuario', dados);
     console.log('data', data)
+    if (data) {
+      createAlert(data.info)
+    }
   }
+
+  const createAlert = (info) =>
+    Alert.alert(
+      "Informação",
+      info,
+      [
+        {
+          text: "OK", onPress: () => goBack()
+        }
+      ],
+      { cancelable: false }
+    );
 
   return (
     <View style={styles.container}>

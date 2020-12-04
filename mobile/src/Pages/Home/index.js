@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight, ActivityIndicator } from 'react-native';
 import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
@@ -17,9 +17,32 @@ function Home() {
   const { anuncios, setAnuncios, anunciosInicial, setAnunciosInicial } = useAnuncio();
   const [filtro, setFiltro] = useState('');
   const [visible, setModalVisible] = useState(false);
+  const [ordenou, setOrdenou] = useState(false);
 
   const { navigate } = useNavigation();
   const route = useRoute();
+
+  function handleOrdenar() {
+    setOrdenou(!ordenou);
+    if (ordenou) {
+      const ordenados = anuncios.sort(function (a, b) { return Number(b.gostei) - Number(a.gostei) });
+      setAnuncios([])
+      setTimeout(() => {
+        setAnuncios(ordenados)
+      }, 1)
+    } else {
+      const ordenados = anuncios.sort(function (a, b) { return Number(a.gostei) - Number(b.gostei) });
+      setAnuncios([])
+      setTimeout(() => {
+        setAnuncios(ordenados)
+      }, 1)
+    }
+  }
+
+  useMemo(() => {
+    //console.log('ordenao', anuncios)
+  }, [anuncios])
+
 
   function handleAtualizar() {
     api.get(`/anuncios`).then((res) => {
@@ -73,6 +96,10 @@ function Home() {
         <BorderlessButton style={styles.button} onPress={handleAtualizar}>
           <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
         </BorderlessButton>
+        <BorderlessButton style={styles.button} onPress={handleOrdenar}>
+          <Text style={{ fontSize: 25, color: '#96D2F0' }}>↑↓</Text>
+          {/* <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} /> */}
+        </BorderlessButton>
 
       </View>
       {anuncios?.length > 0 ?
@@ -83,6 +110,8 @@ function Home() {
           <Text style={styles.info}>Ops... Sem anúncios no momento!</Text>
         </View>
       }
+
+      {/* <Text>{JSON.stringify(anuncios, null, 2)}</Text> */}
     </View>
   );
 }
