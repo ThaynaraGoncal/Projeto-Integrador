@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Image, TouchableWithoutFeedback, Keyboard, } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import useAuth from '../hooks/useAuth';
@@ -92,76 +93,67 @@ export default function TelaHome() {
   return (
     <View style={styles.container}>
       {logado ? (
-        <KeyboardAvoidingView style={styles.box}
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          <ScrollView style={{ width: '100%', height: '100%' }}>
-            <View style={styles.viewContainer}>
-              <Image source={Logo} style={styles.logo} />
-              <Text style={styles.title}>
-                Que bom te ver de volta
+        <View style={styles.ViewLogado}>
+          <Image source={Logo} style={styles.logo} />
+          <View style={styles.viewWelcome}>
+            <Text style={styles.title}>
+              Que bom te ver de volta
+              </Text>
+            <Text style={styles.textUsuario}>
+              {user.apelido}
             </Text>
-              <Text style={styles.textUsuario}>
-                {user.apelido}
-              </Text>
-              <TouchableOpacity style={styles.buttonLogar}
-                onPress={handleEntrar}
-              >
-                <Text style={styles.titleButton}>Entrar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonLogar}
-                onPress={handleOutraConta}
-              >
-                <Text style={styles.titleButton} >
-                  Entrar com outra conta
-              </Text>
-              </TouchableOpacity>
-              <View style={styles.viewCadastro}>
-                <Text style={styles.textCadastro}>
-                  Não tem cadastro?
+          </View>
+          <TouchableOpacity style={styles.buttonLogar}
+            onPress={handleEntrar}
+          >
+            <Text style={styles.titleButton}>Entrar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonLogar}
+            onPress={handleOutraConta}
+          >
+            <Text style={styles.titleButton} >
+              Entrar com outra conta
                 </Text>
-                <TouchableOpacity onPress={handleCadastro}>
-                  <Text style={styles.textCliqueAqui}
-                  > Clique aqui!</Text>
-                </TouchableOpacity>
-              </View>
-
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      ) :
-
-        <KeyboardAvoidingView style={styles.box}
+          </TouchableOpacity>
+          <View style={styles.viewCadastro}>
+            <Text style={styles.textCadastro}>
+              Não tem cadastro?
+                </Text>
+            <TouchableOpacity onPress={handleCadastro}>
+              <Text style={styles.textCliqueAqui}
+              > Clique aqui!</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+        :
+        <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
-          <ScrollView style={{ width: '100%', height: '100%' }}>
-            <View style={styles.viewContainer}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inner}>
               <Image source={Logo} style={styles.logo} />
-              {/* <Text style={styles.titleLogin}>
-                Faça Login e tenha uma melhor experiência
-              </Text> */}
-
-              <View style={styles.viewDados}>
-                <Text style={styles.textEmail}>Email</Text>
-                <TextInput style={styles.input}
+              <View style={styles.viewInput}>
+                <FontAwesome5 name='user' size={28} color='rgba(255,255,255, 0.6)' />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="email@email.com"
+                  placeholderTextColor='rgba(255,255,255, 0.6)'
                   value={email}
                   onChangeText={setEmail}
-                  placeholder="email@email.com">
-                </TextInput>
-                <Text style={styles.textEmail}>Senha</Text>
-                <View style={styles.viewPass}>
-                  <TextInput style={styles.inputPass}
-                    secureTextEntry={visiblePsw}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="****************"
-                  />
-                  <TouchableOpacity onPress={() => { setVisiblePsw(!visiblePsw) }}>
-                    {visiblePsw ? <Feather name='eye-off' size={25} color={color.AMARELO} /> :
-                      <Feather name='eye' size={25} color={color.AMARELO} />
-                    }
-                  </TouchableOpacity>
-                </View>
+                  color={color.CINZA_TITULO}
+                />
+              </View>
+              <View style={styles.viewInput}>
+                <FontAwesome5 name='lock' size={28} color='rgba(255,255,255, 0.6)' />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder='*************'
+                  placeholderTextColor='rgba(255,255,255, 0.6)'
+                  value={password}
+                  onChangeText={setPassword}
+                  color={color.CINZA_TITULO}
+                />
               </View>
               <TouchableOpacity style={[styles.buttonLogar]}
                 onPress={
@@ -180,9 +172,13 @@ export default function TelaHome() {
                 </TouchableOpacity>
               </View>
             </View>
-          </ScrollView>
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       }
+      <LinearGradient
+        colors={['transparent', 'rgba(0,0,0,0.4)']}
+        style={styles.linearGradient}
+      />
     </View >
   )
 }
@@ -192,8 +188,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.AZUL_CIANETO,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingTop: 20,
+    justifyContent: 'center',
+  },
+
+  ViewLogado: {
+    flex: 1,
+    padding: 10,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  viewWelcome: {
+    marginTop: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 30,
+    width: '100%'
+  },
+
+  title: {
+    fontFamily: 'Nunito_600SemiBold',
+    fontSize: 18,
+    color: '#fff',
+  },
+
+  textUsuario: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 20,
+    color: '#fff',
+    marginLeft: 2
   },
 
   box: {
@@ -201,11 +225,59 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
-  titleLogin: {
+  inner: {
+    padding: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  logo: {
+    width: 200,
+    height: 213,
+  },
+
+  viewInput: {
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    width: '100%',
+    height: 50,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#fff',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    //elevation: 2
+  },
+
+  textInput: {
+    width: '90%',
+    height: 50,
+    marginLeft: 10,
+  },
+
+  buttonLogar: {
+    width: '100%',
+    height: 50,
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 5,
+  },
+
+  titleButton: {
     fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 22,
-    lineHeight: 24,
-    color: '#fff',
+    fontSize: 24,
+    color: color.CINZA_TITULO
   },
 
   viewCadastro: {
@@ -224,107 +296,11 @@ const styles = StyleSheet.create({
     color: color.AMARELO
   },
 
-  viewContainer: {
-    paddingTop: 5,
-    height: 600,
-    alignItems: 'center',
-    marginTop: 40,
-    paddingHorizontal: 20,
+  linearGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 100,
   },
-
-  logo: {
-    width: 200,
-    height: 213,
-  },
-
-  viewLogado: {
-    flex: 1,
-    paddingBottom: 120,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-
-  title: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 24,
-    color: '#fff',
-    marginTop: 40
-  },
-
-  textUsuario: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 26,
-    color: color.AMARELO,
-  },
-
-  buttonLogar: {
-    width: '100%',
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    marginBottom: 5,
-  },
-
-  titleButton: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 24,
-    color: color.CINZA_TITULO
-  },
-
-  buttonOutraConta: {
-    width: '100%',
-    height: 30,
-  },
-
-  textButton: {
-    fontFamily: 'Nunito_700Bold',
-    fontSize: 18,
-    color: color.AMARELO
-  },
-
-  viewDados: {
-    alignItems: 'flex-start',
-    width: '100%'
-  },
-
-  textEmail: {
-    fontFamily: 'Nunito_700Bold',
-    fontSize: 20,
-    color: '#fff',
-    marginTop: 5,
-  },
-
-  viewPass: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#fff',
-    borderColor: '#d3e2e6',
-    borderWidth: 1.4,
-    borderRadius: 10,
-    borderRadius: 8,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    alignItems: 'center'
-  },
-
-  inputPass: {
-    width: '100%',
-    height: 50,
-  },
-
-  input: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#fff',
-    borderColor: '#d3e2e6',
-    borderWidth: 1.4,
-    borderRadius: 10,
-    borderRadius: 8,
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  }
 })

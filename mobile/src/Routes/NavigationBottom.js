@@ -18,7 +18,6 @@ function NavigationBottom() {
   return (
     <ContextAuth>
       <NavigationContainer>
-        
         <Navigator screenOptions={{ headerShown: false }}>
           <Screen name="TelaHome" component={TelaHome} />
           <Screen name="Navigation" component={Navigation} />

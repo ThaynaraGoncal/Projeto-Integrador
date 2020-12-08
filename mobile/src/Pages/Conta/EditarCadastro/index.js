@@ -36,7 +36,6 @@ export default function EditarCadastro() {
     }
 
     const { data } = await api.put('/usuario', dados);
-    console.log('data', data)
     if (data) {
       createAlert(data.info)
     }

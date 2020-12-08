@@ -54,7 +54,7 @@ export default function Filtro({ route }) {
   function handleSubmit() {
 
     let ok = validaFiltros(categoria, precoMin, precoMax);
-    console.log('ok', ok)
+
     if (ok) {
       if (categoria === '') {
         api.get(`/anuncios`).then(res => {
