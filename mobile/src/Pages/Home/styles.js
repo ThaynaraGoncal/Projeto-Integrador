@@ -22,14 +22,22 @@ const styles = StyleSheet.create({
   },
 
   headerCenter: {
-    height: 80,
+    height: 133,
     backgroundColor: color.AZUL_CIANETO,
     borderBottomWidth: 1,
     borderColor: '#fff',
-    flexDirection: 'row',
+    //flexDirection: 'row',
     alignItems: 'flex-end',
     paddingHorizontal: 5,
     paddingBottom: 10,
+    paddingTop: 20,
+  },
+
+  viewButtonsFiltro: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    paddingVertical: 5,
   },
 
   titleHeader: {
@@ -40,14 +48,38 @@ const styles = StyleSheet.create({
   },
 
   viewInput: {
-    flex: 1,
+    width: '100%',
     height: 40,
     backgroundColor: '#fff',
     borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 5,
+    marginTop: 20,
     paddingHorizontal: 5
+  },
+
+  viewOrdenacao: {
+    height: 42,
+    width: '100%',
+    borderColor: color.AMARELO,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+  },
+
+  buttonOrdenacao: {
+    height: 40,
+    width: '75%',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    marginRight: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+
+  textButtonOrdenacao: {
+    fontSize: 14,
+    color: color.CINZA_LABEL
   },
 
   button: {
@@ -62,8 +94,9 @@ const styles = StyleSheet.create({
 
   textInput: {
     flex: 1,
+    width: 100,
+    height: 40,
     fontFamily: 'Nunito_600SemiBold',
-    height: 30,
     fontSize: 18,
     color: color.CINZA_TITULO
   },

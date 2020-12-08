@@ -115,7 +115,6 @@ class UsuarioController {
     const sequelize = new Sequelize(database);
 
     try {
-      console.log('req', req.body)
       let cpf = req.body.cpf;
       cpf = cpf.replace('.', '');
       cpf = cpf.replace('-', '');

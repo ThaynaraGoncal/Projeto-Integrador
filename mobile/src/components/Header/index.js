@@ -32,7 +32,7 @@ export default function Header({ title, buttonBack, route, buttonEsq }) {
 
 const styles = StyleSheet.create({
   header: {
-    height: 70,
+    height: 80,
     width: '100%',
     backgroundColor: color.AZUL_CIANETO,
     borderBottomWidth: 1,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     paddingRight: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
 
   headerCenter: {

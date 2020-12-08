@@ -90,17 +90,18 @@ function Home() {
             <Feather name='x' size={25} color={color.BUTTON_IMAGES} />
           </TouchableOpacity>
         </View>
-        <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
-          <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
-        </BorderlessButton>
-        <BorderlessButton style={styles.button} onPress={handleAtualizar}>
-          <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
-        </BorderlessButton>
-        <BorderlessButton style={styles.button} onPress={handleOrdenar}>
-          <Text style={{ fontSize: 25, color: '#96D2F0' }}>↑↓</Text>
-          {/* <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} /> */}
-        </BorderlessButton>
-
+        <View style={styles.viewButtonsFiltro}>
+          <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
+            <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
+          </BorderlessButton>
+          <BorderlessButton style={styles.button} onPress={handleAtualizar}>
+            <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
+          </BorderlessButton>
+          <BorderlessButton style={styles.buttonOrdenacao} onPress={handleOrdenar}>
+            <Text style={styles.textButtonOrdenacao}>Avaliação ★</Text>
+            <Text style={{ fontSize: 25, color: '#96D2F0' }}>↑↓</Text>
+          </BorderlessButton>
+        </View>
       </View>
       {anuncios?.length > 0 ?
         (

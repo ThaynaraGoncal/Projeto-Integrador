@@ -19,7 +19,7 @@ export default function AnuncioDetalhes({ route }) {
 
   const imagens = route.params[0].path;
   const [isPessoa, setIspessoa] = useState(route.params[1]);
-  const { categoria, descricao, valor, titulo, telefone, cd_pessoa_fisica, nome } = route.params[0];
+  const { categoria, descricao, valor, titulo, telefone, cd_pessoa_fisica, nome, apelido } = route.params[0];
   const { navigate } = useNavigation();
 
   const [like, setLike] = useState(false);
