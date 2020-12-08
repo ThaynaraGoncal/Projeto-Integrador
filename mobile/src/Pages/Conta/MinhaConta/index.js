@@ -27,7 +27,6 @@ function MinhaConta() {
     AsyncStorage.getItem("Dadosuser").then((res) => {
       if (res) {
         usuario = JSON.parse(res);
-        console.log('usuario', usuario);
         setNome(usuario.apelido);
         setEmail(usuario.email);
         setTelefone(usuario.telefone);

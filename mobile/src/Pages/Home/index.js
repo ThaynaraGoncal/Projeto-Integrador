@@ -40,7 +40,6 @@ function Home() {
   }
 
   useMemo(() => {
-    //console.log('ordenao', anuncios)
   }, [anuncios])
 
 
