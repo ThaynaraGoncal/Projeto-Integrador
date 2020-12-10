@@ -4,7 +4,9 @@ import Usuario from '../models/Usuario';
 import PessoaFisica from '../controllers/PessoaFisicaController';
 import database from '../../config/database';
 import moment from 'moment';
+import senEmail from '../../config/senMail';
 class UsuarioController {
+
   async store(req, res) {
     const sequelize = new Sequelize(database);
 
@@ -68,8 +70,6 @@ class UsuarioController {
       return res.status(400).json({ error: 'Não foi possível criar usuario' });
     }
   }
-
-
 
   async user(req, res) {
     const sequelize = new Sequelize(database);
@@ -148,6 +148,14 @@ class UsuarioController {
     }
   }
 
+  async updateSenha(req, res) {
+    console.log('req', req.query);
+
+    const ok = senEmail('thaynara', 'thaynarafaria21@gmail.com');
+    console.log('ok: ', ok)
+
+    return res.status(201).json({ info: 'Email enviado' });
+  }
 }
 
 export default new UsuarioController();
