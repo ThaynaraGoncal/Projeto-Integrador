@@ -20,6 +20,8 @@ function MinhaConta() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [dt_nascimento, setDt_nascimento] = useState('');
+  const [cpf, setCPF] = useState('');
 
   let usuario = {};
 
@@ -27,9 +29,12 @@ function MinhaConta() {
     AsyncStorage.getItem("Dadosuser").then((res) => {
       if (res) {
         usuario = JSON.parse(res);
-        setNome(usuario.apelido);
+
+        setNome(usuario.nome);
         setEmail(usuario.email);
         setTelefone(usuario.telefone);
+        setDt_nascimento(usuario.dt_nascimento)
+        setCPF(usuario.cpf)
       }
     }).catch((err) => {
       console.log(err)
@@ -57,11 +62,13 @@ function MinhaConta() {
     <KeyboardAvoidingView style={styles.container} behavior="padding" >
       <Header title='Minha Conta' />
       <View style={styles.containerDados}>
-        <View style={{ margin: 10, marginRight: 40, alignItems: 'center', }}>
-          <FontAwesome name="user-circle" size={60} color={color.CINZA_LABEL} />
+        <View style={{ marginLeft: 30, marginRight: 30, alignItems: 'center', justifyContent: 'center' }}>
+          <FontAwesome name="user-circle" size={70} color={color.CINZA_LABEL} />
         </View>
         <View style={{ marginTop: 5 }}>
           <Text style={styles.dadosTitulo}>{nome}</Text>
+          <Text style={styles.dados}>Data Nascimento: {dt_nascimento}</Text>
+          <Text style={styles.dados}>CPF: {cpf}</Text>
           <Text style={styles.dados}>Email: {email}</Text>
           <Text style={styles.dados}>Telefone: {telefone}</Text>
         </View>

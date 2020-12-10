@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   containerDados: {
     backgroundColor: color.INPUT_LAVEL,
     flexDirection: 'row',
-    height: 100,
+    height: 130,
   },
 
   dadosTitulo: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     color: color.AZUL_CIANETO,
   },
 
-  line:{
+  line: {
     borderColor: color.INPUT_BORDER_LABEL,
     borderWidth: 0.5,
     borderStyle: "solid",

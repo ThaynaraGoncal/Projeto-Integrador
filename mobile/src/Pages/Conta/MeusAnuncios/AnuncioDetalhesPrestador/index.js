@@ -53,19 +53,6 @@ export default function AnuncioDetalhesPrestador({ route }) {
   return (
     <View style={styles.container}>
       <Header title="Detalhes Anúncio" buttonBack route="MeusAnuncios" />
-      <View style={styles.viewButtons}>
-        {/* <RectButton style={styles.button}
-          onPress={handleEditar}
-        >
-          <Text>Editar</Text>
-        </RectButton> */}
-        <RectButton style={styles.button}
-          onPress={deleteAnuncio}
-        >
-          <Text style={styles.textButtonExluir}>Excluir</Text>
-
-        </RectButton>
-      </View>
       <ScrollView>
         <ScrollView horizontal={true} style={styles.viewImages}>
           {imagens.map((item) => {
@@ -74,6 +61,19 @@ export default function AnuncioDetalhesPrestador({ route }) {
             )
           })}
         </ScrollView>
+        <View style={styles.viewButtons}>
+          {/* <RectButton style={styles.button}
+          onPress={handleEditar}
+        >
+          <Text>Editar</Text>
+        </RectButton> */}
+          <RectButton style={styles.button}
+            onPress={deleteAnuncio}
+          >
+            <Text style={styles.textButtonExluir}>Excluir</Text>
+
+          </RectButton>
+        </View>
         <Text style={styles.titulo}>{titulo}</Text>
         <Text style={styles.labelValor}>R$ {valor}</Text>
         <View style={styles.line} />

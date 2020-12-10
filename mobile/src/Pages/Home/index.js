@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, TouchableHighlight, ActivityIndicator } from 'react-native';
-import { RectButton, BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState, useMemo } from 'react';
+import { View, Text, TextInput } from 'react-native';
+import { BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
 
 import useAnuncio from '../../hooks/useAnuncio';
 
 import api from '../../services/api';
 import ListaAnuncio from '../../components/ListaAnuncios';
-import ModalFiltro from '../../components/ModalFiltro';
 
 import * as color from '../../Colors';
 import styles from './styles';
@@ -16,7 +16,7 @@ import styles from './styles';
 function Home() {
   const { anuncios, setAnuncios, anunciosInicial, setAnunciosInicial } = useAnuncio();
   const [filtro, setFiltro] = useState('');
-  const [visible, setModalVisible] = useState(false);
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
   const [ordenou, setOrdenou] = useState(false);
 
   const { navigate } = useNavigation();
@@ -69,14 +69,18 @@ function Home() {
     }
   }
 
+  function handleToggleFiltersVisible() {
+    setIsFiltersVisible(!isFiltersVisible);
+  }
+
   function limpaFiltro() {
     setFiltro('');
     listaAnuncios();
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerCenter}>
+    <View style={{ flex: 1 }}>
+      <View style={styles.headerHome}>
         <View style={styles.viewInput}>
           <MaterialIcons name='search' size={25} color={color.BUTTON_IMAGES} />
           <TextInput
@@ -89,19 +93,35 @@ function Home() {
             <Feather name='x' size={25} color={color.BUTTON_IMAGES} />
           </TouchableOpacity>
         </View>
-        <View style={styles.viewButtonsFiltro}>
-          <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
-            <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
-          </BorderlessButton>
-          <BorderlessButton style={styles.button} onPress={handleAtualizar}>
-            <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
-          </BorderlessButton>
-          <BorderlessButton style={styles.buttonOrdenacao} onPress={handleOrdenar}>
-            <Text style={styles.textButtonOrdenacao}>Avaliação ★</Text>
-            <Text style={{ fontSize: 25, color: '#96D2F0' }}>↑↓</Text>
-          </BorderlessButton>
-        </View>
+        <BorderlessButton style={styles.button} onPress={() => navigate('Filtro')}>
+          <AntDesign name='filter' size={25} color={color.BUTTON_IMAGES} />
+        </BorderlessButton>
+        <BorderlessButton style={styles.button} onPress={handleAtualizar}>
+          <AntDesign name='reload1' size={25} color={color.BUTTON_IMAGES} />
+        </BorderlessButton>
       </View>
+      <View style={styles.viewOrdenar}>
+        <TouchableOpacity
+          onPress={handleToggleFiltersVisible}
+        >
+          <Text style={styles.textStyle}>Ordernar</Text>
+        </TouchableOpacity>
+      </View>
+
+      {
+        isFiltersVisible && (
+          <View style={styles.viewButtonsOrdena}>
+            <BorderlessButton style={styles.buttonOrdenacao} onPress={handleOrdenar}>
+              <Text style={styles.seta}>↑</Text>
+              <Text style={styles.textButtonOrdenacao}>★</Text>
+            </BorderlessButton>
+            <BorderlessButton style={styles.buttonOrdenacao} onPress={handleOrdenar}>
+              <Text style={styles.seta}>↓</Text>
+              <Text style={styles.textButtonOrdenacao}>★</Text>
+            </BorderlessButton>
+          </View>
+        )
+      }
       {anuncios?.length > 0 ?
         (
           <ListaAnuncio anuncios={anuncios} />
@@ -111,7 +131,6 @@ function Home() {
         </View>
       }
 
-      {/* <Text>{JSON.stringify(anuncios, null, 2)}</Text> */}
     </View>
   );
 }

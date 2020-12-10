@@ -4,6 +4,7 @@ import * as color from '../../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'blue'
   },
 
   view: {
@@ -21,22 +22,19 @@ const styles = StyleSheet.create({
     color: color.CINZA_TITULO
   },
 
-  headerCenter: {
-    height: 133,
-    backgroundColor: color.AZUL_CIANETO,
-    borderBottomWidth: 1,
-    borderColor: '#fff',
-    //flexDirection: 'row',
-    alignItems: 'flex-end',
-    paddingHorizontal: 5,
+  headerHome: {
     paddingBottom: 10,
-    paddingTop: 20,
+    width: '100%',
+    height: 80,
+    flexDirection: 'row',
+    backgroundColor: color.AZUL_CIANETO,
+    alignItems: 'flex-end',
+    paddingHorizontal: 5
   },
 
   viewButtonsFiltro: {
     flex: 1,
     width: '100%',
-    flexDirection: 'row',
     paddingVertical: 5,
   },
 
@@ -48,27 +46,34 @@ const styles = StyleSheet.create({
   },
 
   viewInput: {
-    width: '100%',
+    width: 270,
     height: 40,
     backgroundColor: '#fff',
     borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
+    marginRight: 5,
   },
 
-  viewOrdenacao: {
-    height: 42,
-    width: '100%',
-    borderColor: color.AMARELO,
-    borderWidth: 1,
-    paddingHorizontal: 10,
+  viewOrdenar: {
+    height: 35,
+    backgroundColor: "white",
+    alignItems: "flex-end",
+    paddingRight: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
   },
 
   buttonOrdenacao: {
     height: 40,
-    width: '75%',
+    width: '40%',
     backgroundColor: '#fff',
     borderRadius: 5,
     marginRight: 5,
@@ -77,9 +82,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 
+  viewButtonsOrdena: {
+    flexDirection: 'row',
+  },
+
+  seta: {
+    fontSize: 30,
+    color: color.AMARELO,
+    fontWeight: 'bold'
+  },
+
   textButtonOrdenacao: {
-    fontSize: 14,
-    color: color.CINZA_LABEL
+    fontSize: 25,
+    color: color.AMARELO
   },
 
   button: {
@@ -101,38 +116,17 @@ const styles = StyleSheet.create({
     color: color.CINZA_TITULO
   },
 
-  centeredView: {
-    flex: 1,
-    marginTop: 30,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: color.AMARELO
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
   openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
+    // width: 100,
+    // padding: 10,
+    // elevation: 2
   },
+
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    color: color.CINZA_TITULO,
+    fontFamily: 'Nunito_600SemiBold',
+    textAlign: "center",
+    fontSize: 20
   },
   modalText: {
     marginBottom: 15,

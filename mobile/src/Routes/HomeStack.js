@@ -16,6 +16,8 @@ import Entretenimento from '../Pages/Anuncio/SubCategorias/Entretenimento';
 import Convites from '../Pages/Anuncio/SubCategorias/Convites';
 import Local from '../Pages/Anuncio/SubCategorias/Local';
 
+import ViewModal from '../components/ViewModal';
+
 import { ContextAnuncio } from '../contexts/AnunciosContext';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -29,6 +31,7 @@ export default function HomeStack() {
           headerShown: false
         }}
         initialRouteName="Home">
+        <Screen name="ViewModal" component={ViewModal} />
         <Screen name="Home" component={Home} />
         <Screen name="AnuncioDetalhes" component={AnuncioDetalhes} />
         <Screen name="Filtro" component={Filtro}

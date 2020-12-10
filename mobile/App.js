@@ -6,7 +6,7 @@ import { Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-g
 import { ContextAuth } from './src/contexts/AuthContext';
 import NavigationBottom from './src/Routes/NavigationBottom';
 
-import Teste from './src/index';
+import * as color from './src/Colors';
 
 export default function Main() {
   const [fontsLoaded] = useFonts({

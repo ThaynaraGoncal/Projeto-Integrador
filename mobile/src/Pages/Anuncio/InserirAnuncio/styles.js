@@ -37,6 +37,22 @@ const styles = StyleSheet.create({
     color: color.CINZA_TITULO
   },
 
+  textareaContainer: {
+    width: '100%',
+    height: 170,
+    padding: 5,
+    backgroundColor: '#fff',
+    borderColor: '#d3e2e6',
+    borderWidth: 1.4,
+    borderRadius: 8,
+  },
+  textarea2: {
+    textAlignVertical: 'top',  // hack android
+    height: 170,
+    fontSize: 14,
+    color: '#333',
+  },
+
   button: {
     borderColor: color.AMARELO,
     height: 50,

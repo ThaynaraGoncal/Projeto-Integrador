@@ -12,6 +12,7 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
+import Textarea from 'react-native-textarea';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as color from '../../../Colors';
@@ -147,12 +148,11 @@ function Anuncio({ route }) {
   return (
     <View style={styles.container}>
       <Header title="Inserir Anúncio" />
-      <KeyboardAvoidingView style={styles.box}
+      <KeyboardAvoidingView style={{ padding: 10 }}
         behavior={Platform.OS == "ios" ? "padding" : ""}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ marginBottom: 50 }} showsVerticalScrollIndicator='false'>
           <Text style={styles.labelInput}>Selecione as imagens</Text>
-
           <ScrollView horizontal={true} style={styles.ViewImages}>
             {images.map(image => {
               return (
@@ -188,22 +188,25 @@ function Anuncio({ route }) {
             value={valor}
             onChangeText={setValor}
             keyboardType='numeric'
-          >
-          </InputText>
+          />
           <Text style={styles.labelInput}>Descrição</Text>
-          <TextInput
-            style={styles.textArea}
-            value={descricao}
+          <Textarea
+            containerStyle={styles.textareaContainer}
+            style={styles.textarea2}
             onChangeText={setDescricao}
-            multiline
-          ></TextInput>
+            defaultValue={descricao}
+            maxLength={255}
+            placeholder={'Insira uma descrição objetiva...'}
+            placeholderTextColor={'#c7c7c7'}
+            underlineColorAndroid={'transparent'}
+          />
           <Button
             titleButton="Continuar"
             onPress={handleSubmit}
           >
           </Button>
         </ScrollView>
-      </KeyboardAvoidingView >
+      </KeyboardAvoidingView>
     </View>
   );
 }
