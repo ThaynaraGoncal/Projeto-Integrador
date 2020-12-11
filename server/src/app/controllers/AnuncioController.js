@@ -4,7 +4,7 @@ import Anuncio from '../models/Anuncio';
 import Arquivo from '../models/Arquivo';
 import database from '../../config/database';
 
-import { hostCasa, hostEmpresa } from '../../constants';
+import { host } from '../../constants';
 
 class AnuncioController {
   async store(req, res) {
@@ -68,7 +68,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${host}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -105,7 +105,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of anuncio_list) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${host}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -133,7 +133,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of lista_anuncios) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${host}/images/${anunciosAll.path}`);
         }
       }
     }
@@ -167,7 +167,7 @@ class AnuncioController {
     for (let anuncioF of anuncios) {
       for (let anunciosAll of lista_anuncios) {
         if (anuncioF.id === anunciosAll.id) {
-          anuncioF.path.push(`${hostEmpresa}/images/${anunciosAll.path}`);
+          anuncioF.path.push(`${host}/images/${anunciosAll.path}`);
         }
       }
     }
