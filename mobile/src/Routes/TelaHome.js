@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput, Alert, KeyboardAvoidingView, Image, TouchableWithoutFeedback, Keyboard, } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import useAuth from '../hooks/useAuth';
@@ -15,6 +15,7 @@ import * as color from '../Colors';
 export default function TelaHome() {
   const { user, logado, setLogado, setUser } = useAuth();
 
+  const [visibleSenha, setVisibleSenha] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { navigate } = useNavigation();
@@ -146,11 +147,23 @@ export default function TelaHome() {
                 <TextInput
                   style={styles.textInput}
                   placeholder='*************'
+                  keyboardType='numeric'
                   placeholderTextColor='rgba(255,255,255, 0.6)'
                   value={password}
                   onChangeText={setPassword}
                   color={color.CINZA_TITULO}
+                  secureTextEntry={visibleSenha}
+
                 />
+                <TouchableOpacity
+                  onPress={() => setVisibleSenha(!visibleSenha)}
+                >
+                  {
+                    visibleSenha ?
+                      <Feather name='eye' size={25} color='#5c8599' />
+                      : <Feather name='eye-off' size={25} color='#5c8599' />
+                  }
+                </TouchableOpacity>
               </View >
               <View style={styles.viewButtonSenha}>
                 <TouchableOpacity style={styles.buttonSenha}
@@ -251,7 +264,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 20,
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#fff',
     shadowOffset: {
@@ -264,7 +277,7 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    width: '90%',
+    width: '80%',
     height: 50,
     marginLeft: 10,
   },

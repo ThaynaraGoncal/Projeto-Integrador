@@ -151,7 +151,7 @@ function Anuncio({ route }) {
       <KeyboardAvoidingView style={{ padding: 10 }}
         behavior={Platform.OS == "ios" ? "padding" : ""}
       >
-        <ScrollView style={{ marginBottom: 50 }} showsVerticalScrollIndicator='false'>
+        <ScrollView style={{ marginBottom: 50 }} showsVerticalScrollIndicator={false}>
           <Text style={styles.labelInput}>Selecione as imagens</Text>
           <ScrollView horizontal={true} style={styles.ViewImages}>
             {images.map(image => {

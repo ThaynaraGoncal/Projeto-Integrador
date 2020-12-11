@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 15,
     padding: 10,
+    color: '#5E565A',
+    fontSize: 18,
   },
 
 });

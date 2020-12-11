@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Text, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import Input from '../../../components/input';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
 import api from '../../../services/api';
@@ -79,9 +80,9 @@ export default function EditarCadastro() {
             onChangeText={setDtNascimento} value={dt_nascimento}
           />
           <Text style={styles.labelInput}>CPF</Text>
-          <TextInput style={styles.input}
-            returnKeyType='done'
-            placeholder='clique para digitar'
+          <Input type={'custom'}
+            options={{ mask: '999.999.999-99' }}
+            keyboardType='numeric'
             onChangeText={setCPF} value={cpf}
           />
           <Text style={styles.labelInput}>E-mail</Text>
