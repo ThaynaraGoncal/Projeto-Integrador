@@ -62,7 +62,7 @@ function MinhaConta() {
     <KeyboardAvoidingView style={styles.container} behavior="padding" >
       <Header title='Minha Conta' />
       <View style={styles.containerDados}>
-        <View style={{ marginLeft: 30, marginRight: 30, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ marginLeft: 20, marginRight: 20, alignItems: 'center', justifyContent: 'center' }}>
           <FontAwesome name="user-circle" size={70} color={color.CINZA_LABEL} />
         </View>
         <View style={{ marginTop: 5 }}>

@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
 
   viewButtonsOrdena: {
     flexDirection: 'row',
+    padding: 5,
   },
 
   seta: {
