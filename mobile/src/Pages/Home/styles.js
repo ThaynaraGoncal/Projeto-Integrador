@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   headerHome: {
     paddingBottom: 10,
     width: '100%',
-    height: 80,
+    height: 90,
     flexDirection: 'row',
     backgroundColor: color.AZUL_CIANETO,
     alignItems: 'flex-end',
