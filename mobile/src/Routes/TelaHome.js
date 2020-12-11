@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Image, TouchableWithoutFeedback, Keyboard, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput, Alert, KeyboardAvoidingView, Image, TouchableWithoutFeedback, Keyboard, } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import useAuth from '../hooks/useAuth';
+
+import Modal from '../components/ViewModal';
 import api from '../services/api';
-
 import Logo from '../images/logo.png';
-
-import Input from '../components/input';
 import * as color from '../Colors';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TelaHome() {
   const { user, logado, setLogado, setUser } = useAuth();
-  const [visiblePsw, setVisiblePsw] = useState(true);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -154,8 +151,17 @@ export default function TelaHome() {
                   onChangeText={setPassword}
                   color={color.CINZA_TITULO}
                 />
+              </View >
+              <View style={styles.viewButtonSenha}>
+                <TouchableOpacity style={styles.buttonSenha}
+                  onPress={() => {
+                    navigate('EsqueciSenha')
+                  }}
+                >
+                  <Text style={styles.textEsqueciSenha}>Esqueci a senha...</Text>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity style={[styles.buttonLogar]}
+              <TouchableOpacity style={styles.buttonLogar}
                 onPress={
                   handleLogin
                 }
@@ -303,4 +309,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 100,
   },
+
+  viewButtonSenha: {
+    width: '100%',
+    paddingLeft: 5
+  },
+
+  buttonSenha: {
+    width: 200,
+    height: 30,
+    //alignItems: 'center',
+    justifyContent: "center"
+  },
+
+  textEsqueciSenha: {
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 20,
+    color: color.AMARELO
+  }
 })

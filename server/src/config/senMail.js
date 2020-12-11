@@ -1,40 +1,41 @@
 const nodemailer = require('nodemailer');
 
 let transport = nodemailer.createTransport({
-  host: "smtp.mailtrap.io",
-  port: 2525,
+  host: "smtp.gmail.com",
+  port: 587,
   auth: {
-    user: "8ca55599784097",
-    pass: "aa6cbfab415bbf"
+    user: "contatostgf@gmail.com",
+    pass: "Tata489837"
   }
 });
 
-export default function senEmail(name, to) {
-  console.log(name)
+//465
 
-  let novaSenha = '123456'
+export default async function senEmail(name, to, senha) {
 
   let msgEsqueciSenha = `
-  Olá ${name}, Sua senha foi redefinada para ${novaSenha}!
+  Olá ${name}, Sua senha foi redefinada para ${senha}!
   
+
   
   Attenciosamento,
   Equipe Resenha Fast!`
 
   const emailEsqueciSenha = {
-    from: 'no-replay@resenha.com',
+    from: 'thaynarafaria21@gmail.com',
     to: to,
     subject: 'Senha redefinida! - Resenha Fast!',
     text: msgEsqueciSenha,
   };
 
-  transport.sendMail(emailEsqueciSenha, function (error, info) {
+  const deucerto = await transport.sendMail(emailEsqueciSenha, async function (error, info) {
     if (error) {
       console.log(error);
     } else {
-      return info.response;
-      console.log('Email enviado: ' + info.response);
+      console.log('Email enviado: ' + info.accepted);
     }
   });
+
+  console.log(deucerto)
 
 }

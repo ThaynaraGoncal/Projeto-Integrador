@@ -25,7 +25,8 @@ routes.get('/usuario', UsuarioController.user);
 routes.post('/usuario', UsuarioController.store);
 routes.put('/usuario', UsuarioController.userUpdate)
 
-routes.put('/usuario_senha', UsuarioController.updateSenha)
+routes.put('/usuario_senha', UsuarioController.updateSenha);
+routes.put('/altera_senha', UsuarioController.alteraSenha);
 
 routes.get('/anuncios', AnuncioController.index);
 routes.get('/anuncio_prestador', AnuncioController.indexPrestador);

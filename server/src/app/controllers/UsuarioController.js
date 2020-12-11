@@ -33,8 +33,7 @@ class UsuarioController {
       }
 
       //Cadastra a Pessoa Fisica
-      let pessoa = await PessoaFisica.store(req.body)
-      console.log('pessoa inserida', pessoa)
+      let pessoa = await PessoaFisica.store(req.body);
 
       if (pessoa.info) {
         return res.status(201).json({ info: pessoa.info })
@@ -46,7 +45,7 @@ class UsuarioController {
         password: req.body.password,
         cd_pessoa_fisica: pessoa.id
       }
-      console.log('Usuario para inserir', user)
+
       let usuario = await Usuario.create(user);
 
       if (usuario) {
@@ -75,7 +74,6 @@ class UsuarioController {
     const sequelize = new Sequelize(database);
 
     try {
-      console.log('req', req.query)
 
       if (req.query.email === '' || req.query.email === undefined) {
         res.status(201).json({ info: 'Informe um email' });
@@ -86,8 +84,6 @@ class UsuarioController {
 
       req.query.email = req.query.email.toUpperCase();
 
-      //console.log('req.query.email.toUpercase()', req.query.email.toUpperCase())
-
       let user = await sequelize
         .query(`select usu.cd_pessoa_fisica, nome, apelido, email, telefone, cpf, 
             to_char(dt_nascimento, 'dd/mm/yyy') dt_nascimento 
@@ -97,7 +93,6 @@ class UsuarioController {
           { type: QueryTypes.SELECT }).then(user => {
             return user[0]
           });
-      console.log(user)
 
       if (user) {
         return res.status(201).json(user);
@@ -149,13 +144,95 @@ class UsuarioController {
   }
 
   async updateSenha(req, res) {
-    console.log('req', req.query);
+    const sequelize = new Sequelize(database);
 
-    const ok = senEmail('thaynara', 'thaynarafaria21@gmail.com');
-    console.log('ok: ', ok)
+    try {
 
-    return res.status(201).json({ info: 'Email enviado' });
+      const { email } = req.query;
+
+      let emailUpper = email.toUpperCase();
+
+      let user = await sequelize
+        .query(`select apelido, email
+        from usuarios 
+        where UPPER(email) = '${emailUpper}'`,
+          { type: QueryTypes.SELECT }).then(user => {
+            return user[0]
+          });
+
+      if (user === undefined) {
+        return res.status(201).json({ msg: 'Usuário não encontrado!' });
+      }
+
+      const usuario = user.apelido;
+
+      function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      let nova_senha = getRandomIntInclusive(100000, 999999);
+
+      await sequelize
+        .query(`update usuarios 
+            set password = ${nova_senha}
+            where  UPPER(email) = '${emailUpper}'`,
+          { type: QueryTypes.SELECT }).then((res) => {
+            return res
+          });
+
+      senEmail(usuario, email, nova_senha);
+
+      return res.status(201).json({ info: `Nova senha enviada para ${email}` });
+
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: 'Não foi possível enviar email' });
+    }
   }
+
+  async alteraSenha(req, res) {
+    const sequelize = new Sequelize(database);
+    console.log('req', req.query);
+    try {
+
+      const { senha_atual, nova_senha } = req.query;
+
+      let user = await sequelize
+        .query(`select password, apelido, email
+        from usuarios 
+        where password = '${senha_atual}'`,
+          { type: QueryTypes.SELECT }).then(user => {
+            return user[0]
+          });
+
+      if (user === undefined) {
+        return res.status(201).json({ msg: `Senha atual não confere!` });
+      }
+
+      console.log('user', user);
+
+      await sequelize
+        .query(`update usuarios 
+          set password = ${nova_senha}
+          where  password = '${user.password}'`,
+          { type: QueryTypes.UPDATE }).then((res) => {
+            return res
+          });
+
+
+      senEmail(user.apelido, user.email, nova_senha);
+
+      return res.status(201).json({ info: `Senha alterada! Nova senha enviada para ${user.email}` });
+
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: 'Não foi possível enviar email' });
+    }
+
+  }
+
 }
 
 export default new UsuarioController();

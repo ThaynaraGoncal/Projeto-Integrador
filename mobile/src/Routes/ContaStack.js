@@ -9,6 +9,7 @@ import MeusFavoritos from '../Pages/Conta/MeusFavoritos';
 import AnuncioDetalhesPrestador from '../Pages/Conta/MeusAnuncios/AnuncioDetalhesPrestador';
 import EditarAnuncio from '../Pages/Conta/MeusAnuncios/EditarAnuncio';
 import EditarCadastro from '../Pages/Conta/EditarCadastro';
+import AlteraSenha from '../Pages/Conta/AlteraSenha';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -20,6 +21,7 @@ function ContaStack() {
       <Screen name="MinhaConta" component={MinhaConta} />
       <Screen name="MeusAnuncios" component={MeusAnuncios} />
       <Screen name="MeusFavoritos" component={MeusFavoritos} />
+      <Screen name="AlteraSenha" component={AlteraSenha} />
       <Screen name="CadastroDetalhes" component={CadastroDetalhes} />
       <Screen name="EditarCadastro" component={EditarCadastro} />
       <Screen name="AnuncioDetalhesPrestador" component={AnuncioDetalhesPrestador} />

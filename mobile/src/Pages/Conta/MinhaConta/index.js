@@ -94,6 +94,12 @@ function MinhaConta() {
         </TouchableOpacity >
         <View style={styles.line} />
         <TouchableOpacity style={styles.button}
+          onPress={() => navigate('AlteraSenha')}
+        >
+          <Text style={styles.textButton}>Alterar Senha</Text>
+        </TouchableOpacity>
+        <View style={styles.line} />
+        <TouchableOpacity style={styles.button}
           onPress={logoff}
         >
           <Text style={styles.textButton}>Sair</Text>

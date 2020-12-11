@@ -36,14 +36,14 @@ const ViewModal = () => {
         </View>
       </Modal>
 
-      <TouchableHighlight
+      {/* <TouchableHighlight
         style={styles.openButton}
         onPress={() => {
           setModalVisible(true);
         }}
       >
         <Text style={styles.textStyle}>Show Modal</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
   );
 };
