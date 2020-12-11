@@ -15,7 +15,6 @@ import {
 } from '../../../storage/anunciosFavoritos';
 
 export default function AnuncioDetalhes({ route }) {
-  console.log('route', route.params[0].gostei)
 
   const imagens = route.params[0].path;
   const [isPessoa, setIspessoa] = useState(route.params[1]);

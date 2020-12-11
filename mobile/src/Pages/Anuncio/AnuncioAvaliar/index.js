@@ -35,7 +35,7 @@ export default function AnuncioAvaliar() {
     }
 
     const { data } = await api.post('/avaliar', dados);
-    console.log(data.info);
+    
     if (data.info) {
       createAlert(data.info);
     }
